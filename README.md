@@ -1,6 +1,7 @@
 # Tic-Tac-Toe API
 
 A RESTful API that provides responses to run a tic-tac-toe game
+[![GitHub Super-Linter](https://github.com/yuyi365/tic_tac_toe_api/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 ## Installation
 
