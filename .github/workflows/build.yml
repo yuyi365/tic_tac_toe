@@ -8,13 +8,16 @@ jobs:
 
     steps:
       - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.12'
+
       - uses: actions/checkout@v2
 
       - name: install dependencies
         run: pip install pytest
 
       - name: run pytest
-        run: pytest
+        run: pytest -v
 
   # lint:
   #   runs-on: ubuntu-latest
