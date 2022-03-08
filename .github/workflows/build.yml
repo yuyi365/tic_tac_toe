@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     
       - name: run pytest
-        run: pytest -v
+        run: pipenv run pytest -v
 
   lint:
 
@@ -30,9 +30,9 @@ jobs:
 
       steps:
         - name: run flake8
-          run: flake8
+          run: pipenv run flake8
 
         - name: run black
-          run: black
+          run: pipenv run black
         
       
