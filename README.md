@@ -1,46 +1,48 @@
 # Tic-Tac-Toe API
 
-A RESTful API that provides responses to run a tic-tac-toe game
+![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build.yml/badge.svg)
+
+👾 A RESTful API that provides responses to run a tic-tac-toe game.
+
+## Features
+- TBD
 
 ## Installation
 
-1. [Homebrew](https://brew.sh/)
-```
+1. [Homebrew](https://brew.sh/) 🍺
+```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
-2. Python3
-```
+2. Python3 🐍
+```bash
 brew install python
 ```
 
-3. Pyenv
-```
+3. Pyenv 🐍
+```bash
 brew install pyenv
 ```
-
-4. Configure the ```pyenv``` PATH (macOS reference below)
-```
+- Configure the `pyenv` PATH (macOS reference below)
+```bash
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 ```
 
-5. FastAPI
-```
-pip install fastapi
+5. Pipenv (package manager) 🐍
+```bash
+pip install pipenv
 ```
 
-6. Uvicorn
-```
-pip install uvicorn
+6. All dependencies via pipenv 📦
+```bash
+pipenv install --dev
 ```
 
 ## Usage
-- View all endpoints via FastAPI docs
+- View all endpoints via FastAPI docs 📝
 ```
 [localhost]/docs
 ```
-
-
 
