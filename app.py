@@ -4,5 +4,5 @@ app = FastAPI()
 
 
 @app.get("/board")
-def home():
-    return {"Board": "Testing"}
+async def board():
+    return {"board": "[1, 2, 3, 4, 5, 6, 7, 8, 9]"}

@@ -10,6 +10,8 @@ fastapi = "*"
 black = "*"
 flake8 = "*"
 pytest = "*"
+starlette = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
