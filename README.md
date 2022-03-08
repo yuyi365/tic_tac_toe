@@ -1,6 +1,6 @@
 # Tic-Tac-Toe API
 
-![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/<build.yml>/badge.svg)
+![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build.yml/badge.svg)
 
 👾 A RESTful API that provides responses to run a tic-tac-toe game.
 
