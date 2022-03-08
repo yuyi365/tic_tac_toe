@@ -17,22 +17,23 @@ jobs:
         run: pip install pipenv
         run: pipenv install
         run: pipenv install --dev
-
+  
   test:
     runs-on: ubuntu-latest
-    
+
+    steps:
+      - uses: actions/checkout@v2
       - name: run pytest
         run: pipenv run pytest -v
 
   lint:
-
     runs-on: ubuntu-latest
 
-      steps:
-        - name: run flake8
-          run: pipenv run flake8
+    steps:
+      - uses: actions/checkout@v2
+      - name: run flake8
+        run: pipenv run flake8
 
-        - name: run black
-          run: pipenv run black
-        
+      - name: run black
+        run: pipenv run black
       
