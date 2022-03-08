@@ -26,7 +26,7 @@ jobs:
         run: pipenv run pytest -v
 
       - name: run flake8
-        run: pipenv run flake8
+        run: pipenv run flake8 .
 
       - name: run black
-        run: pipenv run black
+        run: pipenv run black .
