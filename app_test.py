@@ -1,15 +1,21 @@
 from fastapi.testclient import TestClient
 
-from app import app
+from app import make_empty_board, app
 
 client = TestClient(app)
 
 
-def test_read_board():
+def test_valid_board_endpoint():
+    expected_status_code = 200
+
     response = client.get("/board")
-    assert response.status_code == 200
-    assert response.json() == {"board": "[1, 2, 3, 4, 5, 6, 7, 8, 9]"}
+
+    assert response.status_code == expected_status_code
 
 
-def test_smoke():
-    assert True
+def test_empty_board_contents():
+    expected_content = make_empty_board()
+
+    response = client.get("/board")
+
+    assert response.json() == expected_content.dict()

@@ -16,9 +16,6 @@ jobs:
       - name: install pipenv
         run: pip install pipenv
       
-      - name: install pipenv
-        run: pipenv install
-      
       - name: install pipenv development dependencies
         run: pipenv install --dev
   
@@ -29,4 +26,4 @@ jobs:
         run: pipenv run flake8 .
 
       - name: run black
-        run: pipenv run black .
+        run: pipenv run black --check .
