@@ -11,17 +11,17 @@ class Board(BaseModel):
     row3: List[int]
 
     def place_slot(self, slot: int):
-        if slot in self.row1:
+        if slot in self.row1 and self.row1[slot] != "X":
             self.row1[slot] = "X"
             return BOARD
-        elif slot in self.row2:
+        elif slot in self.row2 and self.row1[slot] != "X":
             self.row2[slot] = "X"
             return BOARD
-        elif slot in self.row3:
+        elif slot in self.row3 and self.row1[slot] != "X":
             self.row3[slot] = "X"
             return BOARD
         else:
-            return BOARD
+            return "please pic another number"
 
 
 class Move(BaseModel):
@@ -43,5 +43,8 @@ async def board():
 
 @app.post("/move", response_model=Move)
 async def create_move(move: Move):
-    BOARD.place_slot(move)
-    return move
+    if Move.slot == range(0, 9):
+        BOARD.place_slot(move)
+        return move
+    else:
+        return "please only select an integer between 0 and 9"
