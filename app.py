@@ -12,13 +12,13 @@ class Board(BaseModel):
 
     def place_slot(self, slot: int, token="X"):
         if slot in self.row1:
-            self.row1[slot] = token
+            self.row1[slot - 1] = token
             return BOARD
         elif slot in self.row2:
-            self.row2[slot] = token
+            self.row2[slot - 1] = token
             return BOARD
         elif slot in self.row3:
-            self.row3[slot] = token
+            self.row3[slot - 1] = token
             return BOARD
         else:
             return BOARD
