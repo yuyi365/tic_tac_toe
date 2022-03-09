@@ -10,15 +10,15 @@ class Board(BaseModel):
     row2: List[int]
     row3: List[int]
 
-    def place_slot(self, slot: int, token="X"):
+    def place_slot(self, slot: int):
         if slot in self.row1:
-            self.row1[slot - 1] = token
+            self.row1[slot] = "X"
             return BOARD
         elif slot in self.row2:
-            self.row2[slot - 1] = token
+            self.row2[slot] = "X"
             return BOARD
         elif slot in self.row3:
-            self.row3[slot - 1] = token
+            self.row3[slot] = "X"
             return BOARD
         else:
             return BOARD
@@ -26,11 +26,10 @@ class Board(BaseModel):
 
 class Move(BaseModel):
     slot: int
-    token: str
 
 
 def make_empty_board():
-    board = Board(row1=[1, 2, 3], row2=[4, 5, 6], row3=[7, 8, 9])
+    board = Board(row1=[0, 1, 2], row2=[3, 4, 5], row3=[6, 7, 8])
     return board
 
 

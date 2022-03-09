@@ -36,12 +36,12 @@ def test_valid_move_endpoint():
 
 def test_post_response_content():
 
-    expected_content = BOARD.place_slot(slot=1, token="X")
+    expected_content = BOARD.place_slot(slot=1)
 
     response = client.post(
         "/move",
         headers={"X-Token": "playermove"},
-        json={"slot": 1, "token": "X"},
+        json={"slot": 1},
     )
 
     assert response.json() == expected_content.dict()
