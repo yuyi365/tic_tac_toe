@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
 
-from app import BOARD, make_empty_board, app
+from app import Board, app
 
 client = TestClient(app)
 
@@ -14,7 +14,7 @@ def test_valid_board_endpoint():
 
 
 def test_empty_board_content():
-    expected_content = make_empty_board()
+    expected_content = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.get("/board")
 
@@ -28,7 +28,7 @@ def test_valid_move_endpoint():
     response = client.post(
         "/move",
         headers={"X-Token": "playermove"},
-        json={"slot": 1, "token": "X"},
+        json={"slot_index": 1},
     )
 
     assert response.status_code == expected_status
@@ -36,12 +36,12 @@ def test_valid_move_endpoint():
 
 def test_post_response_content():
 
-    expected_content = BOARD.place_slot(slot=1)
+    board = Board(slots=["-", "X", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.post(
         "/move",
         headers={"X-Token": "playermove"},
-        json={"slot": 1},
+        json={"slot_index": 1},
     )
 
-    assert response.json() == expected_content.dict()
+    assert response.json() == board.dict()

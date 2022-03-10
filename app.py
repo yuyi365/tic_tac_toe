@@ -1,35 +1,29 @@
+from http.client import HTTPException
 from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 app = FastAPI()
 
+PLAYER_ONE_TOKEN = "X"
+EMPTY_TOKEN = "-"
+
 
 class Board(BaseModel):
-    row1: List[int]
-    row2: List[int]
-    row3: List[int]
+    slots: List[str]
 
-    def place_slot(self, slot: int):
-        if slot in self.row1 and self.row1[slot] != "X":
-            self.row1[slot] = "X"
-            return BOARD
-        elif slot in self.row2 and self.row1[slot] != "X":
-            self.row2[slot] = "X"
-            return BOARD
-        elif slot in self.row3 and self.row1[slot] != "X":
-            self.row3[slot] = "X"
-            return BOARD
-        else:
-            return "please pic another number"
+    def check_avail(self, slot_index: int):
+        if self.slots[slot_index] == EMPTY_TOKEN:
+            return True
 
-
-class Move(BaseModel):
-    slot: int
+    def place_slot(self, slot_index: int):
+        if EMPTY_TOKEN in self.slots[slot_index]:
+            self.slots[slot_index] = PLAYER_ONE_TOKEN
+            return BOARD
 
 
 def make_empty_board():
-    board = Board(row1=[0, 1, 2], row2=[3, 4, 5], row3=[6, 7, 8])
+    board = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
     return board
 
 
@@ -41,10 +35,13 @@ async def board():
     return BOARD
 
 
-@app.post("/move", response_model=Move)
-async def create_move(move: Move):
-    if Move.slot == range(0, 9):
-        BOARD.place_slot(move)
-        return move
+@app.post("/move", response_model=Board)
+async def create_move(slot_index: int):
+    if not Board.slots[slot_index]:
+        raise HTTPException(status_code=404, detail="Invalid entry")
+    elif PLAYER_ONE_TOKEN in Board.slots[slot_index]:
+        raise HTTPException(status_code=404, detail="Spot already taken")
     else:
-        return "please only select an integer between 0 and 9"
+        BOARD.place_slot(slot_index)
+
+    return BOARD
