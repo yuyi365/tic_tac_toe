@@ -37,9 +37,9 @@ async def board():
 
 @app.post("/move", response_model=Board)
 async def create_move(slot_index: int):
-    if not Board.slots[slot_index]:
+    if not BOARD.slots[slot_index]:
         raise HTTPException(status_code=404, detail="Invalid entry")
-    elif PLAYER_ONE_TOKEN in Board.slots[slot_index]:
+    elif not BOARD.check_avail(slot_index):
         raise HTTPException(status_code=404, detail="Spot already taken")
     else:
         BOARD.place_slot(slot_index)

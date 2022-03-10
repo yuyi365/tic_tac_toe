@@ -27,7 +27,6 @@ def test_valid_move_endpoint():
 
     response = client.post(
         "/move",
-        headers={"X-Token": "playermove"},
         json={"slot_index": 1},
     )
 
@@ -40,7 +39,6 @@ def test_post_response_content():
 
     response = client.post(
         "/move",
-        headers={"X-Token": "playermove"},
         json={"slot_index": 1},
     )
 
