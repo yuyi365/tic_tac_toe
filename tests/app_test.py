@@ -1,7 +1,8 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app import Board, app
+from tic_tac_toe_api.api import app
+from tic_tac_toe_api.game import Board, EMPTY_TOKEN
 
 
 @pytest.fixture()
@@ -19,7 +20,7 @@ def test_valid_board_endpoint(client):
 
 
 def test_empty_board_content(client):
-    expected_content = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+    expected_content = Board(slots=[EMPTY_TOKEN] * 9)
 
     response = client.get("/board")
 

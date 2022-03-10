@@ -1,5 +1,6 @@
 import pytest
-from app import Board
+
+from tic_tac_toe_api.game import Board
 
 
 @pytest.fixture()
@@ -20,4 +21,4 @@ def test_board_with_existing_token():
 
     result = board.check_avail(0)
 
-    assert result != True
+    assert result is not True
