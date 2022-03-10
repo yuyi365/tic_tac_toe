@@ -22,5 +22,5 @@ class Move(BaseModel):
 
 
 def make_empty_board() -> Board:
-    board = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+    board = Board(slots=[EMPTY_TOKEN] * 9)
     return board

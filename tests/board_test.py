@@ -1,11 +1,11 @@
 import pytest
 
-from tic_tac_toe_api.game import Board
+from tic_tac_toe_api.game import Board, EMPTY_TOKEN
 
 
 @pytest.fixture()
 def empty_board():
-    return Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+    return Board(slots=[EMPTY_TOKEN] * 9)
 
 
 def test_empty_board_has_first_spot_available(empty_board):
