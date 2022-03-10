@@ -13,6 +13,7 @@ flake8 = "*"
 pytest = "*"
 starlette = "*"
 requests = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.8"
