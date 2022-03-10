@@ -1,17 +1,16 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from app import BOARD, Board, app
-
-client = TestClient(app)
+from app import Board, app
 
 
 @pytest.fixture()
-def empty_board():
-    return Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+def client():
+    with TestClient(app) as client:
+        yield client
 
 
-def test_valid_board_endpoint():
+def test_valid_board_endpoint(client):
     expected_status_code = 200
 
     response = client.get("/board")
@@ -19,8 +18,7 @@ def test_valid_board_endpoint():
     assert response.status_code == expected_status_code
 
 
-def test_empty_board_content():
-
+def test_empty_board_content(client):
     expected_content = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.get("/board")
@@ -28,8 +26,7 @@ def test_empty_board_content():
     assert response.json() == expected_content.dict()
 
 
-def test_valid_move_endpoint():
-
+def test_valid_move_endpoint(client):
     expected_status = 200
 
     response = client.post(
@@ -40,8 +37,7 @@ def test_valid_move_endpoint():
     assert response.status_code == expected_status
 
 
-def test_post_response_content():
-
+def test_post_response_content(client):
     expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.post(
@@ -52,9 +48,8 @@ def test_post_response_content():
     assert response.json() == expected_board.dict()
 
 
-def test_post_response_content_index_out_of_range():
-
-    expected_content = {"Invalid entry"}
+def test_post_response_content_index_out_of_range(client):
+    expected_content = {"detail": "Invalid entry"}
 
     response = client.post(
         "/move",
