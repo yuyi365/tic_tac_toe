@@ -1,4 +1,4 @@
-from http.client import HTTPException
+from fastapi import HTTPException
 from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -15,11 +15,17 @@ class Board(BaseModel):
     def check_avail(self, slot_index: int):
         if self.slots[slot_index] == EMPTY_TOKEN:
             return True
+        else:
+            return False
 
     def place_slot(self, slot_index: int):
-        if EMPTY_TOKEN in self.slots[slot_index]:
+        if self.check_avail(slot_index):
             self.slots[slot_index] = PLAYER_ONE_TOKEN
             return BOARD
+
+
+class Move(BaseModel):
+    slot_index: int
 
 
 def make_empty_board():
@@ -36,12 +42,11 @@ async def board():
 
 
 @app.post("/move", response_model=Board)
-async def create_move(slot_index: int):
-    if not BOARD.slots[slot_index]:
+async def create_move(move: Move):
+    if not BOARD.slots[move.slot_index]:
         raise HTTPException(status_code=404, detail="Invalid entry")
-    elif not BOARD.check_avail(slot_index):
+    elif not BOARD.check_avail(move.slot_index):
         raise HTTPException(status_code=404, detail="Spot already taken")
     else:
-        BOARD.place_slot(slot_index)
-
-    return BOARD
+        BOARD.place_slot(move.slot_index)
+        return BOARD

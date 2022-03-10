@@ -1,8 +1,14 @@
+import pytest
 from app import Board
 
 
-def test_empty_board_has_first_spot_available():
-    board = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+@pytest.fixture()
+def empty_board():
+    return Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
+
+
+def test_empty_board_has_first_spot_available(empty_board):
+    board = empty_board
 
     result = board.check_avail(0)
 

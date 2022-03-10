@@ -1,8 +1,14 @@
+import pytest
 from fastapi.testclient import TestClient
 
-from app import Board, app
+from app import BOARD, Board, app
 
 client = TestClient(app)
+
+
+@pytest.fixture()
+def empty_board():
+    return Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
 
 
 def test_valid_board_endpoint():
@@ -14,6 +20,7 @@ def test_valid_board_endpoint():
 
 
 def test_empty_board_content():
+
     expected_content = Board(slots=["-", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.get("/board")
@@ -35,11 +42,23 @@ def test_valid_move_endpoint():
 
 def test_post_response_content():
 
-    board = Board(slots=["-", "X", "-", "-", "-", "-", "-", "-", "-"])
+    expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     response = client.post(
         "/move",
-        json={"slot_index": 1},
+        json={"slot_index": 0},
     )
 
-    assert response.json() == board.dict()
+    assert response.json() == expected_board.dict()
+
+
+def test_post_response_content_index_out_of_range():
+
+    expected_content = {"Invalid entry"}
+
+    response = client.post(
+        "/move",
+        json={"slot_index": 11},
+    )
+
+    assert response.json() == expected_content
