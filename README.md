@@ -40,6 +40,11 @@ pip install pipenv
 pipenv install --dev
 ```
 
+7. Launch server
+```bash
+uvicorn tic_tac_toe_api.api:app --reload
+```
+
 ## Usage
 - View all endpoints via FastAPI docs 📝
 ```
