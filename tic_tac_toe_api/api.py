@@ -42,10 +42,10 @@ async def create_move(move: Move) -> Board:
     board = state["board"]
     if move.slot_index not in range(len(board.slots)):
         raise HTTPException(
-            status_code=404, detail="Invalid entry - slot index must be between 0 and 8"
+            status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
         )
     elif not board.check_avail(move.slot_index):
-        raise HTTPException(status_code=404, detail="Spot already taken")
+        raise HTTPException(status_code=400, detail="Spot already taken")
     else:
         board.place_slot(move.slot_index)
         return board
