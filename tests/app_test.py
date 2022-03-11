@@ -50,7 +50,7 @@ def test_post_response_content(client):
 
 
 def test_post_response_content_index_out_of_range(client):
-    expected_content = {"detail": "Invalid entry"}
+    expected_content = {"detail": "Invalid entry - slot index must be between 0 and 8"}
 
     response = client.post(
         "/move",
