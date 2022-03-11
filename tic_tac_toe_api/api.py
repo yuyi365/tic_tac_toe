@@ -11,7 +11,7 @@ TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
 You will be able to:
 
 * **Retrieve a board**
-* **Add to the board**
+* **Add moves to the board**
 """
 
 app = FastAPI(
