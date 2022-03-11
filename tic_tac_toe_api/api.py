@@ -3,7 +3,26 @@ from fastapi import FastAPI
 
 from .game import make_empty_board, Board, Move
 
-app = FastAPI()
+description = """
+TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
+
+## Board
+
+You will be able to:
+
+* **Retrieve a board**
+* **Add to the board**
+"""
+
+app = FastAPI(
+    title="TicTacToeApp",
+    description=description,
+    version="0.0.1",
+    contact={
+        "name": "Yuyi",
+        "email": "yli@8thlight.com",
+    },
+)
 
 state = {}
 
