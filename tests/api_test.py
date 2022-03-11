@@ -58,3 +58,20 @@ def test_post_response_content_index_out_of_range(client):
     )
 
     assert response.json() == expected_content
+
+
+def test_post_response_slot_already_exists(client):
+
+    expected_content = {"detail": "Spot already taken"}
+
+    client.post(
+        "/move",
+        json={"slot_index": 2},
+    )
+
+    response = client.post(
+        "/move",
+        json={"slot_index": 2},
+    )
+
+    assert response.json() == expected_content
