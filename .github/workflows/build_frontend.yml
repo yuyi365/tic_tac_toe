@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ../src
+        working-directory: ./frontend/src
 
     steps:
       - uses: actions/setup-node@v2
@@ -17,5 +17,5 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install packages
-      working-directory: ./frontend
+        working-directory: ./frontend
         run: npm install
