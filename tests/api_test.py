@@ -32,7 +32,7 @@ def test_valid_move_endpoint(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 1},
+        json={"slot_index": 1, "token": "X"},
     )
 
     assert response.status_code == expected_status
@@ -43,7 +43,7 @@ def test_post_response_content(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 0},
+        json={"slot_index": 0, "token": "X"},
     )
 
     assert response.json() == expected_board.dict()
@@ -54,7 +54,7 @@ def test_post_response_content_index_out_of_range(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 11},
+        json={"slot_index": 11, "token": "X"},
     )
 
     assert response.json() == expected_content
@@ -66,12 +66,12 @@ def test_post_response_slot_already_exists(client):
 
     client.post(
         "/move",
-        json={"slot_index": 2},
+        json={"slot_index": 2, "token": "X"},
     )
 
     response = client.post(
         "/move",
-        json={"slot_index": 2},
+        json={"slot_index": 2, "token": "X"},
     )
 
     assert response.json() == expected_content

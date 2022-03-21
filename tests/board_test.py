@@ -30,6 +30,6 @@ def test_if_board_can_accept_token(empty_board):
     expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     board.check_avail(0) == True
-    board.place_slot(0)
+    board.place_slot(0, "X")
 
     assert board == expected_board

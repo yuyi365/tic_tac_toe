@@ -47,5 +47,5 @@ async def create_move(move: Move) -> Board:
     elif not board.check_avail(move.slot_index):
         raise HTTPException(status_code=400, detail="Spot already taken")
     else:
-        board.place_slot(move.slot_index)
+        board.place_slot(move.slot_index, move.token)
         return board
