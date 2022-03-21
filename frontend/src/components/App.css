@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    /* border: 1px solid red; */
+  }
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    padding: 1.5rem;
+    font-size: 3rem;
+}
+
+.results {
+    padding: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.board {
+    border-radius: 1rem;
+}
+
+.square {
+    box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);  
+    height: 8rem;
+    width: 8rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.square:hover {
+    background-color: aquamarine;
+    cursor: pointer;
+}
+
+.square-clicked {
+    box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);  
+    height: 8rem;
+    width: 8rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.square-clicked:hover {
+    cursor: not-allowed;
+}
+
+.square-won {
+    box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);  
+    background-color: yellow;
+    height: 8rem;
+    width: 8rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.reset-board-button {
+  background-color: #EA4C89;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.reset-board-button:hover,
+.reset-board-button:focus {
+  background-color: #F082AC;
+}
+
+.reset-board-div {
+    padding: 0.5rem;
+}
+
+
+
+
