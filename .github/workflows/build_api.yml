@@ -5,6 +5,9 @@ on: push
 jobs: 
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tic_tac_toe_api
 
     steps:
       - uses: actions/setup-python@v2
