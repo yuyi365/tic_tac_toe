@@ -1,11 +1,14 @@
 from fastapi import HTTPException
 from fastapi import FastAPI
 
+from .models import (
+    BoardResponse,
+    MoveRequest,
+    InvalidBoardIndexErrorResponse,
+    SpotUnavailableErrorResponse,
+)
 from .game import (
     make_empty_board,
-    Board,
-    MoveRequest,
-    BoardResponse,
     InvalidBoardIndex,
     SpotUnavailableError,
 )
@@ -45,7 +48,14 @@ async def board() -> BoardResponse:
     return BoardResponse(slots=board.slots)
 
 
-@app.post("/move", response_model=BoardResponse)
+@app.post(
+    "/move",
+    response_model=BoardResponse,
+    responses={
+        401: {"model": InvalidBoardIndexErrorResponse},
+        402: {"model": SpotUnavailableErrorResponse},
+    },
+)
 async def create_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
 
@@ -53,9 +63,9 @@ async def create_move(move: MoveRequest) -> BoardResponse:
         board.place_slot(move.slot_index)
     except InvalidBoardIndex:
         raise HTTPException(
-            status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
+            status_code=401, detail="Invalid entry - slot index must be between 0 and 8"
         )
     except SpotUnavailableError:
-        raise HTTPException(status_code=400, detail="Spot already taken")
+        raise HTTPException(status_code=402, detail="Spot already taken")
     else:
         return BoardResponse(slots=board.slots)

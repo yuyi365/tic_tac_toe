@@ -1,6 +1,4 @@
 from typing import List
-from pydantic import BaseModel
-
 
 PLAYER_ONE_TOKEN = "X"
 EMPTY_TOKEN = "-"
@@ -25,22 +23,14 @@ class Board:
             self.slots[slot_index] = PLAYER_ONE_TOKEN
 
 
+def make_empty_board() -> Board:
+    board = Board(slots=[EMPTY_TOKEN] * 9)
+    return board
+
+
 class InvalidBoardIndex(Exception):
     pass
 
 
 class SpotUnavailableError(Exception):
     pass
-
-
-class BoardResponse(BaseModel):
-    slots: List[str]
-
-
-class MoveRequest(BaseModel):
-    slot_index: int
-
-
-def make_empty_board() -> Board:
-    board = Board(slots=[EMPTY_TOKEN] * 9)
-    return board

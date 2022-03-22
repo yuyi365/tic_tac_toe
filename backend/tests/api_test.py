@@ -2,9 +2,8 @@ import pytest
 from fastapi.testclient import TestClient
 
 from tic_tac_toe_api.api import app
+from tic_tac_toe_api.models import BoardResponse
 from tic_tac_toe_api.game import (
-    Board,
-    BoardResponse,
     EMPTY_TOKEN,
     PLAYER_ONE_TOKEN,
 )

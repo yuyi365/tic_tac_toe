@@ -1,7 +1,6 @@
 import pytest
 
 from tic_tac_toe_api.game import (
-    BoardResponse,
     Board,
     EMPTY_TOKEN,
     InvalidBoardIndex,
