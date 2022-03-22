@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: ./backend/tic_tac_toe_api
 
     steps:
       - uses: actions/setup-python@v2
@@ -17,11 +17,9 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install pipenv
-        working-directory: ./tic_tac_toe_api
         run: pip install pipenv
       
       - name: install pipenv development dependencies
-        working-directory: ./tic_tac_toe_api
         run: pipenv install --dev
   
       - name: run pytest
@@ -29,9 +27,7 @@ jobs:
         run: pipenv run pytest -v
 
       - name: run flake8
-        working-directory: ./tic_tac_toe_api
         run: pipenv run flake8 .
 
       - name: run black
-        working-directory: ./tic_tac_toe_api
         run: pipenv run black --check .
