@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from tic_tac_toe_api.api import app
-from tic_tac_toe_api.game import Board, EMPTY_TOKEN
+from tic_tac_toe_api.game import Board, EMPTY_TOKEN, PLAYER_ONE_TOKEN
 
 
 @pytest.fixture()
@@ -39,7 +39,7 @@ def test_valid_move_endpoint(client):
 
 
 def test_post_response_content(client):
-    expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
+    expected_board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
     response = client.post(
         "/move",

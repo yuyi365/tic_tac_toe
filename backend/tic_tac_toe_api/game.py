@@ -9,6 +9,10 @@ EMPTY_TOKEN = "-"
 class Board(BaseModel):
     slots: List[str]
 
+
+class BoardResponse(BaseModel):
+    slots: List[str]
+
     def check_avail(self, slot_index: int) -> bool:
         return self.slots[slot_index] == EMPTY_TOKEN
 
@@ -17,7 +21,7 @@ class Board(BaseModel):
             self.slots[slot_index] = PLAYER_ONE_TOKEN
 
 
-class Move(BaseModel):
+class MoveRequest(BaseModel):
     slot_index: int
 
 

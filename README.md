@@ -1,7 +1,7 @@
 # Tic-Tac-Toe Game
 
-![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_api.yml/badge.svg)
-![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_frontend.yml/badge.svg)
+![API Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_api.yml/badge.svg)
+![Frontend Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_frontend.yml/badge.svg)
 
 👾 A tic-tac-toe web application that connects to a custom API.
 
@@ -43,7 +43,7 @@ pipenv install --dev
 
 7. Launch server
 ```bash
-uvicorn --port 3000 tic_tac_toe_api.api:app --reload
+uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
 ```
 
 ## Installation - Frontend

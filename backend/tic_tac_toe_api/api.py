@@ -1,7 +1,12 @@
 from fastapi import HTTPException
 from fastapi import FastAPI
 
-from .game import make_empty_board, Board, Move
+from .game import (
+    make_empty_board,
+    Board,
+    MoveRequest,
+    BoardResponse,
+)
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
@@ -37,9 +42,10 @@ async def board() -> Board:
     return state["board"]
 
 
-@app.post("/move", response_model=Board)
-async def create_move(move: Move) -> Board:
+@app.post("/move", response_model=BoardResponse)
+async def create_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
+
     if move.slot_index not in range(len(board.slots)):
         raise HTTPException(
             status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
