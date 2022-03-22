@@ -1,4 +1,5 @@
 import pytest
+from backend.tic_tac_toe_api.game import BoardResponse
 
 from tic_tac_toe_api.game import Board, EMPTY_TOKEN
 
@@ -17,7 +18,7 @@ def test_empty_board_has_first_spot_available(empty_board):
 
 
 def test_board_with_existing_token():
-    board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
+    board = BoardResponse(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     result = board.check_avail(0)
 
@@ -27,7 +28,7 @@ def test_board_with_existing_token():
 def test_if_board_can_accept_token(empty_board):
 
     board = empty_board
-    expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
+    expected_board = BoardResponse(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
 
     board.check_avail(0) == True
     board.place_slot(0)

@@ -12,8 +12,8 @@ black = "*"
 flake8 = "*"
 pytest = "*"
 starlette = "*"
-requests = "*"
 mypy = "*"
+requests = "*"
 
 [requires]
 python_version = "3.8"
