@@ -18,6 +18,10 @@ jobs:
 
       - name: install packages
         run: npm install --dev
+
+      - name: launch backend to enable client
+        working-directory: ./backend
+        run: uvicorn --port 3000 tic_tac_toe_api.api:app --reload
       
       - name: install OpenAPI client folder
         run: npm run generate-client
