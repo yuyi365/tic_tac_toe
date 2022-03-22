@@ -16,12 +16,21 @@ class Board:
         else:
             return False
 
-    def check_avail(self, slot_index: int) -> bool:
-        return self.slots[slot_index] == EMPTY_TOKEN
-
     def place_slot(self, slot_index: int) -> None:
-        if self.check_avail(slot_index):
+        if slot_index not in range(len(self.slots)):
+            raise InvalidBoardIndex(f"not a valid slot index: {slot_index}")
+        elif self.slots[slot_index] != EMPTY_TOKEN:
+            raise SpotUnavailableError(f"slot at index already taken: {slot_index}")
+        else:
             self.slots[slot_index] = PLAYER_ONE_TOKEN
+
+
+class InvalidBoardIndex(Exception):
+    pass
+
+
+class SpotUnavailableError(Exception):
+    pass
 
 
 class BoardResponse(BaseModel):
