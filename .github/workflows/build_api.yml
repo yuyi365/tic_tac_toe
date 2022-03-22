@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: install pipenv
-        working-directory: ./backend
+        working-directory: ./tic_tac_toe_api
         run: pip install pipenv
       
       - name: install pipenv development dependencies
