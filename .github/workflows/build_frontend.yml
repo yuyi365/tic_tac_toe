@@ -18,3 +18,9 @@ jobs:
 
       - name: install packages
         run: npm install
+      
+      - name: install OpenAPI client
+        run: npm run generate-client
+
+      - name: launch frontend on port 3001
+        run: npm start

@@ -59,7 +59,12 @@ brew install node
 npm install
 ```
 
-3. Launch server
+2. OpenAPI client files 📦
+```bash
+npm run generate-client
+```
+
+4. Launch server
 ```bash
 npm start
 ```
