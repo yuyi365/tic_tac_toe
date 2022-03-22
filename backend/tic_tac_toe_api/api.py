@@ -37,9 +37,10 @@ async def startup_event() -> None:
     state["board"] = make_empty_board()
 
 
-@app.get("/board", response_model=Board)
-async def board() -> Board:
-    return state["board"]
+@app.get("/board", response_model=BoardResponse)
+async def board() -> BoardResponse:
+    board = state["board"]
+    return BoardResponse(slots=board.slots)
 
 
 @app.post("/move", response_model=BoardResponse)
@@ -54,4 +55,4 @@ async def create_move(move: MoveRequest) -> BoardResponse:
         raise HTTPException(status_code=400, detail="Spot already taken")
     else:
         board.place_slot(move.slot_index)
-        return board
+        return BoardResponse(slots=board.slots)

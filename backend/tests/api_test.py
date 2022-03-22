@@ -25,7 +25,7 @@ def test_valid_board_endpoint(client):
 
 
 def test_empty_board_content(client):
-    expected_content = Board(slots=[EMPTY_TOKEN] * 9)
+    expected_content = BoardResponse(slots=[EMPTY_TOKEN] * 9)
 
     response = client.get("/board")
 
