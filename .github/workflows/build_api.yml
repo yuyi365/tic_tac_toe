@@ -23,7 +23,7 @@ jobs:
         run: pipenv install --dev
   
       - name: run pytest
-        working-directory: ./backend/tic_tac_toe_api/tests
+        working-directory: tests
         run: pipenv run pytest -v
 
       - name: run flake8
