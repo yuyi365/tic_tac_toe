@@ -18,10 +18,6 @@ jobs:
 
       - name: install packages
         run: npm install --dev
-
-      - name: run pytest
-        working-directory: ./backend/tests
-        run: pipenv run pytest -v
       
       - name: install OpenAPI client folder
         run: npm run generate-client
