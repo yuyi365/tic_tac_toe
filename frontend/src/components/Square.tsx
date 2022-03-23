@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DefaultService } from "../client";
+import { MakeMoveService } from "../client";
 
 type SquareProps = {
   index: number;
@@ -16,7 +16,7 @@ const Square = (props: SquareProps) => {
   const token = "🦄";
 
   async function makeMove() {
-    const moveResponse = await DefaultService.createMoveMovePost({
+    const moveResponse = await MakeMoveService.makeMove({
       slot_index: props.index,
     });
     setBoard(moveResponse.slots);

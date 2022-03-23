@@ -1,6 +1,6 @@
 import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
-import { DefaultService } from "../client";
+import { GetBoardService } from "../client";
 import { useState, useEffect } from "react";
 import calculateWinner from "../gamelogic";
 
@@ -16,7 +16,7 @@ const BoardContainer = () => {
   }, []);
 
   async function getBoard() {
-    const boardResponse = await DefaultService.boardBoardGet();
+    const boardResponse = await GetBoardService.getBoard();
     setBoard(boardResponse.slots);
   }
 

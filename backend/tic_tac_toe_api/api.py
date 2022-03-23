@@ -1,5 +1,7 @@
 from fastapi import HTTPException
 from fastapi import FastAPI
+from fastapi.routing import APIRoute
+
 
 from .models import (
     BoardResponse,
@@ -37,12 +39,19 @@ app = FastAPI(
 state = {}
 
 
+def custom_generate_unique_id(route: APIRoute):
+    return f"{route.tags[0]}"
+
+
+app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
+
+
 @app.on_event("startup")
 async def startup_event() -> None:
     state["board"] = make_empty_board()
 
 
-@app.get("/board", response_model=BoardResponse)
+@app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
     board = state["board"]
     return BoardResponse(slots=board.slots)
@@ -55,6 +64,7 @@ async def board() -> BoardResponse:
         401: {"model": InvalidBoardIndexErrorResponse},
         402: {"model": SpotUnavailableErrorResponse},
     },
+    tags=["makeMove"],
 )
 async def create_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
