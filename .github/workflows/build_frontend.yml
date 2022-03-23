@@ -5,55 +5,27 @@ on: push
 jobs: 
   build:
     runs-on: ubuntu-latest
-
+    defaults: 
+      run:
+        working-directory: ./frontend
+    
     steps:
       - uses: actions/setup-node@v2
         with:
           node-version: '17.x'
 
-      - uses: actions/setup-python@v2
-        with:
-          python-version: '3.8.12'
-
       - uses: actions/checkout@v2
 
-      - name: install packages (frontend)
-        working-directory: ./frontend
+      - name: install packages
         run: npm install --dev
-
-      - name: install pipenv
-        working-directory: ./backend
-        run: pip install pipenv
-      
-      - name: install pipenv development dependencies
-        working-directory: ./backend
-        run: pipenv install --dev
 
       - name: run pytest
         working-directory: ./backend/tests
         run: pipenv run pytest -v
-
-      - name: run flake8
-        working-directory: ./backend/tic_tac_toe_api
-        run: pipenv run flake8 .
-
-      - name: run black
-        working-directory: ./backend/tic_tac_toe_api
-        run: pipenv run black --check .
-      
-      - name: launch API
-        working-directory: ./backend
-        run: pipenv run uvicorn --port 3000 tic_tac_toe_api.api:app --reload
       
       - name: install OpenAPI client folder
-        working-directory: ./frontend
         run: npm run generate-client
-
-      - name: launch frontend on port 3001
-        working-directory: ./frontend
-        run: npm start
       
       - name: run tests using react testing library
-        working-directory: ./frontend
         run: npm run tests
       
