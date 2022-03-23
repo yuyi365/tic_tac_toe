@@ -27,10 +27,13 @@ const Square = (props: SquareProps) => {
     makeMove();
   };
 
-  return props.gameWinner == "X" && props.isInWinningCombo ? (
-    <td className="square-won">{click ? token : props.board[props.index]}</td>
+  return props.gameWinner === "X" && props.isInWinningCombo ? (
+    <td className="square-won">{click ? token : ""}</td>
   ) : (
-    <td className={click ? "square-clicked" : "square"} onClick={handleOnClick}>
+    <td
+      className={props.gameWinner !== "X" ? "square" : "square-clicked"}
+      onClick={props.gameWinner !== "X" ? handleOnClick : undefined}
+    >
       {click ? token : ""}
     </td>
   );
