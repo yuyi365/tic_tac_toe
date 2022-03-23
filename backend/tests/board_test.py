@@ -18,7 +18,7 @@ def test_if_board_can_accept_token(empty_board):
     board = empty_board
     expected_board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
-    board.place_slot(0)
+    board.place_slot(0, PLAYER_ONE_TOKEN)
 
     assert board == expected_board
 
@@ -27,10 +27,10 @@ def test_placing_token_on_board_with_existing_token_raises_spot_unavailable():
     board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
     with pytest.raises(SpotUnavailableError):
-        board.place_slot(0)
+        board.place_slot(0, PLAYER_ONE_TOKEN)
 
 
 @pytest.mark.parametrize("slot_index", [-1, 9, "a"])
 def test_placing_invalid_slot_index(slot_index, empty_board):
     with pytest.raises(InvalidBoardIndex):
-        empty_board.place_slot(slot_index)
+        empty_board.place_slot(slot_index, PLAYER_ONE_TOKEN)

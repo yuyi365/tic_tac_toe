@@ -1,12 +1,15 @@
 type ResultProps = {
   gameWinner: string | undefined;
+  turn: string;
 };
 
 const ResultsContainer = (props: ResultProps) => {
-  return !props.gameWinner ? (
-    <div className="results">Please place your token</div>
-  ) : (
-    <div className="results">{`Winner: ${props.gameWinner}`}</div>
+  return (
+    <div className="results">
+      {!props.gameWinner
+        ? `It's your turn, player: ${props.turn}`
+        : `Game is over - the winner is ${props.gameWinner}!`}
+    </div>
   );
 };
 

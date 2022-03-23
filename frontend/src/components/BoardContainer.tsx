@@ -6,6 +6,7 @@ import calculateWinner from "../gamelogic";
 
 const BoardContainer = () => {
   const [board, setBoard] = useState<Array<string>>([]);
+  const [turn, setTurn] = useState("🦄");
 
   const winner = calculateWinner(board);
   const gameWinner = winner?.winner;
@@ -27,8 +28,10 @@ const BoardContainer = () => {
         setBoard={setBoard}
         gameWinner={gameWinner}
         winningCombo={winningCombo}
+        turn={turn}
+        setTurn={setTurn}
       />
-      <ResultsContainer gameWinner={gameWinner} />
+      <ResultsContainer gameWinner={gameWinner} turn={turn}/>
     </>
   );
 };

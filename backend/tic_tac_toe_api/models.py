@@ -8,6 +8,7 @@ class BoardResponse(BaseModel):
 
 class MoveRequest(BaseModel):
     slot_index: int
+    token: str
 
 
 class ValidationErrorResponse(BaseModel):
