@@ -23,5 +23,5 @@ jobs:
         run: npm run generate-client
       
       - name: run tests using react testing library
-        run: npm run tests
+        run: npm run test
       
