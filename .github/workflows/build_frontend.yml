@@ -43,7 +43,7 @@ jobs:
       
       - name: launch API
         working-directory: ./backend
-        run: uvicorn --port 3000 tic_tac_toe_api.api:app --reload
+        run: pipenv run uvicorn --port 3000 tic_tac_toe_api.api:app --reload
       
       - name: install OpenAPI client folder
         working-directory: ./frontend
