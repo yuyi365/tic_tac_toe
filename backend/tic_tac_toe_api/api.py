@@ -61,8 +61,8 @@ async def board() -> BoardResponse:
     "/move",
     response_model=BoardResponse,
     responses={
-        401: {"model": InvalidBoardIndexErrorResponse},
-        402: {"model": SpotUnavailableErrorResponse},
+        400: {"model": InvalidBoardIndexErrorResponse},
+        403: {"model": SpotUnavailableErrorResponse},
     },
     tags=["makeMove"],
 )
@@ -73,9 +73,9 @@ async def create_move(move: MoveRequest) -> BoardResponse:
         board.place_slot(move.slot_index)
     except InvalidBoardIndex:
         raise HTTPException(
-            status_code=401, detail="Invalid entry - slot index must be between 0 and 8"
+            status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
         )
     except SpotUnavailableError:
-        raise HTTPException(status_code=402, detail="Spot already taken")
+        raise HTTPException(status_code=403, detail="Spot already taken")
     else:
         return BoardResponse(slots=board.slots)

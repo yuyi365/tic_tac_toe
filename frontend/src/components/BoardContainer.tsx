@@ -29,10 +29,6 @@ const BoardContainer = () => {
         winningCombo={winningCombo}
       />
       <ResultsContainer gameWinner={gameWinner} />
-
-      <div className="reset-board-div">
-        <button className="reset-board-button">New Game</button>
-      </div>
     </>
   );
 };
