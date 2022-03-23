@@ -15,7 +15,7 @@ def empty_board():
 
 def test_if_board_can_accept_token(empty_board):
     board = empty_board
-    expected_board = Board(slots=["X", "-", "-", "-", "-", "-", "-", "-", "-"])
+    expected_board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
     board.place_slot(0)
 
