@@ -3,6 +3,7 @@ import pytest
 from tic_tac_toe_api.game import (
     Board,
     EMPTY_TOKEN,
+    PLAYER_ONE_TOKEN,
     InvalidBoardIndex,
     SpotUnavailableError,
 )
