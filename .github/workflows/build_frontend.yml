@@ -22,11 +22,11 @@ jobs:
         run: npm install --dev
 
       - name: install pipenv
-        working-directory: ./backend/tic_tac_toe_api
+        working-directory: ./backend
         run: pip install pipenv
       
       - name: install pipenv development dependencies
-        working-directory: ./backend/tic_tac_toe_api
+        working-directory: ./backend
         run: pipenv install --dev
 
       - name: run pytest
@@ -42,7 +42,8 @@ jobs:
         run: pipenv run black --check .
       
       - name: launch API
-        run: uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
+        working-directory: ./backend
+        run: uvicorn --port 3000 tic_tac_toe_api.api:app --reload
       
       - name: install OpenAPI client folder
         working-directory: ./frontend
