@@ -67,7 +67,6 @@ npm run generate-client
 4. Launch server
 ```bash
 npm start
-```
 
 ## Usage
 - View all endpoints via FastAPI docs 📝
