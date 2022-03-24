@@ -13,7 +13,7 @@ board = Board(slots=[EMPTY_TOKEN] * 9)
 
 
 def test_board_mapper_response_with_none_empty_board():
-
+board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
     expected_board = BoardResponse(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
     response = map_board_response(expected_board)
