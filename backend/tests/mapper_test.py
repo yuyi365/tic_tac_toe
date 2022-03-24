@@ -1,6 +1,6 @@
 from tic_tac_toe_api.mappers import map_board_response
 from tic_tac_toe_api.api import BoardResponse
-from tic_tac_toe_api.game import EMPTY_TOKEN, PLAYER_ONE_TOKEN
+from tic_tac_toe_api.game import Board, EMPTY_TOKEN, PLAYER_ONE_TOKEN
 
 
 def test_board_mapper_response_with_empty_board():
