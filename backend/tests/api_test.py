@@ -79,3 +79,15 @@ def test_post_response_slot_already_exists(client):
     )
 
     assert response.json() == expected_content
+
+
+def test_post_response_type_error_unprocessable_entity(client):
+
+    expected_status = 422
+
+    response = client.post(
+        "/move",
+        json={"not_slot_index_int": "🧇"},
+    )
+
+    assert response.status_code == expected_status
