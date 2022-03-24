@@ -54,7 +54,7 @@ async def startup_event() -> None:
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
-    board = make_empty_board()
+    board = state["board"]
     return map_board_response(board)
 
 

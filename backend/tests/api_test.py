@@ -84,7 +84,7 @@ def test_post_response_type_error_unprocessable_entity(client):
 
     response = client.post(
         "/move",
-        json={"not_slot_index_int": "🧇"},
+        json={"not_slot_index_int": "🧇", "not_a_token_str": 5},
     )
 
     assert response.status_code == expected_status

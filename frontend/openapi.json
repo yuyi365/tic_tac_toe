@@ -17,7 +17,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/BoardResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/BoardResponse"
+                }
               }
             }
           }
@@ -34,7 +36,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/MoveRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/MoveRequest"
+              }
             }
           },
           "required": true
@@ -44,7 +48,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/BoardResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/BoardResponse"
+                }
               }
             }
           },
@@ -72,7 +78,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
               }
             }
           }
@@ -92,7 +100,9 @@
           "slots": {
             "title": "Slots",
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -103,7 +113,9 @@
           "detail": {
             "title": "Detail",
             "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationError" }
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
           }
         }
       },
@@ -117,7 +129,9 @@
           "detail": {
             "title": "Detail",
             "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationErrorResponse" }
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResponse"
+            }
           }
         }
       },
@@ -129,8 +143,14 @@
         ],
         "type": "object",
         "properties": {
-          "slot_index": { "title": "Slot Index", "type": "integer" },
-          "token": { "title": "Token", "type": "string" }
+          "slot_index": {
+            "title": "Slot Index",
+            "type": "integer"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
+          }
         }
       },
       "SpotUnavailableErrorResponse": {
@@ -143,7 +163,9 @@
           "detail": {
             "title": "Detail",
             "type": "array",
-            "items": { "$ref": "#/components/schemas/ValidationErrorResponse" }
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResponse"
+            }
           }
         }
       },
@@ -159,10 +181,18 @@
           "loc": {
             "title": "Location",
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
-          "msg": { "title": "Message", "type": "string" },
-          "type": { "title": "Error Type", "type": "string" }
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
         }
       },
       "ValidationErrorResponse": {
@@ -177,10 +207,18 @@
           "loc": {
             "title": "Loc",
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           },
-          "msg": { "title": "Msg", "type": "string" },
-          "type": { "title": "Type", "type": "string" }
+          "msg": {
+            "title": "Msg",
+            "type": "string"
+          },
+          "type": {
+            "title": "Type",
+            "type": "string"
+          }
         }
       }
     }
