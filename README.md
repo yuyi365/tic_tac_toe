@@ -1,13 +1,14 @@
-# Tic-Tac-Toe API
+# Tic-Tac-Toe Game
 
-![Build Status](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build.yml/badge.svg)
+![API Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_api.yml/badge.svg)
+![Frontend Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_frontend.yml/badge.svg)
 
-👾 A RESTful API that provides responses to run a tic-tac-toe game.
+👾 A tic-tac-toe web application that connects to a custom API.
 
 ## Features
 - TBD
 
-## Installation
+## Installation - API
 
 1. [Homebrew](https://brew.sh/) 🍺
 ```bash
@@ -39,6 +40,33 @@ pip install pipenv
 ```bash
 pipenv install --dev
 ```
+
+7. Launch server
+```bash
+uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
+```
+
+## Installation - Frontend
+*please make sure that you are in the `frontend` directory*
+
+1. Install node 💻
+```bash
+brew install node
+```
+
+2. All dependencies via npm 📦
+```bash
+npm install
+```
+
+2. OpenAPI client files 📦
+```bash
+npm run generate-client
+```
+
+4. Launch server
+```bash
+npm start
 
 ## Usage
 - View all endpoints via FastAPI docs 📝

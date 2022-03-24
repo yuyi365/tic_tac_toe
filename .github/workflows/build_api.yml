@@ -1,0 +1,35 @@
+name: Build and Test - API
+
+on: push
+
+jobs: 
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8.12'
+
+      - uses: actions/checkout@v2
+
+      - name: install pipenv
+        run: pip install pipenv
+      
+      - name: install pipenv development dependencies
+        run: pipenv install --dev
+  
+      - name: run pytest
+        working-directory: ./backend/tests
+        run: pipenv run pytest -v
+
+      - name: run flake8
+        working-directory: ./backend/tic_tac_toe_api
+        run: pipenv run flake8 .
+
+      - name: run black
+        working-directory: ./backend/tic_tac_toe_api
+        run: pipenv run black --check .
