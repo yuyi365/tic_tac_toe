@@ -13,6 +13,8 @@ const Board = (props: BoardProps) => {
   const board = props.board;
   const setBoard = props.setBoard;
 
+  console.log(props.board);
+
   return (
     <>
       <table className="board">

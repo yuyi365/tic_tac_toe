@@ -33,14 +33,22 @@ const Square = (props: SquareProps) => {
     }
   };
 
-  return props.gameWinner && props.isInWinningCombo ? (
-    <td className="square-won">{props.board[props.index]}</td>
-  ) : (
+  const getClassNames = () => {
+    if (!props.gameWinner) {
+      return "square";
+    } else if (props.isInWinningCombo) {
+      return "square-won";
+    } else {
+      return "square-clicked";
+    }
+  };
+
+  return (
     <td
-      className={!props.gameWinner ? "square" : "square-clicked"}
+      className={getClassNames()}
       onClick={!props.gameWinner ? handleOnClick : undefined}
     >
-      {click ? props.board[props.index] : ""}
+      {props.board[props.index]}
     </td>
   );
 };
