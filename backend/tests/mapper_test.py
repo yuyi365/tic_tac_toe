@@ -4,7 +4,7 @@ from tic_tac_toe_api.game import EMPTY_TOKEN, PLAYER_ONE_TOKEN
 
 
 def test_board_mapper_response_with_empty_board():
-
+board = Board(slots=[EMPTY_TOKEN] * 9)
     expected_board = BoardResponse(slots=[EMPTY_TOKEN] * 9)
 
     response = map_board_response(expected_board)
