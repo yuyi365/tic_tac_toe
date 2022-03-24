@@ -2,7 +2,6 @@ from fastapi import HTTPException
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
 
-
 from .models import (
     BoardResponse,
     MoveRequest,
@@ -14,6 +13,8 @@ from .game import (
     InvalidBoardIndex,
     SpotUnavailableError,
 )
+
+from .mappers import map_board_response
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
@@ -53,8 +54,8 @@ async def startup_event() -> None:
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
-    board = state["board"]
-    return BoardResponse(slots=board.slots)
+    board = make_empty_board()
+    return map_board_response(board)
 
 
 @app.post(
@@ -78,4 +79,4 @@ async def create_move(move: MoveRequest) -> BoardResponse:
     except SpotUnavailableError:
         raise HTTPException(status_code=403, detail="Spot already taken")
     else:
-        return BoardResponse(slots=board.slots)
+        return map_board_response(board)
