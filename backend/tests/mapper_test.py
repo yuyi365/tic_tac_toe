@@ -16,6 +16,6 @@ def test_board_mapper_response_with_none_empty_board():
 board = Board(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
     expected_board = BoardResponse(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
-    response = map_board_response(expected_board)
+    response = map_board_response(board)
 
     assert response == expected_board
