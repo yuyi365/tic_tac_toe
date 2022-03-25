@@ -5,8 +5,8 @@ type SquareProps = {
   index: number;
   board: Array<string>;
   setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
-  gameWinner: string | undefined;
-  isInWinningCombo: boolean | undefined;
+  gameWinner?: string;
+  isInWinningCombo?: boolean;
   turn: string;
   setTurn: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -34,7 +34,7 @@ const Square = (props: SquareProps) => {
   };
 
   const getClassNames = () => {
-    if (!props.gameWinner) {
+    if (!props.gameWinner && !props.board[props.index]) {
       return "square";
     } else if (props.isInWinningCombo) {
       return "square-won";

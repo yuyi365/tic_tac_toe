@@ -3,8 +3,8 @@ import Square from "./Square";
 type BoardProps = {
   board: Array<string>;
   setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
-  gameWinner: string | undefined;
-  winningCombo: number[] | undefined;
+  gameWinner?: string;
+  winningCombo?: number[];
   turn: string;
   setTurn: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -12,8 +12,6 @@ type BoardProps = {
 const Board = (props: BoardProps) => {
   const board = props.board;
   const setBoard = props.setBoard;
-
-  console.log(props.board);
 
   return (
     <>

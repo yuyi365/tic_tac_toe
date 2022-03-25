@@ -1,6 +1,6 @@
 from typing import List
 
-EMPTY_TOKEN = "-"
+EMPTY_TOKEN = ""
 
 
 class Board:
