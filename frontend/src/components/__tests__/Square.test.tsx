@@ -6,15 +6,21 @@ import Board from "../Board";
 describe("Square component", () => {
   it("Renders on the screen", () => {
     render(
-      <Square
-        board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
-        setBoard={(board) => board}
-        gameWinner={"🍄"}
-        turn={"🦄"}
-        isInWinningCombo={true}
-        setTurn={(turn: any) => turn}
-        index={3}
-      />
+      <table>
+        <tbody>
+          <tr>
+            <Square
+              board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
+              setBoard={(board) => board}
+              gameWinner={"🍄"}
+              turn={"🦄"}
+              isInWinningCombo={true}
+              setTurn={(turn: any) => turn}
+              index={3}
+            />
+          </tr>
+        </tbody>
+      </table>
     );
     const square = screen.getAllByRole("cell");
     expect(square).toHaveLength(1);
@@ -26,26 +32,17 @@ describe("When there is a winning combination, the specific square in the combin
     render(
       <Board
         board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
+        winningCombo={[3, 4, 5]}
         setBoard={(board: any) => board}
         gameWinner={"🍄"}
         turn={"🦄"}
         setTurn={(turn: any) => turn}
       />
     );
-    render(
-      <Square
-        board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
-        setBoard={(board) => board}
-        gameWinner={"🍄"}
-        turn={"🦄"}
-        isInWinningCombo={true}
-        setTurn={(turn: any) => turn}
-        index={3}
-      />
-    );
     const squares = screen.getAllByRole("cell");
-    screen.debug();
-    expect(squares[0]).toHaveClass("square-clicked");
+    expect(squares[3]).toHaveClass("square-won");
+    expect(squares[4]).toHaveClass("square-won");
+    expect(squares[5]).toHaveClass("square-won");
   });
 });
 
