@@ -21,6 +21,14 @@ const BoardContainer = () => {
     setBoard(boardResponse.slots);
   }
 
+  const handleSwitchToken = () => {
+    if (turn === "🦄") {
+      setTurn("🍄");
+    } else {
+      setTurn("🦄");
+    }
+  };
+
   return (
     <>
       <Board
@@ -28,10 +36,10 @@ const BoardContainer = () => {
         setBoard={setBoard}
         gameWinner={gameWinner}
         winningCombo={winningCombo}
+        handleSwitchToken={handleSwitchToken}
         turn={turn}
-        setTurn={setTurn}
       />
-      <ResultsContainer gameWinner={gameWinner} turn={turn}/>
+      <ResultsContainer gameWinner={gameWinner} turn={turn} />
     </>
   );
 };

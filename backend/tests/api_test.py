@@ -3,7 +3,7 @@ from fastapi.testclient import TestClient
 
 from tic_tac_toe_api.api import app
 from tic_tac_toe_api.models import BoardResponse
-from tic_tac_toe_api.game import EMPTY_TOKEN
+from tic_tac_toe_api.game import EMPTY_TOKEN, PLAYER_ONE_TOKEN, PLAYER_TWO_TOKEN
 
 
 @pytest.fixture()
@@ -33,18 +33,18 @@ def test_valid_move_endpoint(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 1, "token": "🦄"},
+        json={"slot_index": 1, "token": PLAYER_ONE_TOKEN},
     )
 
     assert response.status_code == expected_status
 
 
 def test_post_response_content(client):
-    expected_board = BoardResponse(slots=["🦄"] + [EMPTY_TOKEN] * 8)
+    expected_board = BoardResponse(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
 
     response = client.post(
         "/move",
-        json={"slot_index": 0, "token": "🦄"},
+        json={"slot_index": 0, "token": PLAYER_ONE_TOKEN},
     )
 
     assert response.json() == expected_board.dict()
@@ -55,7 +55,7 @@ def test_post_response_content_index_out_of_range(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 11, "token": "🍄"},
+        json={"slot_index": 11, "token": PLAYER_TWO_TOKEN},
     )
 
     assert response.json() == expected_content
@@ -67,12 +67,12 @@ def test_post_response_slot_already_exists(client):
 
     client.post(
         "/move",
-        json={"slot_index": 2, "token": "🦄"},
+        json={"slot_index": 2, "token": PLAYER_ONE_TOKEN},
     )
 
     response = client.post(
         "/move",
-        json={"slot_index": 2, "token": "🍄"},
+        json={"slot_index": 2, "token": PLAYER_TWO_TOKEN},
     )
 
     assert response.json() == expected_content

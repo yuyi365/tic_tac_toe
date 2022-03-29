@@ -7,8 +7,8 @@ type SquareProps = {
   setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
   gameWinner?: string;
   isInWinningCombo?: boolean;
+  handleSwitchToken: Function;
   turn: string;
-  setTurn: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Square = (props: SquareProps) => {
@@ -26,11 +26,7 @@ const Square = (props: SquareProps) => {
   const handleOnClick = () => {
     setClick(!click);
     makeMove();
-    if (props.turn === "🦄") {
-      props.setTurn("🍄");
-    } else {
-      props.setTurn("🦄");
-    }
+    props.handleSwitchToken();
   };
 
   const getClassNames = () => {

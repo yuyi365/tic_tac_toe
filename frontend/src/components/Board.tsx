@@ -5,8 +5,8 @@ type BoardProps = {
   setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
   gameWinner?: string;
   winningCombo?: number[];
+  handleSwitchToken: Function;
   turn: string;
-  setTurn: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const Board = (props: BoardProps) => {
@@ -24,8 +24,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(0)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={1}
@@ -33,8 +33,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(1)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={2}
@@ -42,8 +42,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(2)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
           </tr>
           <tr>
@@ -53,8 +53,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(3)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={4}
@@ -62,8 +62,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(4)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={5}
@@ -71,8 +71,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(5)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
           </tr>
           <tr>
@@ -82,8 +82,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(6)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={7}
@@ -91,8 +91,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(7)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
             <Square
               index={8}
@@ -100,8 +100,8 @@ const Board = (props: BoardProps) => {
               setBoard={setBoard}
               gameWinner={props.gameWinner}
               isInWinningCombo={props.winningCombo?.includes(8)}
+              handleSwitchToken={props.handleSwitchToken}
               turn={props.turn}
-              setTurn={props.setTurn}
             />
           </tr>
         </tbody>
