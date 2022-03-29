@@ -4,6 +4,7 @@ EMPTY_TOKEN = ""
 PLAYER_ONE_TOKEN = "🦄"
 PLAYER_TWO_TOKEN = "🍄"
 
+
 class Board:
     def __init__(self, slots: List[str]) -> None:
         self.slots = slots
