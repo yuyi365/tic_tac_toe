@@ -9,7 +9,7 @@ const loadEmptyBoard = () => {
       setBoard={(board) => board}
       gameWinner={""}
       turn={"🦄"}
-      setTurn={(turn) => turn}
+      handleSwitchToken={(token: any) => token}
     />
   );
 };
@@ -31,7 +31,7 @@ describe("When there is a winning combination, the specific square in the combin
         setBoard={(board: any) => board}
         gameWinner={"🍄"}
         turn={"🦄"}
-        setTurn={(turn: any) => turn}
+        handleSwitchToken={(token: any) => token}
       />
     );
     const squares = screen.getAllByRole("cell");
