@@ -15,14 +15,17 @@ const Board = (props: BoardProps) => {
   const setBoard = props.setBoard;
 
   async function handleMove(index: number) {
-    const moveResponse = await MakeMoveService.makeMove({
+    MakeMoveService.makeMove({
       slot_index: index,
       token: props.turn,
-    });
-
-    setBoard(moveResponse.slots);
-
-    props.handleSwitchToken();
+    })
+      .then((moveResponse) => {
+        setBoard(moveResponse.slots);
+        props.handleSwitchToken();
+      })
+      .catch(() => {
+        alert("backend is down");
+      });
   }
 
   const getClassNames = (index: number) => {
