@@ -7,7 +7,9 @@
   "paths": {
     "/board": {
       "get": {
-        "tags": ["getBoard"],
+        "tags": [
+          "getBoard"
+        ],
         "summary": "Board",
         "operationId": "getBoard",
         "responses": {
@@ -26,7 +28,9 @@
     },
     "/move": {
       "post": {
-        "tags": ["makeMove"],
+        "tags": [
+          "makeMove"
+        ],
         "summary": "Create Move",
         "operationId": "makeMove",
         "requestBody": {
@@ -88,7 +92,9 @@
     "schemas": {
       "BoardResponse": {
         "title": "BoardResponse",
-        "required": ["slots"],
+        "required": [
+          "slots"
+        ],
         "type": "object",
         "properties": {
           "slots": {
@@ -115,7 +121,9 @@
       },
       "InvalidBoardIndexErrorResponse": {
         "title": "InvalidBoardIndexErrorResponse",
-        "required": ["detail"],
+        "required": [
+          "detail"
+        ],
         "type": "object",
         "properties": {
           "detail": {
@@ -129,7 +137,9 @@
       },
       "MoveRequest": {
         "title": "MoveRequest",
-        "required": ["slot_index"],
+        "required": [
+          "slot_index"
+        ],
         "type": "object",
         "properties": {
           "slot_index": {
@@ -140,7 +150,9 @@
       },
       "SpotUnavailableErrorResponse": {
         "title": "SpotUnavailableErrorResponse",
-        "required": ["detail"],
+        "required": [
+          "detail"
+        ],
         "type": "object",
         "properties": {
           "detail": {
@@ -154,7 +166,11 @@
       },
       "ValidationError": {
         "title": "ValidationError",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "loc": {
@@ -176,7 +192,11 @@
       },
       "ValidationErrorResponse": {
         "title": "ValidationErrorResponse",
-        "required": ["loc", "msg", "type"],
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "loc": {
