@@ -1,25 +1,21 @@
 import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
-import { GetBoardService } from "../client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import calculateWinner from "../gamelogic";
 
-const BoardContainer = () => {
-  const [board, setBoard] = useState<Array<string>>([]);
+type BoardProps = {
+  board: Array<string>;
+  setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
+  error: boolean;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const BoardContainer = (props: BoardProps) => {
   const [turn, setTurn] = useState("🦄");
 
-  const winner = calculateWinner(board);
+  const winner = calculateWinner(props.board);
   const gameWinner = winner?.winner;
   const winningCombo = winner?.winningSquares;
-
-  useEffect(() => {
-    getBoard();
-  }, []);
-
-  async function getBoard() {
-    const boardResponse = await GetBoardService.getBoard();
-    setBoard(boardResponse.slots);
-  }
 
   const handleSwitchToken = () => {
     if (turn === "🦄") {
@@ -32,12 +28,14 @@ const BoardContainer = () => {
   return (
     <>
       <Board
-        board={board}
-        setBoard={setBoard}
+        board={props.board}
+        setBoard={props.setBoard}
         gameWinner={gameWinner}
         winningCombo={winningCombo}
         handleSwitchToken={handleSwitchToken}
         turn={turn}
+        setError={props.setError}
+        error={props.error}
       />
       <ResultsContainer gameWinner={gameWinner} turn={turn} />
     </>

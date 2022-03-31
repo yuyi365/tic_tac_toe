@@ -8,6 +8,8 @@ type BoardProps = {
   winningCombo?: number[];
   handleSwitchToken: Function;
   turn: string;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  error: boolean;
 };
 
 const Board = (props: BoardProps) => {
@@ -22,9 +24,10 @@ const Board = (props: BoardProps) => {
       .then((moveResponse) => {
         setBoard(moveResponse.slots);
         props.handleSwitchToken();
+        props.setError(true);
       })
       .catch(() => {
-        alert("backend is down");
+        props.setError(false);
       });
   }
 
