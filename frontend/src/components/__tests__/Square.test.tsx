@@ -9,13 +9,11 @@ describe("Square component", () => {
         <tbody>
           <tr>
             <Square
-              index={3}
-              board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
-              setBoard={(board) => board}
+              index={0}
+              token={"🍄"}
               gameWinner={"🍄"}
-              turn={"🦄"}
-              isInWinningCombo={true}
-              handleSwitchToken={(token: any) => token}
+              handleMove={(move: any) => move}
+              className={"square-won"}
             />
           </tr>
         </tbody>

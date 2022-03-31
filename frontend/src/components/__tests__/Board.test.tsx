@@ -10,6 +10,8 @@ const loadEmptyBoard = () => {
       gameWinner={""}
       turn={"🦄"}
       handleSwitchToken={(token: any) => token}
+      error={false}
+      setError={(error: any) => error}
     />
   );
 };
@@ -32,6 +34,8 @@ describe("When there is a winning combination, the specific square in the combin
         gameWinner={"🍄"}
         turn={"🦄"}
         handleSwitchToken={(token: any) => token}
+        error={false}
+        setError={(error: any) => error}
       />
     );
     const squares = screen.getAllByRole("cell");
