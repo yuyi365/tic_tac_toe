@@ -9,7 +9,6 @@ type BoardProps = {
   handleSwitchToken: Function;
   turn: string;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
-  error: boolean;
 };
 
 const Board = (props: BoardProps) => {
@@ -24,10 +23,10 @@ const Board = (props: BoardProps) => {
       .then((moveResponse) => {
         setBoard(moveResponse.slots);
         props.handleSwitchToken();
-        props.setError(true);
+        props.setError(false);
       })
       .catch(() => {
-        props.setError(false);
+        props.setError(true);
       });
   }
 

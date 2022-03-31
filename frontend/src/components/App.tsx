@@ -17,23 +17,18 @@ const App = () => {
     GetBoardService.getBoard()
       .then((boardResponse) => {
         setBoard(boardResponse.slots);
-        setError(true);
+        setError(false);
       })
       .catch(() => {
-        setError(false);
+        setError(true);
       });
   }
 
   return (
     <div className="App">
       <Header />
-      {error ? (
-        <BoardContainer
-          error={error}
-          setError={setError}
-          board={board}
-          setBoard={setBoard}
-        />
+      {!error ? (
+        <BoardContainer setError={setError} board={board} setBoard={setBoard} />
       ) : (
         <ErrorContainer />
       )}

@@ -6,7 +6,6 @@ import calculateWinner from "../gamelogic";
 type BoardProps = {
   board: Array<string>;
   setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
-  error: boolean;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -35,7 +34,6 @@ const BoardContainer = (props: BoardProps) => {
         handleSwitchToken={handleSwitchToken}
         turn={turn}
         setError={props.setError}
-        error={props.error}
       />
       <ResultsContainer gameWinner={gameWinner} turn={turn} />
     </>
