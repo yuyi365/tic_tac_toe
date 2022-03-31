@@ -30,20 +30,26 @@ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
 echo 'eval "$(pyenv init -)"' >> ~/.zshrc
 ```
+- Install the required version of python
+```
+pyenv install 3.8.12
+```
 
-5. Pipenv (package manager) 🐍
+4. Pipenv (package manager) 🐍
 ```bash
 pip install pipenv
 ```
 
-6. All dependencies via pipenv 📦
+5. All dependencies via pipenv 📦
+*please make sure that you are in the `backend` directory*
+
 ```bash
 pipenv install --dev
 ```
 
-7. Launch server
+6. Run the tests
 ```bash
-uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
+pipenv run pytest
 ```
 
 ## Installation - Frontend
@@ -56,21 +62,37 @@ brew install node
 
 2. All dependencies via npm 📦
 ```bash
-npm install
+npm install --include=dev
 ```
 
-2. OpenAPI client files 📦
+3. OpenAPI client files 📦
 ```bash
 npm run generate-client
 ```
 
-4. Launch server
+4. Run the tests
 ```bash
-npm start
+npm run test
+```
 
 ## Usage
-- View all endpoints via FastAPI docs 📝
-```
-[localhost]/docs
+
+1. Run the backend server in development mode
+```bash
+cd backend
+pipenv run uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
 ```
 
+2. Run a server for frontend development
+```bash
+cd frontend
+npm start
+```
+
+## Development
+
+Generate the OpenAPI schema and frontend client
+
+```bash
+make
+```

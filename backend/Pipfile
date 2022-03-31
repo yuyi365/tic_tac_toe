@@ -17,3 +17,6 @@ requests = "*"
 
 [requires]
 python_version = "3.8"
+
+[scripts]
+generate-openapi = "scripts/generate_openapi.py"
