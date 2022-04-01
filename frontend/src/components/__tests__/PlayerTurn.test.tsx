@@ -1,35 +1,31 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BoardContainer from "../BoardContainer";
-import { MakeMoveService } from "../../client";
+import { CancelablePromise, MoveRequest, MakeMoveService } from "../../client";
 
 describe("When a player places a 🦄 token on an empty board", () => {
   it("The token turn switches to 🍄", () => {
-    // jest
-    //   .spyOn(MakeMoveService, "makeMove")
-    //   .mockImplementation((requestBody: MoveRequest) =>
-    //     Promise.resolve({ slots: ["🦄", "", "", "", "", "", "", "", ""] })
-    //   );
-
+    const mockHandleMove = jest.fn((index: number) => null);
     render(
       <BoardContainer
-        board={["", "", "", "", "", "", "", "", ""]}
-        setBoard={(board: any) => board}
+        board={["", "🍄", "", "", "", "", "", "", ""]}
+        setBoard={jest.fn(() => null)}
         setError={(error: any) => error}
       />
     );
 
     const square = screen.getAllByRole("cell")[0];
     fireEvent.click(square);
-    const result = screen.findAllByDisplayValue("It's your turn, player: 🍄");
+    // jest
+    //   .spyOn(MakeMoveService, "makeMove")
+    //   .mockImplementation((requestBody: MoveRequest) => {
+    //     return new CancelablePromise((resolve, reject) => {
+    //       resolve({
+    //         slots: ["🦄", "🍄", "", "", "", "", "", "", ""],
+    //       });
+    //     });
+    //   });
     screen.debug();
-    expect(result).toBeInTheDocument();
+    expect(mockHandleMove).toHaveBeenCalledWith(0);
   });
 });
-
-// const { container } = render(<BoardContainer />);
-//     const turn = container.getElementsByClassName("results");
-//     expect(turn[0]).toHaveTextContent("It's your turn, player: 🦄");
-//     const squares = container.getElementsByClassName("square");
-//     fireEvent.click(squares[0]);
-//     expect(turn[0]).toHaveTextContent("It's your turn, player: It's your turn, player:");
