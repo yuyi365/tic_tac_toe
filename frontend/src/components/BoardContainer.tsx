@@ -44,10 +44,8 @@ const BoardContainer = (props: BoardProps) => {
     <>
       <Board
         board={props.board}
-        setBoard={props.setBoard}
         gameWinner={gameWinner}
         winningCombo={winningCombo}
-        handleSwitchToken={handleSwitchToken}
         handleMove={handleMove}
         turn={turn}
         setError={props.setError}

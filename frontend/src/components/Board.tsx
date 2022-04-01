@@ -2,10 +2,8 @@ import Square from "./Square";
 
 type BoardProps = {
   board: Array<string>;
-  setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
   gameWinner?: string;
   winningCombo?: number[];
-  handleSwitchToken: Function;
   handleMove: Function;
   turn: string;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
