@@ -1,5 +1,4 @@
 import Square from "./Square";
-import { MakeMoveService } from "../client";
 
 type BoardProps = {
   board: Array<string>;
@@ -7,28 +6,13 @@ type BoardProps = {
   gameWinner?: string;
   winningCombo?: number[];
   handleSwitchToken: Function;
+  handleMove: Function;
   turn: string;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Board = (props: BoardProps) => {
   const board = props.board;
-  const setBoard = props.setBoard;
-
-  async function handleMove(index: number) {
-    MakeMoveService.makeMove({
-      slot_index: index,
-      token: props.turn,
-    })
-      .then((moveResponse) => {
-        setBoard(moveResponse.slots);
-        props.handleSwitchToken();
-        props.setError(false);
-      })
-      .catch(() => {
-        props.setError(true);
-      });
-  }
 
   const getClassNames = (index: number) => {
     const token = board[index];
@@ -51,21 +35,21 @@ const Board = (props: BoardProps) => {
               index={0}
               token={board[0]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(0)}
             />
             <Square
               index={1}
               token={board[1]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(1)}
             />
             <Square
               index={2}
               token={props.board[2]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(2)}
             />
           </tr>
@@ -74,21 +58,21 @@ const Board = (props: BoardProps) => {
               index={3}
               token={props.board[3]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(3)}
             />
             <Square
               index={4}
               token={props.board[4]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(4)}
             />
             <Square
               index={5}
               token={props.board[5]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(5)}
             />
           </tr>
@@ -97,21 +81,21 @@ const Board = (props: BoardProps) => {
               index={6}
               token={props.board[6]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(6)}
             />
             <Square
               index={7}
               token={props.board[7]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(7)}
             />
             <Square
               index={8}
               token={props.board[8]}
               gameWinner={props.gameWinner}
-              handleMove={handleMove}
+              handleMove={props.handleMove}
               className={getClassNames(8)}
             />
           </tr>
