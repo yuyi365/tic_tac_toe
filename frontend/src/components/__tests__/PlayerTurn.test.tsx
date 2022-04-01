@@ -7,7 +7,6 @@ import Board from "../Board";
 // describe("When a player places a 🦄 token on an empty board", () => {
 //   it("The token turn switches to 🍄", () => {
 //     const mockHandleMove = jest.fn((index: number) => null);
-
 //     render(
 //       <BoardContainer
 //         board={["", "", "", "", "", "", "", "", ""]}
@@ -16,19 +15,19 @@ import Board from "../Board";
 //       />
 //     );
 
-//     const square = screen.getAllByRole("cell")[1];
-//     const turn = "🦄";
+//     const square = screen.getAllByRole("cell")[0];
 //     fireEvent.click(square);
+//     expect(mockHandleMove).toHaveBeenCalled();
 
-//     // jest
-//     //   .spyOn(MakeMoveService, "makeMove")
-//     //   .mockImplementation((requestBody: MoveRequest) => {
-//     //     return new CancelablePromise((resolve, reject) => {
-//     //       resolve({
-//     //         slots: ["🦄", "🍄", "", "", "", "", "", "", ""],
-//     //       });
-//     //     });
-//     //   });
+//     //     // jest
+//     //     //   .spyOn(MakeMoveService, "makeMove")
+//     //     //   .mockImplementation((requestBody: MoveRequest) => {
+//     //     //     return new CancelablePromise((resolve, reject) => {
+//     //     //       resolve({
+//     //     //         slots: ["🦄", "🍄", "", "", "", "", "", "", ""],
+//     //     //       });
+//     //     //     });
+//     //     //   });
 //     screen.debug();
 //   });
 // });
