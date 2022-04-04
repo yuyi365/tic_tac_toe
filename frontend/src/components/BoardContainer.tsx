@@ -18,7 +18,7 @@ const BoardContainer = (props: BoardProps) => {
 
   useEffect(() => {
     getBoard();
-  }, [handleMove]);
+  }, []);
 
   async function getBoard() {
     GetBoardService.getBoard()
@@ -44,8 +44,8 @@ const BoardContainer = (props: BoardProps) => {
       slot_index: index,
       token: turn,
     })
-      .then((moveResponse) => {
-        setBoard(moveResponse.slots);
+      .then(async () => {
+        getBoard();
         handleSwitchToken();
         props.setError(false);
       })
@@ -56,15 +56,20 @@ const BoardContainer = (props: BoardProps) => {
 
   return (
     <>
-      <Board
-        board={board}
-        gameWinner={gameWinner}
-        winningCombo={winningCombo}
-        handleMove={handleMove}
-        turn={turn}
-        setError={props.setError}
-      />
-      <ResultsContainer gameWinner={gameWinner} turn={turn} />
+      {/* {board.length === 0 ? (
+        <h1 id="loading">Loading</h1>
+      ) : ( */}
+      <>
+        <Board
+          board={board}
+          gameWinner={gameWinner}
+          winningCombo={winningCombo}
+          handleMove={handleMove}
+          setError={props.setError}
+        />
+        <ResultsContainer gameWinner={gameWinner} turn={turn} />
+      </>
+      {/* )} */}
     </>
   );
 };

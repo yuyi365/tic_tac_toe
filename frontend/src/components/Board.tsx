@@ -5,7 +5,6 @@ type BoardProps = {
   gameWinner?: string;
   winningCombo?: number[];
   handleMove: Function;
-  turn: string;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
