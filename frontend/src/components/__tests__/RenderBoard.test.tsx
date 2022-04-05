@@ -5,14 +5,14 @@ import BoardContainer from "../BoardContainer";
 import { act } from "react-dom/test-utils";
 
 describe("When the component loads", () => {
-  const callApiSpy = jest.spyOn(GetBoardService, "getBoard");
+  const callGetBoardSpy = jest.spyOn(GetBoardService, "getBoard");
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("gets a board if the request is valid", async () => {
-    callApiSpy.mockImplementation(() => {
+    callGetBoardSpy.mockImplementation(() => {
       return new CancelablePromise((resolve, reject) => {
         resolve({
           slots: ["🦄", "🍄", "", "", "", "", "", "", "🦄"],
@@ -22,18 +22,22 @@ describe("When the component loads", () => {
     act(() => {
       render(<BoardContainer setError={(error: any) => error} />);
     });
-    await waitFor(() => expect(callApiSpy).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(callGetBoardSpy).toHaveBeenCalledTimes(1));
   });
 
   it("does not get a board if the request is invalid", async () => {
-    callApiSpy.mockImplementation(() => {
+    callGetBoardSpy.mockImplementation(() => {
       return new CancelablePromise((resolve, reject) => {
         reject("error");
       });
     });
+    const mockSetError = jest.fn((error) => null);
     act(() => {
-      render(<BoardContainer setError={(error: any) => error} />);
+      render(<BoardContainer setError={mockSetError} />);
     });
-    await waitFor(() => expect(callApiSpy).toHaveBeenCalledTimes(1));
+    await waitFor(() => {
+      expect(callGetBoardSpy).toHaveBeenCalledTimes(1);
+      expect(mockSetError).toHaveBeenCalledWith(true);
+    });
   });
 });

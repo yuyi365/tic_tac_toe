@@ -56,20 +56,20 @@ const BoardContainer = (props: BoardProps) => {
 
   return (
     <>
-      {/* {board.length === 0 ? (
+      {board.length === 0 ? (
         <h1 id="loading">Loading</h1>
-      ) : ( */}
-      <>
-        <Board
-          board={board}
-          gameWinner={gameWinner}
-          winningCombo={winningCombo}
-          handleMove={handleMove}
-          setError={props.setError}
-        />
-        <ResultsContainer gameWinner={gameWinner} turn={turn} />
-      </>
-      {/* )} */}
+      ) : (
+        <>
+          <Board
+            board={board}
+            gameWinner={gameWinner}
+            winningCombo={winningCombo}
+            handleMove={handleMove}
+            setError={props.setError}
+          />
+          <ResultsContainer gameWinner={gameWinner} turn={turn} />
+        </>
+      )}
     </>
   );
 };
