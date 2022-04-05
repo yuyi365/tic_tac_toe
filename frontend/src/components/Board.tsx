@@ -4,7 +4,7 @@ type BoardProps = {
   board: Array<string>;
   gameWinner?: string;
   winningCombo?: number[];
-  handleMove: Function;
+  handleMove: (index: number) => Promise<void>;
   setError: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

@@ -9,7 +9,7 @@ type BoardProps = {
 };
 
 const BoardContainer = (props: BoardProps) => {
-  const [turn, setTurn] = useState("🦄");
+  const [turn, setTurn] = useState<string>("🦄");
   const [board, setBoard] = useState<Array<string>>([]);
 
   const winner = calculateWinner(board);
@@ -44,7 +44,7 @@ const BoardContainer = (props: BoardProps) => {
       slot_index: index,
       token: turn,
     })
-      .then(async () => {
+      .then(() => {
         getBoard();
         handleSwitchToken();
         props.setError(false);

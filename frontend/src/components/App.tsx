@@ -5,7 +5,7 @@ import ErrorContainer from "./ErrorContainer";
 import "./App.css";
 
 const App = () => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<boolean>(false);
 
   return (
     <div className="App">
