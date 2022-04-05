@@ -2,7 +2,7 @@ type SquareProps = {
   index: number;
   token: string;
   gameWinner?: string;
-  handleMove: Function;
+  handleMove: (index: number) => void;
   className: string;
 };
 

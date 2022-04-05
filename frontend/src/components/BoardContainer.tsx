@@ -6,7 +6,7 @@ import calculateWinner from "../gamelogic";
 import { MakeMoveService, GetBoardService } from "../client";
 
 type BoardProps = {
-  setError: React.Dispatch<React.SetStateAction<boolean>>;
+  handleError: (error: boolean) => void;
   playerOneToken: string;
   playerTwoToken: string;
 };
@@ -26,10 +26,10 @@ const BoardContainer = (props: BoardProps) => {
     GetBoardService.getBoard()
       .then((boardResponse) => {
         setBoard(boardResponse.slots);
-        props.setError(false);
+        props.handleError(false);
       })
       .catch(() => {
-        props.setError(true);
+        props.handleError(true);
       });
   }
 
@@ -49,10 +49,10 @@ const BoardContainer = (props: BoardProps) => {
       .then(() => {
         getBoard();
         handleSwitchToken();
-        props.setError(false);
+        props.handleError(false);
       })
       .catch(() => {
-        props.setError(true);
+        props.handleError(true);
       });
   }
 
@@ -67,7 +67,7 @@ const BoardContainer = (props: BoardProps) => {
             gameWinner={gameWinner}
             winningCombo={winningCombo}
             handleMove={handleMove}
-            setError={props.setError}
+            handleError={props.handleError}
           />
           <ResultsContainer gameWinner={gameWinner} turn={turn} />
         </>

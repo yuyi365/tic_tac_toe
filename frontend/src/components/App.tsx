@@ -9,10 +9,22 @@ const App = () => {
   const playerOneToken = "🦄";
   const playerTwoToken = "🍄";
 
+  const handleError = (error: boolean) => {
+    setError(error);
+  };
+
   return (
     <div className="App">
       <Header />
-      {!error ? <BoardContainer setError={setError} playerOneToken={playerOneToken} playerTwoToken={playerTwoToken}/> : <ErrorContainer />}
+      {!error ? (
+        <BoardContainer
+          handleError={handleError}
+          playerOneToken={playerOneToken}
+          playerTwoToken={playerTwoToken}
+        />
+      ) : (
+        <ErrorContainer />
+      )}
     </div>
   );
 };

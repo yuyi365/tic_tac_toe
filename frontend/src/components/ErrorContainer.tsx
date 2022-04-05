@@ -1,12 +1,16 @@
 const ErrorContainer = () => {
+  const handleClick = () => {
+    window.location.reload();
+  };
   return (
-    <div className="errors">
+    <div className="errors" data-testid="error-container">
       <h4 className="error-heading">
         The API is down - please wait or try again later.
       </h4>
       <button
         className="try-again-button"
-        onClick={() => window.location.reload()}
+        data-testid="try-again-button"
+        onClick={handleClick}
       >
         Try again
       </button>

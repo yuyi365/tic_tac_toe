@@ -7,8 +7,8 @@ const loadEmptyBoard = () => {
     <Board
       board={["", "", "", "", "", "", "", "", ""]}
       gameWinner={""}
-      handleMove={jest.fn(() => null)}
-      setError={(error: any) => error}
+      handleMove={jest.fn((index: number) => null)}
+      handleError={(error: boolean) => null}
     />
   );
 };
@@ -30,13 +30,19 @@ describe("When there is a winning combination, the specific square in the combin
         board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
         winningCombo={[3, 4, 5]}
         gameWinner={playerTwoToken}
-        handleMove={jest.fn(() => null)}
-        setError={(error: any) => error}
+        handleMove={jest.fn((index: number) => null)}
+        handleError={(error: boolean) => null}
       />
     );
     const squares = screen.getAllByRole("cell");
+    expect(squares[0]).not.toHaveClass("square-won");
+    expect(squares[1]).not.toHaveClass("square-won");
+    expect(squares[2]).not.toHaveClass("square-won");
     expect(squares[3]).toHaveClass("square-won");
     expect(squares[4]).toHaveClass("square-won");
     expect(squares[5]).toHaveClass("square-won");
+    expect(squares[6]).not.toHaveClass("square-won");
+    expect(squares[7]).not.toHaveClass("square-won");
+    expect(squares[8]).not.toHaveClass("square-won");
   });
 });

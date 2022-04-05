@@ -8,7 +8,7 @@ describe("When the board container is still loading", () => {
     const playerTwoToken = "🍄";
     render(
       <BoardContainer
-        setError={(error: any) => error}
+        handleError={(error: boolean) => null}
         playerOneToken={playerOneToken}
         playerTwoToken={playerTwoToken}
       />
