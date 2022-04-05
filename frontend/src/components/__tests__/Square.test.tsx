@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import Square from "../Square";
 
 describe("Square component", () => {
+  const playerTwoToken = "🍄";
   it("Renders on the screen", () => {
     render(
       <table>
@@ -10,8 +11,8 @@ describe("Square component", () => {
           <tr>
             <Square
               index={0}
-              token={"🍄"}
-              gameWinner={"🍄"}
+              token={playerTwoToken}
+              gameWinner={playerTwoToken}
               handleMove={(move: any) => move}
               className={"square-won"}
             />
@@ -48,6 +49,7 @@ describe("A click on the square", () => {
   });
 
   it("does not call handleMove if there is a winner", () => {
+    const playerOneToken = "🦄";
     const mockHandleMove = jest.fn((index: number) => null);
     render(
       <table>
@@ -56,7 +58,7 @@ describe("A click on the square", () => {
             <Square
               index={0}
               token={""}
-              gameWinner={"🦄"}
+              gameWinner={playerOneToken}
               handleMove={mockHandleMove}
               className={"square-won"}
             />

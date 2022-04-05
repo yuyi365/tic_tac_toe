@@ -12,6 +12,8 @@ import { act } from "react-dom/test-utils";
 describe("When a player makes a move", () => {
   const callMakeMoveSpy = jest.spyOn(MakeMoveService, "makeMove");
   const callGetBoardSpy = jest.spyOn(GetBoardService, "getBoard");
+  const playerOneToken = "🦄";
+  const playerTwoToken = "🍄";
 
   beforeEach(() => {
     callMakeMoveSpy.mockImplementation((requestBody: MoveRequest) => {
@@ -36,7 +38,13 @@ describe("When a player makes a move", () => {
 
   it("the player turn changes from 🦄 to 🍄 if the move is valid", async () => {
     act(() => {
-      render(<BoardContainer setError={(error: any) => error} />);
+      render(
+        <BoardContainer
+          setError={(error: any) => error}
+          playerOneToken={playerOneToken}
+          playerTwoToken={playerTwoToken}
+        />
+      );
     });
     await waitFor(() => callMakeMoveSpy);
     await waitFor(() => callGetBoardSpy);
@@ -48,7 +56,13 @@ describe("When a player makes a move", () => {
   it("the player turn does not change if the move is invalid", async () => {
     const mockSetError = jest.fn((error) => null);
     act(() => {
-      render(<BoardContainer setError={mockSetError} />);
+      render(
+        <BoardContainer
+          setError={mockSetError}
+          playerOneToken={playerOneToken}
+          playerTwoToken={playerTwoToken}
+        />
+      );
     });
     await waitFor(() => callMakeMoveSpy);
     await waitFor(() =>

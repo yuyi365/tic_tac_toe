@@ -1,17 +1,19 @@
 import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
+import LoadingContainer from "./LoadingContainer";
 import { useState, useEffect } from "react";
 import calculateWinner from "../gamelogic";
 import { MakeMoveService, GetBoardService } from "../client";
 
 type BoardProps = {
   setError: React.Dispatch<React.SetStateAction<boolean>>;
+  playerOneToken: string;
+  playerTwoToken: string;
 };
 
 const BoardContainer = (props: BoardProps) => {
-  const [turn, setTurn] = useState<string>("🦄");
+  const [turn, setTurn] = useState<string>(props.playerOneToken);
   const [board, setBoard] = useState<Array<string>>([]);
-
   const winner = calculateWinner(board);
   const gameWinner = winner?.winner;
   const winningCombo = winner?.winningSquares;
@@ -32,10 +34,10 @@ const BoardContainer = (props: BoardProps) => {
   }
 
   const handleSwitchToken = () => {
-    if (turn === "🦄") {
-      setTurn("🍄");
+    if (turn === props.playerOneToken) {
+      setTurn(props.playerTwoToken);
     } else {
-      setTurn("🦄");
+      setTurn(props.playerOneToken);
     }
   };
 
@@ -57,7 +59,7 @@ const BoardContainer = (props: BoardProps) => {
   return (
     <>
       {board.length === 0 ? (
-        <h1 id="loading">Loading</h1>
+        <LoadingContainer />
       ) : (
         <>
           <Board

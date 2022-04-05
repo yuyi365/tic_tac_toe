@@ -23,11 +23,13 @@ describe("Board Component", () => {
 
 describe("When there is a winning combination, the specific square in the combination", () => {
   it("Renders with a classname of highlighted; square-won", () => {
+    const playerTwoToken = "🍄";
+
     render(
       <Board
         board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
         winningCombo={[3, 4, 5]}
-        gameWinner={"🍄"}
+        gameWinner={playerTwoToken}
         handleMove={jest.fn(() => null)}
         setError={(error: any) => error}
       />
