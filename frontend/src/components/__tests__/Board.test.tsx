@@ -7,7 +7,6 @@ const loadEmptyBoard = () => {
     <Board
       board={["", "", "", "", "", "", "", "", ""]}
       gameWinner={""}
-      turn={"🦄"}
       handleMove={jest.fn(() => null)}
       setError={(error: any) => error}
     />
@@ -29,7 +28,6 @@ describe("When there is a winning combination, the specific square in the combin
         board={["🦄", "🦄", "", "🍄", "🍄", "🍄", "🦄", "", "🦄"]}
         winningCombo={[3, 4, 5]}
         gameWinner={"🍄"}
-        turn={"🦄"}
         handleMove={jest.fn(() => null)}
         setError={(error: any) => error}
       />
