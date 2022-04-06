@@ -1,7 +1,6 @@
 from fastapi import HTTPException
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
-import time
 
 from .models import (
     BoardResponse,
@@ -56,7 +55,6 @@ async def startup_event() -> None:
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
     board = state["board"]
-    time.sleep(10)
     return map_board_response(board)
 
 

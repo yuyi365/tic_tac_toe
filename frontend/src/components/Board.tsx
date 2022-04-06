@@ -42,7 +42,7 @@ const Board = (props: BoardProps) => {
         <tbody>
           <tr>{mapSquares.slice(0, 3)}</tr>
           <tr>{mapSquares.slice(3, 6)}</tr>
-          <tr>{mapSquares.slice(6, 9)}</tr>
+          <tr>{mapSquares.slice(6)}</tr>
         </tbody>
       </table>
     </>
