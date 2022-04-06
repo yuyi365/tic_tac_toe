@@ -20,16 +20,13 @@ jobs:
         run: pip install pipenv
       
       - name: install pipenv development dependencies
-        run: pipenv install --dev
+        run: pipenv sync --dev
   
       - name: run pytest
-        working-directory: ./backend/tests
         run: pipenv run pytest -v
 
       - name: run flake8
-        working-directory: ./backend/tic_tac_toe_api
         run: pipenv run flake8 .
 
       - name: run black
-        working-directory: ./backend/tic_tac_toe_api
         run: pipenv run black --check .

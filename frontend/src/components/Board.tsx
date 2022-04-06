@@ -2,88 +2,47 @@ import Square from "./Square";
 
 type BoardProps = {
   board: Array<string>;
-  setBoard: React.Dispatch<React.SetStateAction<Array<string>>>;
-  gameWinner: string | undefined;
-  winningCombo: number[] | undefined;
+  gameWinner?: string;
+  winningCombo?: number[];
+  handleMove: (index: number) => void;
+  handleError: (error: boolean) => void;
 };
 
 const Board = (props: BoardProps) => {
   const board = props.board;
-  const setBoard = props.setBoard;
+
+  const getClassNames = (index: number) => {
+    const token = board[index];
+
+    if (!props.gameWinner && !token) {
+      return "square";
+    } else if (props.winningCombo?.includes(index)) {
+      return "square-won";
+    } else {
+      return "square-clicked";
+    }
+  };
+
+  const mapSquares = board.map((square, index) => {
+    return (
+      <Square
+        key={index}
+        index={index}
+        token={board[index]}
+        gameWinner={props.gameWinner}
+        handleMove={props.handleMove}
+        className={getClassNames(index)}
+      />
+    );
+  });
 
   return (
     <>
       <table className="board">
         <tbody>
-          <tr>
-            <Square
-              index={0}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(0)}
-            />
-            <Square
-              index={1}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(1)}
-            />
-            <Square
-              index={2}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(2)}
-            />
-          </tr>
-          <tr>
-            <Square
-              index={3}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(3)}
-            />
-            <Square
-              index={4}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(4)}
-            />
-            <Square
-              index={5}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(5)}
-            />
-          </tr>
-          <tr>
-            <Square
-              index={6}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(6)}
-            />
-            <Square
-              index={7}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(7)}
-            />
-            <Square
-              index={8}
-              board={board}
-              setBoard={setBoard}
-              gameWinner={props.gameWinner}
-              isInWinningCombo={props.winningCombo?.includes(8)}
-            />
-          </tr>
+          <tr>{mapSquares.slice(0, 3)}</tr>
+          <tr>{mapSquares.slice(3, 6)}</tr>
+          <tr>{mapSquares.slice(6)}</tr>
         </tbody>
       </table>
     </>

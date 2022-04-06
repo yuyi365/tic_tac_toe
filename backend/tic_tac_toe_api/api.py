@@ -54,7 +54,7 @@ async def startup_event() -> None:
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
-    board = make_empty_board()
+    board = state["board"]
     return map_board_response(board)
 
 
@@ -71,7 +71,7 @@ async def create_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
 
     try:
-        board.place_slot(move.slot_index)
+        board.place_slot(move.slot_index, move.token)
     except InvalidBoardIndex:
         raise HTTPException(
             status_code=400, detail="Invalid entry - slot index must be between 0 and 8"

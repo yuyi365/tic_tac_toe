@@ -80,7 +80,7 @@ npm run test
 1. Run the backend server in development mode
 ```bash
 cd backend
-pipenv run uvicorn --port 3000 backend.tic_tac_toe_api.api:app --reload
+pipenv run start
 ```
 
 2. Run a server for frontend development

@@ -138,13 +138,18 @@
       "MoveRequest": {
         "title": "MoveRequest",
         "required": [
-          "slot_index"
+          "slot_index",
+          "token"
         ],
         "type": "object",
         "properties": {
           "slot_index": {
             "title": "Slot Index",
             "type": "integer"
+          },
+          "token": {
+            "title": "Token",
+            "type": "string"
           }
         }
       },
