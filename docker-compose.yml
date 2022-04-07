@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      TZ: UTC
+      PGTZ: UTC
+      POSTGRES_DB: tictactoe
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
