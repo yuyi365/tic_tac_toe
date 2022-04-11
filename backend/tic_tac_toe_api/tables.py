@@ -29,18 +29,15 @@ players = Table(
     "players",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column("created_at")
+    Column("created_at", DateTime(timezone=True), default=datetime.datetime.utcnow, nullable=False)
 )
 
 matches = Table(
     "matches",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column("token", String, Nullable=False),
+    Column("token", String, nullable=False),
     Column("game_id", BigInteger, ForeignKey("players.id"), nullable=False),
     Column("player_id", BigInteger, ForeignKey("games.id"), nullable=False),
     Column("created_at", DateTime(timezone=True), default=datetime.datetime.utcnow, nullable=False)
 )
-
-
-
