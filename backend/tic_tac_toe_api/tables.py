@@ -24,7 +24,8 @@ games = Table(
     "games",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column("winning_player_id", BigInteger, nullable=True),
+    Column("pin", String(4), nullable=False, unique=True),
+    Column("winning_player_ix", Enum(PlayerIx), nullable=True),
     Column(
         "created_at",
         DateTime(timezone=True),
@@ -33,6 +34,14 @@ games = Table(
     ),
 )
 
+settings = Table(
+    "settings",
+    metadata,
+    Column("id", BigInteger, primary_key=True, autoincrement=True),
+    Column("game_id", BigInteger, ForeignKey("games.id")),
+    Column("player_one_token", String(1), nullable=False),
+    Column("player_two_token", String(1), nullable=False),
+)
 
 boards = Table(
     "boards",
@@ -40,33 +49,4 @@ boards = Table(
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("game_id", BigInteger, ForeignKey("games.id"), nullable=False),
     Column("board", ARRAY(Enum(PlayerIx)), nullable=False),
-)
-
-
-players = Table(
-    "players",
-    metadata,
-    Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column(
-        "created_at",
-        DateTime(timezone=True),
-        default=datetime.datetime.utcnow,
-        nullable=False,
-    ),
-)
-
-
-matches = Table(
-    "matches",
-    metadata,
-    Column("id", BigInteger, primary_key=True, autoincrement=True),
-    Column("token", String, nullable=False),
-    Column("game_id", BigInteger, ForeignKey("players.id"), nullable=False),
-    Column("player_id", BigInteger, ForeignKey("games.id"), nullable=False),
-    Column(
-        "created_at",
-        DateTime(timezone=True),
-        default=datetime.datetime.utcnow,
-        nullable=False,
-    ),
 )
