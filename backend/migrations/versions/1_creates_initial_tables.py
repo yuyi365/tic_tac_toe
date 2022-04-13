@@ -1,14 +1,13 @@
-"""Create initial tables
+"""Creates initial tables
 
 Revision ID: 1
 Revises:
-Create Date: 2022-04-12 12:08:24.512107
+Create Date: 2022-04-13 16:20:59.968864
 
 """
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-
 
 revision = "1"
 down_revision = None
@@ -20,15 +19,13 @@ def upgrade():
     op.create_table(
         "games",
         sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
-        sa.Column("winning_player_id", sa.BigInteger(), nullable=True),
+        sa.Column("pin", sa.String(length=4), nullable=False),
+        sa.Column(
+            "winning_player_ix", sa.Enum("ONE", "TWO", name="player"), nullable=True
+        ),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.PrimaryKeyConstraint("id"),
-    )
-    op.create_table(
-        "players",
-        sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
-        sa.PrimaryKeyConstraint("id"),
+        sa.UniqueConstraint("pin"),
     )
     op.create_table(
         "boards",
@@ -36,7 +33,7 @@ def upgrade():
         sa.Column("game_id", sa.BigInteger(), nullable=False),
         sa.Column(
             "board",
-            postgresql.ARRAY(sa.Enum("PLAYER_ONE", "PLAYER_TWO", name="playerix")),
+            postgresql.ARRAY(sa.Enum("ONE", "TWO", name="player")),
             nullable=False,
         ),
         sa.ForeignKeyConstraint(
@@ -46,18 +43,13 @@ def upgrade():
         sa.PrimaryKeyConstraint("id"),
     )
     op.create_table(
-        "matches",
+        "settings",
         sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
-        sa.Column("token", sa.String(), nullable=False),
-        sa.Column("game_id", sa.BigInteger(), nullable=False),
-        sa.Column("player_id", sa.BigInteger(), nullable=False),
-        sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
+        sa.Column("game_id", sa.BigInteger(), nullable=True),
+        sa.Column("player_one_token", sa.String(length=1), nullable=False),
+        sa.Column("player_two_token", sa.String(length=1), nullable=False),
         sa.ForeignKeyConstraint(
             ["game_id"],
-            ["players.id"],
-        ),
-        sa.ForeignKeyConstraint(
-            ["player_id"],
             ["games.id"],
         ),
         sa.PrimaryKeyConstraint("id"),
@@ -65,7 +57,6 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table("matches")
+    op.drop_table("settings")
     op.drop_table("boards")
-    op.drop_table("players")
     op.drop_table("games")

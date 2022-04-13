@@ -15,9 +15,9 @@ import enum
 metadata = MetaData()
 
 
-class PlayerIx(enum.Enum):
-    PLAYER_ONE = 1
-    PLAYER_TWO = 2
+class Player(enum.Enum):
+    ONE = 1
+    TWO = 2
 
 
 games = Table(
@@ -25,7 +25,7 @@ games = Table(
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("pin", String(4), nullable=False, unique=True),
-    Column("winning_player_ix", Enum(PlayerIx), nullable=True),
+    Column("winning_player_ix", Enum(Player), nullable=True),
     Column(
         "created_at",
         DateTime(timezone=True),
@@ -33,6 +33,7 @@ games = Table(
         nullable=False,
     ),
 )
+
 
 settings = Table(
     "settings",
@@ -43,10 +44,11 @@ settings = Table(
     Column("player_two_token", String(1), nullable=False),
 )
 
+
 boards = Table(
     "boards",
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("game_id", BigInteger, ForeignKey("games.id"), nullable=False),
-    Column("board", ARRAY(Enum(PlayerIx)), nullable=False),
+    Column("board", ARRAY(Enum(Player)), nullable=False),
 )
