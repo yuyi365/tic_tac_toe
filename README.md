@@ -80,11 +80,11 @@ npm run test
 
 ## Installation - Database 📈
 *make sure that you have `sqlalchemy` and `alembic` installed before proceeding*
-1. `cd` into the `/backend` directory
-2. Launch Docker
+1. Launch Docker
 ```bash
 docker compose up
 ```
+2. `cd` into the `/backend` directory
 3. Run a merge of the database migrations
 ```bash
 alembic upgrade head
@@ -93,9 +93,7 @@ alembic upgrade head
 # Investigate the Database via Docker
 1. `docker exec -it tic_tac_toe-db-1 /bin/bash`
 2. `psql -U postgres tictactoe`
-
-`\d``[table name]` —> shows all rows in the table
-`\dt` `[table name]` —> shows row details for the specific table
+[PostgreSQL Documentation] (https://www.postgresql.org/docs/current/app-psql.html)
 
 ## Usage
 

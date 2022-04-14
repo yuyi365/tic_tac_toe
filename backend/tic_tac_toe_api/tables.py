@@ -25,7 +25,7 @@ games = Table(
     metadata,
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("pin", String(4), nullable=False, unique=True),
-    Column("winning_player_ix", Enum(Player), nullable=True),
+    Column("winning_player", Enum(Player), nullable=True),
     Column(
         "created_at",
         DateTime(timezone=True),
@@ -51,4 +51,10 @@ boards = Table(
     Column("id", BigInteger, primary_key=True, autoincrement=True),
     Column("game_id", BigInteger, ForeignKey("games.id"), nullable=False),
     Column("board", ARRAY(Enum(Player)), nullable=False),
+    Column(
+        "created_at",
+        DateTime(timezone=True),
+        default=datetime.datetime.utcnow,
+        nullable=False,
+    ),
 )
