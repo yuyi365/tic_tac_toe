@@ -3,7 +3,7 @@
 ![API Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_api.yml/badge.svg)
 ![Frontend Build and Test](https://github.com/yuyi365/tic_tac_toe_api/actions/workflows/build_frontend.yml/badge.svg)
 
-👾 A tic-tac-toe web application that connects to a custom API.
+👾 A tic-tac-toe web application that connects to a custom API and database.
 
 ## Features
 - TBD
@@ -75,6 +75,26 @@ npm run generate-client
 npm run test
 ```
 
+## Installation - Docker
+- Install [Docker](https://docs.docker.com/get-docker/) 🐳
+
+## Installation - Database 📈
+*make sure that you have `sqlalchemy` and `alembic` installed before proceeding*
+1. Launch Docker
+```bash
+docker compose up
+```
+2. `cd` into the `/backend` directory
+3. Run a merge of the database migrations
+```bash
+alembic upgrade head
+```
+
+# Investigate the Database via Docker
+1. `docker exec -it tic_tac_toe-db-1 /bin/bash`
+2. `psql -U postgres tictactoe`
+[PostgreSQL Documentation] (https://www.postgresql.org/docs/current/app-psql.html)
+
 ## Usage
 
 1. Run the backend server in development mode
@@ -87,6 +107,11 @@ pipenv run start
 ```bash
 cd frontend
 npm start
+```
+
+3. Run Docker
+```bash
+docker compose up
 ```
 
 ## Development
