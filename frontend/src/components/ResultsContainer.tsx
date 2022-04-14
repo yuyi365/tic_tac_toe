@@ -1,13 +1,15 @@
+import { Player } from "../client";
+
 type ResultProps = {
   gameWinner: string | undefined;
-  turn: string;
+  player: Player;
 };
 
 const ResultsContainer = (props: ResultProps) => {
   return (
     <div className="results">
       {!props.gameWinner
-        ? `It's your turn, player: ${props.turn}`
+        ? `It's your turn, player: ${props.player}`
         : `Game is over - the winner is ${props.gameWinner}!`}
     </div>
   );

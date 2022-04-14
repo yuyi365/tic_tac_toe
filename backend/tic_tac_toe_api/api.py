@@ -1,3 +1,5 @@
+from typing import Dict, Any
+
 from fastapi import HTTPException
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
@@ -10,6 +12,7 @@ from .models import (
 )
 from .game import (
     make_empty_board,
+    make_default_tokens,
     InvalidBoardIndex,
     SpotUnavailableError,
 )
@@ -37,7 +40,7 @@ app = FastAPI(
     },
 )
 
-state = {}
+state: Dict[str, Any] = {}
 
 
 def custom_generate_unique_id(route: APIRoute):
@@ -50,12 +53,14 @@ app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
 @app.on_event("startup")
 async def startup_event() -> None:
     state["board"] = make_empty_board()
+    state["tokens"] = make_default_tokens()
 
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
 async def board() -> BoardResponse:
     board = state["board"]
-    return map_board_response(board)
+    tokens = state["tokens"]
+    return map_board_response(board, tokens)
 
 
 @app.post(
@@ -69,9 +74,9 @@ async def board() -> BoardResponse:
 )
 async def create_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
-
+    tokens = state["tokens"]
     try:
-        board.place_slot(move.slot_index, move.token)
+        board.place_slot(move.slot_index, move.player)
     except InvalidBoardIndex:
         raise HTTPException(
             status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
@@ -79,4 +84,4 @@ async def create_move(move: MoveRequest) -> BoardResponse:
     except SpotUnavailableError:
         raise HTTPException(status_code=403, detail="Spot already taken")
     else:
-        return map_board_response(board)
+        return map_board_response(board, tokens)

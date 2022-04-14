@@ -1,5 +1,8 @@
 from typing import List
+
 from pydantic import BaseModel
+
+from .game import Player
 
 
 class BoardResponse(BaseModel):
@@ -8,7 +11,7 @@ class BoardResponse(BaseModel):
 
 class MoveRequest(BaseModel):
     slot_index: int
-    token: str
+    player: Player
 
 
 class ValidationErrorResponse(BaseModel):

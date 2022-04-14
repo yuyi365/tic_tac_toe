@@ -89,8 +89,6 @@ describe("When a player makes a move", () => {
       render(
         <BoardContainer
           handleError={(error: boolean) => null}
-          playerOneToken={playerOneToken}
-          playerTwoToken={playerTwoToken}
         />
       );
     });
@@ -107,8 +105,6 @@ describe("When a player makes a move", () => {
       render(
         <BoardContainer
           handleError={mockSetError}
-          playerOneToken={playerOneToken}
-          playerTwoToken={playerTwoToken}
         />
       );
     });

@@ -3,16 +3,14 @@ import ResultsContainer from "./ResultsContainer";
 import LoadingContainer from "./LoadingContainer";
 import { useState, useEffect } from "react";
 import calculateWinner from "../gamelogic";
-import { MakeMoveService, GetBoardService } from "../client";
+import { MakeMoveService, GetBoardService, Player } from "../client";
 
 type BoardProps = {
   handleError: (error: boolean) => void;
-  playerOneToken: string;
-  playerTwoToken: string;
 };
 
 const BoardContainer = (props: BoardProps) => {
-  const [turn, setTurn] = useState<string>(props.playerOneToken);
+  const [turn, setTurn] = useState<Player>(Player._1);
   const [board, setBoard] = useState<Array<string>>([]);
   const winner = calculateWinner(board);
   const gameWinner = winner?.winner;
@@ -34,17 +32,17 @@ const BoardContainer = (props: BoardProps) => {
   }
 
   const handleSwitchToken = () => {
-    if (turn === props.playerOneToken) {
-      setTurn(props.playerTwoToken);
+    if (turn === Player._1) {
+      setTurn(Player._2);
     } else {
-      setTurn(props.playerOneToken);
+      setTurn(Player._1);
     }
   };
 
   async function handleMove(index: number) {
     MakeMoveService.makeMove({
       slot_index: index,
-      token: turn,
+      player: turn,
     })
       .then(() => {
         getBoard();
@@ -69,7 +67,7 @@ const BoardContainer = (props: BoardProps) => {
             handleMove={handleMove}
             handleError={props.handleError}
           />
-          <ResultsContainer gameWinner={gameWinner} turn={turn} />
+          <ResultsContainer gameWinner={gameWinner} player={turn} />
         </>
       )}
     </>

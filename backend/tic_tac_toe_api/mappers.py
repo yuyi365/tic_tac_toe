@@ -1,7 +1,10 @@
+from typing import Dict, Optional
+
 from .models import BoardResponse
+from .game import Board, Player
 
-from .game import Board
 
-
-def map_board_response(board: Board) -> BoardResponse:
-    return BoardResponse(slots=board.slots)
+def map_board_response(
+    board: Board, tokens: Dict[Optional[Player], str]
+) -> BoardResponse:
+    return BoardResponse(slots=[tokens[slot] for slot in board.slots])
