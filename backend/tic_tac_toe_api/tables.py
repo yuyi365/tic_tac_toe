@@ -1,3 +1,5 @@
+import datetime
+
 from sqlalchemy import (
     MetaData,
     Table,
@@ -9,15 +11,10 @@ from sqlalchemy import (
     Enum,
 )
 from sqlalchemy.dialects.postgresql import ARRAY
-import datetime
-import enum
+
+from .game import Player
 
 metadata = MetaData()
-
-
-class Player(enum.Enum):
-    ONE = 1
-    TWO = 2
 
 
 games = Table(

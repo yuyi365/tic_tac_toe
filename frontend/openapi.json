@@ -139,7 +139,7 @@
         "title": "MoveRequest",
         "required": [
           "slot_index",
-          "token"
+          "player"
         ],
         "type": "object",
         "properties": {
@@ -147,11 +147,18 @@
             "title": "Slot Index",
             "type": "integer"
           },
-          "token": {
-            "title": "Token",
-            "type": "string"
+          "player": {
+            "$ref": "#/components/schemas/Player"
           }
         }
+      },
+      "Player": {
+        "title": "Player",
+        "enum": [
+          1,
+          2
+        ],
+        "description": "An enumeration."
       },
       "SpotUnavailableErrorResponse": {
         "title": "SpotUnavailableErrorResponse",

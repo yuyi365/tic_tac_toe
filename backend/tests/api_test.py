@@ -3,13 +3,18 @@ from fastapi.testclient import TestClient
 
 from tic_tac_toe_api.api import app
 from tic_tac_toe_api.models import BoardResponse
-from tic_tac_toe_api.game import EMPTY_TOKEN, PLAYER_ONE_TOKEN, PLAYER_TWO_TOKEN
+from tic_tac_toe_api.game import Player, make_default_tokens
 
 
 @pytest.fixture()
 def client():
     with TestClient(app) as client:
         yield client
+
+
+@pytest.fixture()
+def default_tokens():
+    return make_default_tokens()
 
 
 def test_valid_board_endpoint(client):
@@ -20,8 +25,9 @@ def test_valid_board_endpoint(client):
     assert response.status_code == expected_status_code
 
 
-def test_empty_board_content(client):
-    expected_content = BoardResponse(slots=[EMPTY_TOKEN] * 9)
+def test_empty_board_content(client, default_tokens):
+    empty_token = default_tokens[None]
+    expected_content = BoardResponse(slots=[empty_token] * 9)
 
     response = client.get("/board")
 
@@ -33,18 +39,21 @@ def test_valid_move_endpoint(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 1, "token": PLAYER_ONE_TOKEN},
+        json={"slot_index": 1, "player": Player.ONE.value},
     )
 
     assert response.status_code == expected_status
 
 
-def test_post_response_content(client):
-    expected_board = BoardResponse(slots=[PLAYER_ONE_TOKEN] + [EMPTY_TOKEN] * 8)
+def test_post_response_content(client, default_tokens):
+    empty_token = default_tokens[None]
+    player_one_token = default_tokens[Player.ONE]
+
+    expected_board = BoardResponse(slots=[player_one_token] + [empty_token] * 8)
 
     response = client.post(
         "/move",
-        json={"slot_index": 0, "token": PLAYER_ONE_TOKEN},
+        json={"slot_index": 0, "player": Player.ONE.value},
     )
 
     assert response.json() == expected_board.dict()
@@ -55,31 +64,29 @@ def test_post_response_content_index_out_of_range(client):
 
     response = client.post(
         "/move",
-        json={"slot_index": 11, "token": PLAYER_TWO_TOKEN},
+        json={"slot_index": 11, "player": Player.TWO.value},
     )
 
     assert response.json() == expected_content
 
 
 def test_post_response_slot_already_exists(client):
-
     expected_content = {"detail": "Spot already taken"}
 
     client.post(
         "/move",
-        json={"slot_index": 2, "token": PLAYER_ONE_TOKEN},
+        json={"slot_index": 2, "player": Player.ONE.value},
     )
 
     response = client.post(
         "/move",
-        json={"slot_index": 2, "token": PLAYER_TWO_TOKEN},
+        json={"slot_index": 2, "player": Player.TWO.value},
     )
 
     assert response.json() == expected_content
 
 
 def test_post_response_type_error_unprocessable_entity(client):
-
     expected_status = 422
 
     response = client.post(

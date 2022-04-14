@@ -6,8 +6,6 @@ import "./App.css";
 
 const App = () => {
   const [error, setError] = useState<boolean>(false);
-  const playerOneToken = "🦄";
-  const playerTwoToken = "🍄";
 
   const handleError = (error: boolean) => {
     setError(error);
@@ -19,8 +17,6 @@ const App = () => {
       {!error ? (
         <BoardContainer
           handleError={handleError}
-          playerOneToken={playerOneToken}
-          playerTwoToken={playerTwoToken}
         />
       ) : (
         <ErrorContainer />

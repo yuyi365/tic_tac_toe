@@ -2,7 +2,7 @@
 
 all: frontend/openapi.json client
 
-frontend/openapi.json: backend/tic_tac_toe_api/api.py
+frontend/openapi.json: backend/tic_tac_toe_api/api.py backend/tic_tac_toe_api/models.py
 	cd backend && pipenv run generate-openapi > $(abspath $@)
 
 client: frontend/openapi.json
