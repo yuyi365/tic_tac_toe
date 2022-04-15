@@ -93,9 +93,19 @@ async def create_move(move: MoveRequest) -> BoardResponse:
         return map_board_response(board, tokens)
 
 
-@app.post("/newgame", response_model=NewGameResponse, tags=["makeNewGame"])
+@app.post(
+    "/newgame",
+    response_model=NewGameResponse,
+    responses={
+        400: {"model": InvalidConnectionErrorResponse},
+    },
+    tags=["makeNewGame"],
+)
 def new_game() -> NewGameResponse:
     engine = state["engine"]
-    with engine.conn() as conn:
-        result = create_new_game(conn)
-    return map_new_game_response(result)
+    try:
+        with engine.conn() as conn:
+            result = create_new_game(conn)
+        return map_new_game_response(result)
+    except InvalidConnectionError:
+        raise HTTPException(status_code=400, detail="API connection error")

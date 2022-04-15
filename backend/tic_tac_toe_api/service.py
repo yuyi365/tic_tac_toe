@@ -1,5 +1,4 @@
 import sqlalchemy
-import sqlalchemy
 from . import repository
 from .utils import make_pin
 
