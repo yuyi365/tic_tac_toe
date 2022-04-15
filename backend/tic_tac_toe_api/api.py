@@ -101,7 +101,7 @@ async def create_move(move: MoveRequest) -> BoardResponse:
     },
     tags=["makeNewGame"],
 )
-def new_game() -> NewGameResponse:
+def new_game(conn) -> NewGameResponse:
     engine = state["engine"]
     try:
         with engine.conn() as conn:
