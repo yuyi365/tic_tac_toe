@@ -2,8 +2,5 @@ import os
 import sqlalchemy
 
 
-engine = sqlalchemy.create_engine(os.getenv("SQLALCHEMY_CONN"))
-
-
-def create_engine():
+def create_engine() -> sqlalchemy.engine.Engine:
     return sqlalchemy.create_engine(os.getenv("SQLALCHEMY_CONN"))

@@ -1,5 +1,9 @@
-# pin logic goes here
+import sqlalchemy
+import sqlalchemy
+from . import repository
+from .utils import make_pin
 
-import random
 
-number = random.randint(1000, 9999)
+def create_new_game(conn: sqlalchemy.engine.Connection):
+    pin = make_pin()
+    repository.insert_game(conn, pin)

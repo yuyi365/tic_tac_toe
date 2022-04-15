@@ -1,12 +1,7 @@
 from sqlalchemy import create_engine
+import sqlalchemy
+from .tables import games
 
 
-engine = create_engine()
-
-with engine.connect() as conn:
-    results = conn.execute("SELECT * from games")
-    results.fetchall()
-    
-    add_game = conn.insert.values({
-        id, pin, winning_player,created_at
-    })
+def insert_game(conn: sqlalchemy.engine.Connection, pin: str) -> int:
+    return conn.execute(games.insert().values(pin=pin).returning(games.c.id)).first().id
