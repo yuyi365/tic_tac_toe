@@ -86,6 +86,37 @@
           }
         }
       }
+    },
+    "/newgame": {
+      "post": {
+        "tags": [
+          "makeNewGame"
+        ],
+        "summary": "New Game",
+        "operationId": "makeNewGame",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewGameResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidConnectionErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -135,6 +166,22 @@
           }
         }
       },
+      "InvalidConnectionErrorResponse": {
+        "title": "InvalidConnectionErrorResponse",
+        "required": [
+          "detail"
+        ],
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResponse"
+            }
+          }
+        }
+      },
       "MoveRequest": {
         "title": "MoveRequest",
         "required": [
@@ -149,6 +196,24 @@
           },
           "player": {
             "$ref": "#/components/schemas/Player"
+          }
+        }
+      },
+      "NewGameResponse": {
+        "title": "NewGameResponse",
+        "required": [
+          "game_id",
+          "pin"
+        ],
+        "type": "object",
+        "properties": {
+          "game_id": {
+            "title": "Game Id",
+            "type": "integer"
+          },
+          "pin": {
+            "title": "Pin",
+            "type": "string"
           }
         }
       },

@@ -3,7 +3,6 @@ from typing import Dict, Any
 from fastapi import HTTPException
 from fastapi import FastAPI
 from fastapi.routing import APIRoute
-from sqlalchemy import create_engine
 
 from .models import (
     BoardResponse,
@@ -23,6 +22,7 @@ from .game import (
 
 from .mappers import map_board_response, map_new_game_response
 from .service import create_new_game
+from .db import create_engine
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
