@@ -10,5 +10,5 @@ def map_board_response(
     return BoardResponse(slots=[tokens[slot] for slot in board.slots])
 
 
-def map_new_game_response(pin: str, game_id: int) -> NewGameResponse:
+def map_new_game_response(game_id: int, pin: str) -> NewGameResponse:
     return NewGameResponse(game_id=game_id, pin=pin)
