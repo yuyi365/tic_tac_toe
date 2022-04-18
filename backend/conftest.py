@@ -1,11 +1,10 @@
 import pytest
 import os
 import sqlalchemy
-
 from tic_tac_toe_api.tables import metadata
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="class")
 def db_engine():
     engine = sqlalchemy.create_engine(os.environ["TEST_SQLALCHEMY_CONN"], echo=True)
     metadata.create_all(engine)
@@ -13,10 +12,10 @@ def db_engine():
     metadata.drop_all(engine)
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="class")
 def db_conn(db_engine):
     try:
         with db_engine.connect() as conn:
             yield conn
-    except:
+    except ConnectionError:
         conn.rollback()
