@@ -6,7 +6,7 @@ jobs:
   runner-job:
     runs-on: ubuntu-latest
     env:
-        SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
+      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
 
     services:
       postgres:
@@ -30,11 +30,11 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    env:
+      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
     defaults:
       run:
         working-directory: ./backend
-      env:
-        SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
 
     steps:
       - uses: actions/setup-python@v2
