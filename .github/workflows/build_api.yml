@@ -19,18 +19,6 @@ jobs:
         ports:
           - 5432:5432
 
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Connect to PostgreSQL
-        run: node client.js
-        env:
-          POSTGRES_HOST: localhost
-          POSTGRES_PORT: 5432
-
   build:
     runs-on: ubuntu-latest
     defaults:
