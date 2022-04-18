@@ -2,7 +2,6 @@ from tic_tac_toe_api.service import create_new_game
 from tic_tac_toe_api.tables import games
 from sqlalchemy.sql import select
 from unittest.mock import patch
-import sqlalchemy
 
 
 def test_return_value_pin_to_be_in_the_pin_of_initial_pin_input(db_conn):
