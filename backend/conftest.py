@@ -15,6 +15,8 @@ def db_engine():
 
 @pytest.fixture(scope="function")
 def db_conn(db_engine):
-    with db_engine.conn() as conn:
-        yield conn
+    try:
+        with db_engine.connect() as conn:
+            yield conn
+    except:
         conn.rollback()
