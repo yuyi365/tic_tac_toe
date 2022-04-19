@@ -16,7 +16,6 @@ jobs:
     services:
       db_test:
         image: postgres:13
-        restart: always
         environment:
           TZ: UTC
           PGTZ: UTC
