@@ -11,21 +11,21 @@ jobs:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
       SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
 
-  services:
-    db_test:
-      image: postgres:13
-      environment:
-        TZ: UTC
-        PGTZ: UTC
-        POSTGRES_DB: tictactoe
-        POSTGRES_HOST_AUTH_METHOD: trust
-      options: >-
-            --health-cmd pg_isready
-            --health-interval 10s
-            --health-timeout 5s
-            --health-retries 5
-      ports:
-        - 8000:5432
+    services:
+      db_test:
+        image: postgres:13
+        environment:
+          TZ: UTC
+          PGTZ: UTC
+          POSTGRES_DB: tictactoe
+          POSTGRES_HOST_AUTH_METHOD: trust
+        options: >-
+              --health-cmd pg_isready
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
+        ports:
+          - 8000:5432
 
     steps:
       - uses: actions/setup-python@v2
