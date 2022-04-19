@@ -14,13 +14,10 @@ jobs:
         working-directory: ./backend
 
     services:
-      db_test:
+      postgres:
         image: postgres:13
-        environment:
-          TZ: UTC
-          PGTZ: UTC
-          POSTGRES_DB: tictactoe
-          POSTGRES_HOST_AUTH_METHOD: trust
+        env:
+          POSTGRES_PASSWORD: postgres
         options: >-
               --health-cmd pg_isready
               --health-interval 10s
