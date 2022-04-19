@@ -3,8 +3,10 @@ name: Build and Test - API and Database
 on: push
 
 jobs:
-  runner-job:
+  build:
     runs-on: ubuntu-latest
+    run:
+      working-directory: ./backend
     env:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
       SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
@@ -12,7 +14,6 @@ jobs:
   services:
     db_test:
       image: postgres:13
-      restart: always
       environment:
         TZ: UTC
         PGTZ: UTC
@@ -24,21 +25,7 @@ jobs:
             --health-timeout 5s
             --health-retries 5
       ports:
-        - 8000:8000
-
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v3
-
-  build:
-    runs-on: ubuntu-latest
-    env:
-      TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-      SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-
-    defaults:
-      run:
-        working-directory: ./backend
+        - 8000:5432
 
     steps:
       - uses: actions/setup-python@v2
