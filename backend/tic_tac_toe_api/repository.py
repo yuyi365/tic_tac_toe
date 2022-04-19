@@ -1,4 +1,3 @@
-from pydantic import NoneBytes
 import sqlalchemy
 from sqlalchemy.exc import DataError
 from .tables import games

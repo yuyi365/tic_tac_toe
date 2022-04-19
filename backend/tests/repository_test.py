@@ -15,4 +15,4 @@ def test_insert_game_with_invalid_pin_string_length(db_conn):
     insert_game(db_conn, "123456")
     query = select(games)
     result = db_conn.execute(query).first()
-    assert result == None
+    assert result is None
