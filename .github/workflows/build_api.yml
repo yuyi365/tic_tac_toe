@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-      SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
+      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
 
     services:
       postgres:
@@ -24,6 +24,7 @@ jobs:
           --health-retries 5
         ports:
           - 8000:5432
+          - 5432:5432
 
     steps:
       - name: Check out repository code
@@ -33,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-      SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
+      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
 
     defaults:
       run:
