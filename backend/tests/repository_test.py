@@ -5,14 +5,14 @@ from sqlalchemy.sql import select
 
 def test_insert_game_with_valid_pin(db_conn):
     insert_game(db_conn, "4765")
-    stmt = select(games)
-    result = db_conn.execute(stmt).first()
+    query = select(games)
+    result = db_conn.execute(query).first()
     assert result.pin == "4765"
     assert result.id == 1
 
 
-def test_insert_game_with_invalid_pin_type(db_conn):
-    insert_game(db_conn, 0)
-    stmt = select(games)
-    result = db_conn.execute(stmt).first()
-    assert result.pin != 0
+def test_insert_game_with_invalid_pin_string_length(db_conn):
+    insert_game(db_conn, "123456")
+    query = select(games)
+    result = db_conn.execute(query).first()
+    assert result == None
