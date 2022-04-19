@@ -22,7 +22,7 @@ from .game import (
 
 from .mappers import map_board_response, map_new_game_response
 from .service import create_new_game
-from .db import create_engine, create_test_engine
+from .db import create_engine
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
@@ -59,10 +59,7 @@ app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
 async def startup_event() -> None:
     state["board"] = make_empty_board()
     state["tokens"] = make_default_tokens()
-    try:
-        state["engine"] = create_engine()
-    except ConnectionError:
-        state["engine"] = create_test_engine()
+    state["engine"] = create_engine()
 
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])

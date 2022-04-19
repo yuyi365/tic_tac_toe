@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
+      SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
 
   services:
-    db:
+    db_test:
       image: postgres:13
       restart: always
       environment:
@@ -24,23 +24,7 @@ jobs:
             --health-timeout 5s
             --health-retries 5
       ports:
-        - "5432:5432"
-
-  db_test:
-    image: postgres:13
-    restart: always
-    environment:
-      TZ: UTC
-      PGTZ: UTC
-      POSTGRES_DB: tictactoe
-      POSTGRES_HOST_AUTH_METHOD: trust
-    options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-    ports:
-      - "8000:5432"
+        - "8000:8000"
 
     steps:
       - name: Check out repository code
@@ -50,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TEST_SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
-      SQLALCHEMY_CONN: postgresql://postgres@localhost/tictactoe
+      SQLALCHEMY_CONN: postgresql://postgres@localhost:8000/tictactoe
 
     defaults:
       run:
