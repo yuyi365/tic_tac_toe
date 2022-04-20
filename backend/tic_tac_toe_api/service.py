@@ -24,11 +24,9 @@ def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
     return {"game_id": game_id, "pin": pin}
 
 
-def create_move(
-    conn: sqlalchemy.engine.Connection,
+def create_new_board(
+    board: Board,
     slot_index: int,
     player: Player,
-    board: Board,
-    tokens: Dict[Optional[Player], str],
-) -> Dict:
+) -> Board:
     return board.place_slot(slot_index, player)
