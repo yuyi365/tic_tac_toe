@@ -45,3 +45,7 @@ class InvalidBoardIndex(Exception):
 
 class SpotUnavailableError(Exception):
     pass
+
+
+class InvalidConnectionError(Exception):
+    pass

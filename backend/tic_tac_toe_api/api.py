@@ -7,17 +7,22 @@ from fastapi.routing import APIRoute
 from .models import (
     BoardResponse,
     MoveRequest,
+    NewGameResponse,
     InvalidBoardIndexErrorResponse,
     SpotUnavailableErrorResponse,
+    InvalidConnectionErrorResponse,
 )
 from .game import (
     make_empty_board,
     make_default_tokens,
     InvalidBoardIndex,
     SpotUnavailableError,
+    InvalidConnectionError,
 )
 
-from .mappers import map_board_response
+from .mappers import map_board_response, map_new_game_response
+from .service import create_new_game
+from .db import create_engine
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾
@@ -54,6 +59,7 @@ app = FastAPI(generate_unique_id_function=custom_generate_unique_id)
 async def startup_event() -> None:
     state["board"] = make_empty_board()
     state["tokens"] = make_default_tokens()
+    state["engine"] = create_engine()
 
 
 @app.get("/board", response_model=BoardResponse, tags=["getBoard"])
@@ -85,3 +91,22 @@ async def create_move(move: MoveRequest) -> BoardResponse:
         raise HTTPException(status_code=403, detail="Spot already taken")
     else:
         return map_board_response(board, tokens)
+
+
+@app.post(
+    "/newgame",
+    response_model=NewGameResponse,
+    responses={
+        502: {"model": InvalidConnectionErrorResponse},
+    },
+    tags=["makeNewGame"],
+)
+def new_game() -> NewGameResponse:
+    engine = state["engine"]
+
+    try:
+        with engine.connect() as conn:
+            result = create_new_game(conn)
+        return map_new_game_response(result["game_id"], result["pin"])
+    except InvalidConnectionError:
+        raise HTTPException(status_code=502, detail="API connection error")

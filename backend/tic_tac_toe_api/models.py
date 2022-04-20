@@ -14,6 +14,11 @@ class MoveRequest(BaseModel):
     player: Player
 
 
+class NewGameResponse(BaseModel):
+    game_id: int
+    pin: str
+
+
 class ValidationErrorResponse(BaseModel):
     loc: List[str]
     msg: str
@@ -25,4 +30,8 @@ class InvalidBoardIndexErrorResponse(BaseModel):
 
 
 class SpotUnavailableErrorResponse(BaseModel):
+    detail: List[ValidationErrorResponse]
+
+
+class InvalidConnectionErrorResponse(BaseModel):
     detail: List[ValidationErrorResponse]
