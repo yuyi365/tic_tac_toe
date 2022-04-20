@@ -6,7 +6,7 @@ from tic_tac_toe_api.tables import metadata
 
 @pytest.fixture(scope="class")
 def db_engine():
-    engine = sqlalchemy.create_engine(os.environ["TEST_SQLALCHEMY_CONN"], echo=False)
+    engine = sqlalchemy.create_engine(os.environ["TEST_SQLALCHEMY_CONN"], echo=True, future=True)
     metadata.create_all(engine)
     yield engine
     metadata.drop_all(engine)
