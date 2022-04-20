@@ -18,5 +18,4 @@ def test_service_handles_pin_already_exists(mock_make_pin, db_conn):
     mock_make_pin.side_effect = [first_pin, second_pin]
 
     new_game_result = create_new_game(db_conn)
-
     assert new_game_result["pin"] == second_pin
