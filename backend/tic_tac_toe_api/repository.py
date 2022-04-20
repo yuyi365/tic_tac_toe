@@ -10,5 +10,6 @@ def insert_game(conn: sqlalchemy.engine.Connection, pin: str) -> int:
             .first()
             .id
         )
-    except DataError:
-        return None
+    except DataError as e:
+        error = str(e.__dict__["orig"])
+        return error
