@@ -21,7 +21,7 @@ from .game import (
 )
 
 from .mappers import map_board_response, map_new_game_response
-from .service import create_new_game
+from .service import create_new_board, create_new_game
 from .db import create_engine
 
 description = """
@@ -78,19 +78,19 @@ async def board() -> BoardResponse:
     },
     tags=["makeMove"],
 )
-async def create_move(move: MoveRequest) -> BoardResponse:
+async def make_move(move: MoveRequest) -> BoardResponse:
     board = state["board"]
     tokens = state["tokens"]
     try:
-        board.place_slot(move.slot_index, move.player)
+        new_board = create_new_board(board, move.slot_index, move.player)
+        state["board"] = new_board
+        return map_board_response(board, tokens)
     except InvalidBoardIndex:
         raise HTTPException(
             status_code=400, detail="Invalid entry - slot index must be between 0 and 8"
         )
     except SpotUnavailableError:
         raise HTTPException(status_code=403, detail="Spot already taken")
-    else:
-        return map_board_response(board, tokens)
 
 
 @app.post(
