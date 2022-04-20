@@ -5,10 +5,9 @@ from unittest.mock import patch
 
 
 def test_return_value_pin_is_equal_to_initial_pin_input(db_conn):
-    new_game_result = create_new_game(db_conn)
-    query = select(games)
-    result = db_conn.execute(query).first()
-    assert result.pin == new_game_result["pin"]
+    result = create_new_game(db_conn)
+    expected = db_conn.execute(select(games.c.id, games.c.pin)).first()
+    assert result == {"pin": expected.pin, "game_id": expected.id}
 
 
 def test_return_posts_to_the_database_and_returns_a_new_game(db_conn):
