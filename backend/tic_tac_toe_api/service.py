@@ -3,10 +3,10 @@ from sqlalchemy.exc import IntegrityError
 import sqlalchemy
 from . import repository
 from .utils import make_pin
-from typing import Dict, Union
+from typing import Union
 
 
-def create_new_game(conn: sqlalchemy.engine.Connection) -> Dict[Union[int, str]]:
+def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
     trying = True
     while trying:
         pin = make_pin()
