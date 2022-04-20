@@ -1,9 +1,10 @@
 from psycopg2 import DataError
 from sqlalchemy.exc import IntegrityError
 import sqlalchemy
+from typing import Union, Dict, Optional
 from . import repository
 from .utils import make_pin
-from typing import Union
+from .game import Player, Board
 
 
 def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
@@ -21,3 +22,13 @@ def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
         else:
             trying = False
     return {"game_id": game_id, "pin": pin}
+
+
+def create_move(
+    conn: sqlalchemy.engine.Connection,
+    slot_index: int,
+    player: Player,
+    board: Board,
+    tokens: Dict[Optional[Player], str],
+) -> Dict:
+    return board.place_slot(slot_index, player)
