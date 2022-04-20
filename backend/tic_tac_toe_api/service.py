@@ -29,5 +29,15 @@ def create_new_board(
     slot_index: int,
     player: Player,
 ) -> Board:
+
     board.place_slot(slot_index, player)
     return board
+
+
+def save_game_settings(
+    conn: sqlalchemy.engine.Connection,
+    game_id: int,
+    player_one_token: str,
+    player_two_token: str,
+):
+    repository.insert_settings(conn, game_id, player_one_token, player_two_token)

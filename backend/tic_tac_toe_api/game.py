@@ -49,3 +49,7 @@ class SpotUnavailableError(Exception):
 
 class InvalidConnectionError(Exception):
     pass
+
+
+class InvalidGameIdError(Exception):
+    pass

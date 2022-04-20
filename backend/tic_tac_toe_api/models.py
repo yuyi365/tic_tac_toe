@@ -14,6 +14,12 @@ class MoveRequest(BaseModel):
     player: Player
 
 
+class SettingsRequest(BaseModel):
+    game_id: int
+    player_one_token: str
+    player_two_token: str
+
+
 class NewGameResponse(BaseModel):
     game_id: int
     pin: str
@@ -34,4 +40,8 @@ class SpotUnavailableErrorResponse(BaseModel):
 
 
 class InvalidConnectionErrorResponse(BaseModel):
+    detail: List[ValidationErrorResponse]
+
+
+class InvalidGameIdErrorResponse(BaseModel):
     detail: List[ValidationErrorResponse]

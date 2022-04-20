@@ -7,10 +7,12 @@ from fastapi.routing import APIRoute
 from .models import (
     BoardResponse,
     MoveRequest,
+    SettingsRequest,
     NewGameResponse,
     InvalidBoardIndexErrorResponse,
     SpotUnavailableErrorResponse,
     InvalidConnectionErrorResponse,
+    InvalidGameIdErrorResponse,
 )
 from .game import (
     make_empty_board,
@@ -18,10 +20,11 @@ from .game import (
     InvalidBoardIndex,
     SpotUnavailableError,
     InvalidConnectionError,
+    InvalidGameIdError,
 )
 
 from .mappers import map_board_response, map_new_game_response
-from .service import create_new_board, create_new_game
+from .service import create_new_board, create_new_game, save_game_settings
 from .db import create_engine
 
 description = """
@@ -101,7 +104,7 @@ async def make_move(move: MoveRequest) -> BoardResponse:
     },
     tags=["makeNewGame"],
 )
-def new_game() -> NewGameResponse:
+async def new_game() -> NewGameResponse:
     engine = state["engine"]
 
     try:
@@ -110,3 +113,26 @@ def new_game() -> NewGameResponse:
         return map_new_game_response(result["game_id"], result["pin"])
     except InvalidConnectionError:
         raise HTTPException(status_code=502, detail="API connection error")
+
+
+@app.post(
+    "/games/${game_id}/settings",
+    response_model=BoardResponse,
+    responses={
+        400: {"model": InvalidGameIdErrorResponse},
+    },
+    tags=["makeMove"],
+)
+async def make_settings(settings: SettingsRequest) -> BoardResponse:
+    engine = state["engine"]
+
+    try:
+        with engine.connect() as conn:
+            save_game_settings(
+                conn,
+                settings.game_id,
+                settings.player_one_token,
+                settings.player_two_token,
+            )
+    except InvalidGameIdError:
+        raise HTTPException(status_code=403, detail="Invalid game id")
