@@ -70,7 +70,7 @@ async def board() -> BoardResponse:
 
 
 @app.post(
-    "/makemove",
+    "/move",
     response_model=BoardResponse,
     responses={
         400: {"model": InvalidBoardIndexErrorResponse},

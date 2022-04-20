@@ -38,7 +38,7 @@ def test_valid_move_endpoint(client):
     expected_status = 200
 
     response = client.post(
-        "/makemove",
+        "/move",
         json={"slot_index": 1, "player": Player.ONE.value},
     )
 
@@ -52,7 +52,7 @@ def test_post_response_content(client, default_tokens):
     expected_board = BoardResponse(slots=[player_one_token] + [empty_token] * 8)
 
     response = client.post(
-        "/makemove",
+        "/move",
         json={"slot_index": 0, "player": Player.ONE.value},
     )
 
@@ -63,7 +63,7 @@ def test_post_response_content_index_out_of_range(client):
     expected_content = {"detail": "Invalid entry - slot index must be between 0 and 8"}
 
     response = client.post(
-        "/makemove",
+        "/move",
         json={"slot_index": 11, "player": Player.TWO.value},
     )
 
@@ -74,12 +74,12 @@ def test_post_response_slot_already_exists(client):
     expected_content = {"detail": "Spot already taken"}
 
     client.post(
-        "/makemove",
+        "/move",
         json={"slot_index": 2, "player": Player.ONE.value},
     )
 
     response = client.post(
-        "/makemove",
+        "/move",
         json={"slot_index": 2, "player": Player.TWO.value},
     )
 
@@ -90,7 +90,7 @@ def test_post_response_type_error_unprocessable_entity(client):
     expected_status = 422
 
     response = client.post(
-        "/makemove",
+        "/move",
         json={"not_slot_index_int": "🧇", "not_a_token_str": 5},
     )
 
