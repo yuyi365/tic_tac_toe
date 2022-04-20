@@ -16,7 +16,7 @@ def empty_board():
 
 def test_if_board_can_accept_token(empty_board):
     board = empty_board
-    expected_board = Board(slots=[Player.ONE] + [None] * 8)
+    expected_board = Board(slots=[Player.ONE] + [Player.EMPTY] * 8)
 
     board.place_slot(0, Player.ONE)
 
@@ -24,7 +24,7 @@ def test_if_board_can_accept_token(empty_board):
 
 
 def test_placing_token_on_board_with_existing_token_raises_spot_unavailable():
-    board = Board(slots=[Player.ONE] + [None] * 8)
+    board = Board(slots=[Player.ONE] + [Player.EMPTY] * 8)
 
     with pytest.raises(SpotUnavailableError):
         board.place_slot(0, Player.ONE)

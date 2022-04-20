@@ -15,9 +15,12 @@ class MoveRequest(BaseModel):
 
 
 class SettingsRequest(BaseModel):
-    game_id: int
     player_one_token: str
     player_two_token: str
+
+
+class SettingsResponse(BaseModel):
+    response: int
 
 
 class NewGameResponse(BaseModel):
