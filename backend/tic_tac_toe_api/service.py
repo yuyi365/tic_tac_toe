@@ -13,7 +13,7 @@ def create_new_game(conn: sqlalchemy.engine.Connection) -> Dict[str, str]:
             game_id = repository.insert_game(conn, pin)
         except IntegrityError:
             print("Duplicate pin found, trying again")
-            pass
+            conn.rollback()
         else:
             trying = False
     return {"game_id": game_id, "pin": pin}
