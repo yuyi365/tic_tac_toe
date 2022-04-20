@@ -1,7 +1,7 @@
 from psycopg2 import DataError
 from sqlalchemy.exc import IntegrityError
 import sqlalchemy
-from typing import Union, Dict, Optional
+from typing import Union
 from . import repository
 from .utils import make_pin
 from .game import Player, Board
@@ -29,4 +29,5 @@ def create_new_board(
     slot_index: int,
     player: Player,
 ) -> Board:
-    return board.place_slot(slot_index, player)
+    board.place_slot(slot_index, player)
+    return board
