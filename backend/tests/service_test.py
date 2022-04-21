@@ -1,7 +1,11 @@
 import pytest
-from tic_tac_toe_api.service import create_new_game, create_new_board
+from tic_tac_toe_api.service import (
+    create_new_game,
+    create_new_board,
+    save_game_settings,
+)
 from tic_tac_toe_api.game import make_empty_board, Player, Board
-from tic_tac_toe_api.tables import games
+from tic_tac_toe_api.tables import games, settings
 from sqlalchemy.sql import select
 from unittest.mock import patch
 
@@ -35,3 +39,12 @@ def test_creates_new_board(empty_board):
     expected_board = Board(slots=[Player.ONE] + [None] * 8)
     new_board = create_new_board(board, slot_index, player)
     assert expected_board == new_board
+
+
+def test_insert_settings_with_valid_game_id(db_conn):
+    new_game = create_new_game(db_conn)
+    save_game_settings(db_conn, new_game["game_id"], "🦄", "🍄")
+    data = db_conn.execute(select(settings)).first()
+    assert data.game_id == new_game["game_id"]
+    assert data.player_one_token == "🦄"
+    assert data.player_two_token == "🍄"
