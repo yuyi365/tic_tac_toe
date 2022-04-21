@@ -10,12 +10,18 @@ def insert_settings(
     conn: sqlalchemy.engine.Connection,
     game_id: int,
     player_one_token: str,
-    player_two_token,
+    player_two_token: str,
 ):
-    return conn.execute(
-        settings.insert().values(
-            game_id=game_id,
-            player_one_token=player_one_token,
-            player_two_token=player_two_token,
+    return (
+        conn.execute(
+            settings.insert()
+            .values(
+                game_id=game_id,
+                player_one_token=player_one_token,
+                player_two_token=player_two_token,
+            )
+            .returning(settings.c.id)
         )
+        .first()
+        .id
     )

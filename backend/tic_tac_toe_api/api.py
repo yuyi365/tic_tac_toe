@@ -1,7 +1,7 @@
 from typing import Dict, Any
 
 from fastapi import HTTPException
-from fastapi import FastAPI
+from fastapi import FastAPI, Response, status
 from fastapi.routing import APIRoute
 
 from .models import (
@@ -121,9 +121,9 @@ async def new_game() -> NewGameResponse:
     responses={
         400: {"model": InvalidGameIdErrorResponse},
     },
-    tags=["makeMove"],
+    tags=["makeSettings"],
 )
-async def make_settings(settings: SettingsRequest) -> BoardResponse:
+async def make_settings(settings: SettingsRequest, response: Response) -> Response:
     engine = state["engine"]
 
     try:
@@ -134,5 +134,6 @@ async def make_settings(settings: SettingsRequest) -> BoardResponse:
                 settings.player_one_token,
                 settings.player_two_token,
             )
+            response.status_code = status.HTTP_201_CREATED
     except InvalidGameIdError:
         raise HTTPException(status_code=403, detail="Invalid game id")

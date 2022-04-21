@@ -13,6 +13,7 @@ def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
         pin = make_pin()
         try:
             game_id = repository.insert_game(conn, pin)
+            conn.commit()
         except IntegrityError:
             print("Duplicate pin found, trying again")
             conn.rollback()
@@ -41,3 +42,4 @@ def save_game_settings(
     player_two_token: str,
 ):
     repository.insert_settings(conn, game_id, player_one_token, player_two_token)
+    conn.commit()
