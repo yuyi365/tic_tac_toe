@@ -5,13 +5,24 @@
     "version": "0.1.0"
   },
   "paths": {
-    "/board": {
+    "/games/{game_id}/board": {
       "get": {
         "tags": [
           "getBoard"
         ],
         "summary": "Board",
         "operationId": "getBoard",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Game Id",
+              "type": "integer"
+            },
+            "name": "game_id",
+            "in": "path"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -22,17 +33,48 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidGameIdErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/move": {
+    "/games/{game_id}/move": {
       "post": {
         "tags": [
           "makeMove"
         ],
-        "summary": "Create Move",
+        "summary": "Make Move",
         "operationId": "makeMove",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Game Id",
+              "type": "integer"
+            },
+            "name": "game_id",
+            "in": "path"
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -48,9 +90,7 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BoardResponse"
-                }
+                "schema": {}
               }
             }
           },
@@ -105,12 +145,74 @@
               }
             }
           },
+          "502": {
+            "description": "Bad Gateway",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InvalidConnectionErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games/{game_id}/settings": {
+      "post": {
+        "tags": [
+          "makeSettings"
+        ],
+        "summary": "Make Settings",
+        "operationId": "makeSettings",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Game Id",
+              "type": "integer"
+            },
+            "name": "game_id",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardResponse"
+                }
+              }
+            }
+          },
           "400": {
             "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InvalidConnectionErrorResponse"
+                  "$ref": "#/components/schemas/InvalidGameIdErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -182,6 +284,22 @@
           }
         }
       },
+      "InvalidGameIdErrorResponse": {
+        "title": "InvalidGameIdErrorResponse",
+        "required": [
+          "detail"
+        ],
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationErrorResponse"
+            }
+          }
+        }
+      },
       "MoveRequest": {
         "title": "MoveRequest",
         "required": [
@@ -220,10 +338,29 @@
       "Player": {
         "title": "Player",
         "enum": [
+          0,
           1,
           2
         ],
         "description": "An enumeration."
+      },
+      "SettingsRequest": {
+        "title": "SettingsRequest",
+        "required": [
+          "player_one_token",
+          "player_two_token"
+        ],
+        "type": "object",
+        "properties": {
+          "player_one_token": {
+            "title": "Player One Token",
+            "type": "string"
+          },
+          "player_two_token": {
+            "title": "Player Two Token",
+            "type": "string"
+          }
+        }
       },
       "SpotUnavailableErrorResponse": {
         "title": "SpotUnavailableErrorResponse",

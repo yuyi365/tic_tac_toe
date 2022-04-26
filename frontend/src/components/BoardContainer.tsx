@@ -21,7 +21,7 @@ const BoardContainer = (props: BoardProps) => {
   }, []);
 
   async function getBoard() {
-    GetBoardService.getBoard()
+    GetBoardService.getBoard(1)
       .then((boardResponse) => {
         setBoard(boardResponse.slots);
         props.handleError(false);
@@ -40,7 +40,7 @@ const BoardContainer = (props: BoardProps) => {
   };
 
   async function handleMove(index: number) {
-    MakeMoveService.makeMove({
+    MakeMoveService.makeMove(1, {
       slot_index: index,
       player: turn,
     })

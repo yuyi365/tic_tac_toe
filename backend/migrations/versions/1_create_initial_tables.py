@@ -1,8 +1,8 @@
-"""Creates initial tables
+"""create initial tables
 
 Revision ID: 1
 Revises:
-Create Date: 2022-04-14 09:26:07.883734
+Create Date: 2022-04-22 15:50:22.448608
 
 """
 from alembic import op
@@ -21,7 +21,9 @@ def upgrade():
         sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
         sa.Column("pin", sa.String(length=4), nullable=False),
         sa.Column(
-            "winning_player", sa.Enum("ONE", "TWO", name="player"), nullable=True
+            "winning_player",
+            sa.Enum("EMPTY", "ONE", "TWO", name="player"),
+            nullable=True,
         ),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
         sa.PrimaryKeyConstraint("id"),
@@ -33,7 +35,7 @@ def upgrade():
         sa.Column("game_id", sa.BigInteger(), nullable=False),
         sa.Column(
             "board",
-            postgresql.ARRAY(sa.Enum("ONE", "TWO", name="player")),
+            postgresql.ARRAY(sa.Enum("EMPTY", "ONE", "TWO", name="player")),
             nullable=False,
         ),
         sa.Column("created_at", sa.DateTime(timezone=True), nullable=False),
