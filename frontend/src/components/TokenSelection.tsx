@@ -1,8 +1,11 @@
 import Token from "./Token";
 
-const TokenSelection = () => {
-  const tokens = ["🦄", "🍄", "👑", "🦩"];
+type Props = {
+  token: string;
+};
 
+const TokenSelection = (props: Props) => {
+  const tokens = ["🦄", "🍄", "👑", "🦩"];
   const mapTokens = tokens.map((token) => {
     return <Token key={token} token={token} />;
   });
