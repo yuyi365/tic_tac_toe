@@ -1,25 +1,22 @@
+import { useState } from "react";
 import Token from "./Token";
 
 type Props = {
-  token: string;
+  player: string;
 };
 
 const TokenSelection = (props: Props) => {
   const tokens = ["🦄", "🍄", "👑", "🦩"];
   const mapTokens = tokens.map((token) => {
-    return <Token key={token} token={token} />;
+    return <Token key={token} token={token} player={props.player} />;
   });
+
   return (
     <>
-      <div className="token-div">
-        <h4>Player 1, select your token:</h4>
-        {mapTokens}
-      </div>
-
-      <div className="token-div">
-        <h4>Player 2, select your token:</h4>
-        {mapTokens}
-      </div>
+      <h4 className="token-h4" key={props.player}>
+        Player {props.player}, select your token:
+      </h4>
+      {mapTokens}
     </>
   );
 };

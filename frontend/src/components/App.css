@@ -98,16 +98,79 @@
   align-items: center;
 }
 
+.token-h4 {
+  margin-top: 1.5rem;
+}
+
 .token-button {
   box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
   height: 4rem;
   width: 4rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   text-align: center;
   font-size: 2rem;
 }
 
 .token-button:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+.token-complete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 3rem;
+  width: 6rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.token-complete-button:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+.form-div {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.form {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+#pin-input {
+  border: none;
+  border-bottom: 3px solid rgba(205, 79, 216, 0.75);
+  margin: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #ea4c89;
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+#pin-input:focus {
+  color: #ea4c89;
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+.pin-complete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 2rem;
+  width: 4rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.pin-complete-button:hover {
   background-color: aquamarine;
   cursor: pointer;
 }

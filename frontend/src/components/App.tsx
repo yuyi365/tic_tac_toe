@@ -5,11 +5,14 @@ import Header from "./Header";
 import ErrorContainer from "./ErrorContainer";
 import "./App.css";
 import LandingPage from "./LandingPage";
+import TokenSelectionContainer from "./TokenSelectionContainer";
+import ResumePin from "./ResumePin";
 
 const App = () => {
   const [error, setError] = useState<boolean>(false);
   const [landingPage, setLandingPage] = useState(true);
   const [tokenPage, setTokenPage] = useState(false);
+  const [boardPage, setBoardPage] = useState(false);
   const [pinPage, setPinPage] = useState(false);
   const [gameId, setGameId] = useState("");
   const [pin, setPin] = useState("");
@@ -29,8 +32,11 @@ const App = () => {
     setTokenPage(!tokenPage);
     // turn off landing screen state
     setLandingPage(!landingPage);
+  };
 
-    // ==> TOKEN SELECTION PAGE
+  const handleStartGame = () => {
+    setTokenPage(!tokenPage);
+    setBoardPage(!boardPage);
   };
 
   const handleResumeGame = () => {
@@ -51,8 +57,12 @@ const App = () => {
           handleNewGame={handleNewGame}
           handleResumeGame={handleResumeGame}
         />
+      ) : !error && pinPage ? (
+        <ResumePin pin={pin} setPin={setPin} />
       ) : !error && tokenPage ? (
-        <TokenSelection />
+        <TokenSelectionContainer handleStartGame={handleStartGame} />
+      ) : !error && boardPage ? (
+        <BoardContainer handleError={handleError} />
       ) : (
         <ErrorContainer />
       )}
