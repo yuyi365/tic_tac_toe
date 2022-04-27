@@ -59,8 +59,8 @@ def test_manipulate_board(db_conn):
 
 
 def test_get_board(db_conn):
-    set_up_game(db_conn)
+    game_id = set_up_game(db_conn)
     expected_result = [Player.EMPTY] * 9
 
-    results = get_board(db_conn, 1)
+    results = get_board(db_conn, game_id)
     assert results["board"].slots == expected_result
