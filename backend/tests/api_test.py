@@ -134,7 +134,7 @@ def test_post_move_response_slot_already_exists(client, db_conn):
     assert response.json() == expected_content
 
 
-def test_post_move_response_type_error_unprocessable_entity(client):
+def test_post_move_response_type_error_unprocessable_entity(client, db_conn):
 
     expected_status = 422
 
@@ -150,7 +150,7 @@ def test_post_move_response_type_error_unprocessable_entity(client):
     assert response.status_code == expected_status
 
 
-def test_post_new_game_endpoint(client):
+def test_post_new_game_endpoint(client, db_conn):
 
     expected_status = 200
 
@@ -174,7 +174,7 @@ def test_post_settings_valid_endpoint(client, db_conn):
     assert response.status_code == expected_status
 
 
-def test_post_settings_invalid_endpoint(client):
+def test_post_settings_invalid_endpoint(client, db_conn):
 
     expected_status = 400
 
