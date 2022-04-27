@@ -1,13 +1,15 @@
-import pytest
 from unittest import mock
+
+import pytest
 from fastapi.testclient import TestClient
+
 from tic_tac_toe_api.api import app
-from tic_tac_toe_api.models import BoardResponse
 from tic_tac_toe_api.game import Player, make_empty_board
+from tic_tac_toe_api.models import BoardResponse
 from tic_tac_toe_api.repository import (
+    insert_board,
     insert_game,
     insert_settings,
-    insert_board,
     retrieve_board,
 )
 

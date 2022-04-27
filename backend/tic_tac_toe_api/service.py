@@ -1,10 +1,12 @@
+from typing import Union
+
+import sqlalchemy
 from psycopg2 import DataError
 from sqlalchemy.exc import IntegrityError
-import sqlalchemy
-from typing import Union
+
 from . import repository
+from .game import Board, Player, make_empty_board
 from .utils import make_pin
-from .game import Player, Board, make_empty_board
 
 
 def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:

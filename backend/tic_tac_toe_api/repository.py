@@ -1,9 +1,11 @@
-from psycopg2 import IntegrityError
+from typing import Dict, List, Optional
+
 import sqlalchemy
-from sqlalchemy import select, desc
-from typing import List, Dict, Optional
-from .tables import games, settings, boards
+from psycopg2 import IntegrityError
+from sqlalchemy import desc, select
+
 from .game import Player
+from .tables import boards, games, settings
 
 
 def insert_game(conn: sqlalchemy.engine.Connection, pin: str) -> int:

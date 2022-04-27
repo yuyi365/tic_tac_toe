@@ -1,34 +1,25 @@
-from typing import Dict, Any
-from fastapi import HTTPException, FastAPI, status
+from typing import Any, Dict
+
+from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
 from fastapi.routing import APIRoute
 from sqlalchemy.exc import IntegrityError
 
+from .db import create_engine
+from .game import InvalidBoardIndex, InvalidConnectionError, SpotUnavailableError
+from .mappers import map_board_response, map_new_game_response
 from .models import (
     BoardResponse,
-    MoveRequest,
-    SettingsRequest,
-    SettingsResponse,
-    NewGameResponse,
     InvalidBoardIndexErrorResponse,
-    SpotUnavailableErrorResponse,
     InvalidConnectionErrorResponse,
     InvalidGameIdErrorResponse,
+    MoveRequest,
+    NewGameResponse,
+    SettingsRequest,
+    SettingsResponse,
+    SpotUnavailableErrorResponse,
 )
-from .game import (
-    InvalidBoardIndex,
-    SpotUnavailableError,
-    InvalidConnectionError,
-)
-
-from .mappers import map_board_response, map_new_game_response
-from .service import (
-    create_new_game,
-    get_board,
-    manipulate_board,
-    save_game_settings,
-)
-from .db import create_engine
+from .service import create_new_game, get_board, manipulate_board, save_game_settings
 
 description = """
 TicTacToe API helps you launch an exciting tic-tac-toe game. 👾

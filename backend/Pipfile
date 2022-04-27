@@ -4,23 +4,25 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-fastapi = "*"
-uvicorn = "*"
-sqlalchemy = "*"
 alembic = "*"
+fastapi = "*"
 psycopg2-binary = "*"
+requests = "*"
+sqlalchemy = "*"
+uvicorn = "*"
 
 [dev-packages]
+autoflake = "*"
 black = "*"
 flake8 = "*"
-pytest = "*"
-starlette = "*"
+isort = "*"
 mypy = "*"
-requests = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.8"
 
 [scripts]
+fmt = "scripts/fmt.sh"
 generate-openapi = "scripts/generate_openapi.py"
 start = "uvicorn --port 3000 tic_tac_toe_api.api:app --reload"

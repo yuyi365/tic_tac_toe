@@ -1,6 +1,8 @@
-import pytest
 import os
+
+import pytest
 import sqlalchemy
+
 from tic_tac_toe_api.tables import metadata
 
 

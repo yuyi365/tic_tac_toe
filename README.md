@@ -116,8 +116,14 @@ docker compose up
 
 ## Development
 
-Generate the OpenAPI schema and frontend client
+Generate the OpenAPI schema and frontend client.
 
 ```bash
 make
+```
+
+Run the code formatters.
+
+```bash
+make fmt
 ```

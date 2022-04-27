@@ -1,14 +1,15 @@
 import pytest
 from sqlalchemy.exc import DataError, IntegrityError
+from sqlalchemy.sql import select
+
+from tic_tac_toe_api.game import Board, Player, make_empty_board
 from tic_tac_toe_api.repository import (
+    insert_board,
     insert_game,
     insert_settings,
     retrieve_board,
-    insert_board,
 )
 from tic_tac_toe_api.tables import games, settings
-from sqlalchemy.sql import select
-from tic_tac_toe_api.game import make_empty_board, Player, Board
 
 
 def test_insert_game_with_valid_pin(db_conn):

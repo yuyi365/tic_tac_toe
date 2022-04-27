@@ -1,15 +1,17 @@
+from unittest.mock import patch
+
 import pytest
+from sqlalchemy.sql import select
+
+from tic_tac_toe_api.game import Player, make_empty_board
+from tic_tac_toe_api.repository import retrieve_board
 from tic_tac_toe_api.service import (
     create_new_game,
-    save_game_settings,
-    manipulate_board,
     get_board,
+    manipulate_board,
+    save_game_settings,
 )
-from tic_tac_toe_api.game import make_empty_board, Player
 from tic_tac_toe_api.tables import games, settings
-from tic_tac_toe_api.repository import retrieve_board
-from sqlalchemy.sql import select
-from unittest.mock import patch
 
 
 @pytest.fixture()
