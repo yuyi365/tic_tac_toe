@@ -1,14 +1,21 @@
-import { useState } from "react";
 import Token from "./Token";
 
 type Props = {
   player: string;
+  setPlayerToken: (playerToken: string) => void;
 };
 
 const TokenSelection = (props: Props) => {
   const tokens = ["🦄", "🍄", "👑", "🦩"];
   const mapTokens = tokens.map((token) => {
-    return <Token key={token} token={token} player={props.player} />;
+    return (
+      <Token
+        key={token}
+        token={token}
+        player={props.player}
+        setPlayerToken={props.setPlayerToken}
+      />
+    );
   });
 
   return (

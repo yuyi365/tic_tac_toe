@@ -1,22 +1,17 @@
 type Props = {
   token: string;
   player: string;
+  setPlayerToken: (playerToken: string) => void;
 };
 
 const Token = (props: Props) => {
   const handleTokenSelection = (e: any) => {
-    console.log(e.target.value);
-    // if (e.target.key == "one") {
-    //   setPlayerOneToken(e.target.value);
-    // } else if (e.target.key == "two") {
-    //   setPlayerTwoToken(e.target.value);
-    // }
+    props.setPlayerToken(e.target.value);
   };
 
   return (
     <>
       <button
-        key={props.player}
         value={props.token}
         className="token-button"
         onClick={(e) => handleTokenSelection(e)}

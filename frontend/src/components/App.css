@@ -131,6 +131,7 @@
 }
 
 .form-div {
+  margin: 1.5rem;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -141,7 +142,25 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+#game-id-input {
+  border: none;
+  border-bottom: 3px solid rgba(205, 79, 216, 0.75);
+  margin: 2rem;
+  padding: 2rem;
+  text-align: center;
+  color: #ea4c89;
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+}
+
+#game-id-input:focus {
+  color: #ea4c89;
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
 }
 
 #pin-input {

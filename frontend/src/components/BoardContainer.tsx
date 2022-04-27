@@ -2,34 +2,20 @@ import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
 import LoadingContainer from "./LoadingContainer";
 import { useState, useEffect } from "react";
-import calculateWinner from "../gamelogic";
 import { MakeMoveService, GetBoardService, Player } from "../client";
 
 type BoardProps = {
   handleError: (error: boolean) => void;
+  board: Array<string>;
+  winner: any;
+  gameId: number;
+  setBoard: (board: Array<string>) => void;
 };
 
 const BoardContainer = (props: BoardProps) => {
   const [turn, setTurn] = useState<Player>(Player._1);
-  const [board, setBoard] = useState<Array<string>>([]);
-  const winner = calculateWinner(board);
-  const gameWinner = winner?.winner;
-  const winningCombo = winner?.winningSquares;
-
-  useEffect(() => {
-    getBoard();
-  }, []);
-
-  async function getBoard() {
-    GetBoardService.getBoard(1)
-      .then((boardResponse) => {
-        setBoard(boardResponse.slots);
-        props.handleError(false);
-      })
-      .catch(() => {
-        props.handleError(true);
-      });
-  }
+  const gameWinner = props.winner?.winner;
+  const winningCombo = props.winner?.winningSquares;
 
   const handleSwitchToken = () => {
     if (turn === Player._1) {
@@ -40,14 +26,20 @@ const BoardContainer = (props: BoardProps) => {
   };
 
   async function handleMove(index: number) {
-    MakeMoveService.makeMove(1, {
+    MakeMoveService.makeMove(props.gameId, {
       slot_index: index,
       player: turn,
     })
       .then(() => {
-        getBoard();
         handleSwitchToken();
         props.handleError(false);
+        GetBoardService.getBoard(props.gameId)
+          .then((boardResponse) => {
+            props.setBoard(boardResponse.slots);
+          })
+          .catch(() => {
+            props.handleError(true);
+          });
       })
       .catch(() => {
         props.handleError(true);
@@ -56,12 +48,12 @@ const BoardContainer = (props: BoardProps) => {
 
   return (
     <>
-      {board.length === 0 ? (
+      {props.board.length === 0 ? (
         <LoadingContainer />
       ) : (
         <>
           <Board
-            board={board}
+            board={props.board}
             gameWinner={gameWinner}
             winningCombo={winningCombo}
             handleMove={handleMove}
