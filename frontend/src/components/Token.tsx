@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type Props = {
   token: string;
   player: string;
@@ -5,8 +7,10 @@ type Props = {
 };
 
 const Token = (props: Props) => {
+  const [clickedToken, setClickedToken] = useState(false);
   const handleTokenSelection = (e: any) => {
     props.setPlayerToken(e.target.value);
+    setClickedToken(!clickedToken);
   };
 
   return (

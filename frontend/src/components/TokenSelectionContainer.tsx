@@ -4,12 +4,23 @@ type Props = {
   handleStartGame: () => void;
   setPlayerOneToken: (playerOneToken: string) => void;
   setPlayerTwoToken: (playerTwoToken: string) => void;
+  playerOneToken: string;
+  playerTwoToken: string;
 };
 
 const TokenSelectionContainer = (props: Props) => {
   const players = ["one", "two"];
+  const tokens = ["🦄", "🍄", "👑", "🦩"];
 
   const mapPlayers = players.map((player) => {
+    const filterTokensOne = tokens.filter(
+      (token) => token !== props.playerTwoToken
+    );
+
+    const filterTokensTwo = tokens.filter(
+      (token) => token !== props.playerOneToken
+    );
+
     return (
       <TokenSelection
         key={player}
@@ -17,6 +28,7 @@ const TokenSelectionContainer = (props: Props) => {
         setPlayerToken={
           player === "one" ? props.setPlayerOneToken : props.setPlayerTwoToken
         }
+        tokens={player === "one" ? filterTokensOne : filterTokensTwo}
       />
     );
   });

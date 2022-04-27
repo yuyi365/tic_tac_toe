@@ -1,7 +1,7 @@
 import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
 import LoadingContainer from "./LoadingContainer";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { MakeMoveService, GetBoardService, Player } from "../client";
 
 type BoardProps = {

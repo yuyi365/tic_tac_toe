@@ -104,6 +104,8 @@ const App = () => {
           handleStartGame={handleStartGame}
           setPlayerOneToken={setPlayerOneToken}
           setPlayerTwoToken={setPlayerTwoToken}
+          playerOneToken={playerOneToken}
+          playerTwoToken={playerTwoToken}
         />
       ) : !error && boardPage ? (
         <BoardContainer

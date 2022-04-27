@@ -3,11 +3,11 @@ import Token from "./Token";
 type Props = {
   player: string;
   setPlayerToken: (playerToken: string) => void;
+  tokens: Array<string>;
 };
 
 const TokenSelection = (props: Props) => {
-  const tokens = ["🦄", "🍄", "👑", "🦩"];
-  const mapTokens = tokens.map((token) => {
+  const mapTokens = props.tokens.map((token) => {
     return (
       <Token
         key={token}
