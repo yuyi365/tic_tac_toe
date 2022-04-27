@@ -1,19 +1,14 @@
-import { useState } from "react";
-
 type Props = {
   pin: string;
   setPin: (pin: string | ((pin: string) => string)) => void;
   gameId: number;
   setGameId: (gameId: any | ((gameId: any) => any)) => void;
+  findGame: (gameId: number) => void;
 };
 const ResumePin = (props: Props) => {
-  const [notFoundError, setNotFoundError] = useState(false);
-
   const handleResumeGameSubmission = (e: any) => {
     e.preventDefault();
-    
-    // query backend for game_id
-    // if game_id is found, change boardcontainer to true, else: pop-up game does not exst
+    props.findGame(props.gameId);
   };
 
   return (

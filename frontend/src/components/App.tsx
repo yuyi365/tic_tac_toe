@@ -31,7 +31,6 @@ const App = () => {
   };
 
   async function handleNewGame() {
-    // create new game
     await MakeNewGameService.makeNewGame()
       .then((data) => {
         setPin(data.pin);
@@ -40,10 +39,7 @@ const App = () => {
       .catch(() => {
         handleError(true);
       });
-
-    // turn on selection screen state
     setTokenPage(!tokenPage);
-    // turn off landing screen state
     setLandingPage(!landingPage);
   }
 
@@ -66,16 +62,25 @@ const App = () => {
       .catch(() => {
         handleError(true);
       });
-
     setTokenPage(!tokenPage);
   }
 
   const handleResumeGame = () => {
-    // turn on enter pin screen state
     setPinPage(!pinPage);
-    // turn off landing screen state
     setLandingPage(!landingPage);
   };
+
+  async function findGame() {
+    GetBoardService.getBoard(gameId)
+      .then((boardResponse) => {
+        setBoard(boardResponse.slots);
+        setPinPage(!pinPage);
+        setBoardPage(!boardPage);
+      })
+      .catch(() => {
+        handleError(true);
+      });
+  }
 
   return (
     <div className="App">
@@ -92,6 +97,7 @@ const App = () => {
           setPin={setPin}
           gameId={gameId}
           setGameId={setGameId}
+          findGame={findGame}
         />
       ) : !error && tokenPage ? (
         <TokenSelectionContainer
