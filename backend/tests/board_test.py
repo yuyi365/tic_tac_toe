@@ -2,10 +2,10 @@ import pytest
 
 from tic_tac_toe_api.game import (
     Board,
-    Player,
-    make_empty_board,
     InvalidBoardIndex,
+    Player,
     SpotUnavailableError,
+    make_empty_board,
 )
 
 

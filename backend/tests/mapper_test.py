@@ -1,8 +1,8 @@
 import pytest
 
-from tic_tac_toe_api.mappers import map_board_response
 from tic_tac_toe_api.api import BoardResponse
-from tic_tac_toe_api.game import Board, make_default_tokens, make_empty_board, Player
+from tic_tac_toe_api.game import Board, Player, make_default_tokens, make_empty_board
+from tic_tac_toe_api.mappers import map_board_response
 
 
 @pytest.fixture

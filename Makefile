@@ -7,3 +7,6 @@ frontend/openapi.json: backend/tic_tac_toe_api/api.py backend/tic_tac_toe_api/mo
 
 client: frontend/openapi.json
 	cd frontend && npm run generate-client
+
+fmt:
+	cd backend && pipenv run fmt

@@ -1,14 +1,14 @@
 import datetime
 
 from sqlalchemy import (
-    MetaData,
-    Table,
     BigInteger,
     Column,
-    String,
     DateTime,
-    ForeignKey,
     Enum,
+    ForeignKey,
+    MetaData,
+    String,
+    Table,
 )
 from sqlalchemy.dialects.postgresql import ARRAY
 

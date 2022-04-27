@@ -1,7 +1,7 @@
 from typing import Dict, Optional
 
-from .models import BoardResponse, NewGameResponse
 from .game import Board, Player
+from .models import BoardResponse, NewGameResponse
 
 
 def map_board_response(
