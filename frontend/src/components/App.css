@@ -15,6 +15,7 @@
 .header {
   padding: 1.5rem;
   font-size: 3rem;
+  cursor: pointer;
 }
 
 .results {
