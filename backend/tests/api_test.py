@@ -58,7 +58,7 @@ def test_get_board_valid_endpoint(client, db_conn):
 
 
 def test_get_board_empty_board_content(client, db_conn):
-    expected_content = dict(slots=[""] * 9, next_turn=1)
+    expected_content = dict(slots=[""] * 9, next_turn=1, next_turn_token="🦄")
 
     game_id = set_up_game_settings_and_board(db_conn)
     response = client.get(f"/games/{game_id}/board")

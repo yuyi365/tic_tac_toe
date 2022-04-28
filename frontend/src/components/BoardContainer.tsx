@@ -11,6 +11,8 @@ type BoardProps = {
   setBoard: (board: Array<string>) => void;
   turn: Player;
   setTurn: (turn: Player) => void;
+  turnToken: string;
+  setTurnToken: (turnToken: string) => void;
 };
 
 const BoardContainer = (props: BoardProps) => {
@@ -37,6 +39,7 @@ const BoardContainer = (props: BoardProps) => {
           .then((boardResponse) => {
             props.setBoard(boardResponse.slots);
             props.setTurn(boardResponse.next_turn);
+            props.setTurnToken(boardResponse.next_turn_token);
           })
           .catch(() => {
             props.handleError(true);
@@ -60,7 +63,7 @@ const BoardContainer = (props: BoardProps) => {
             handleMove={handleMove}
             handleError={props.handleError}
           />
-          <ResultsContainer gameWinner={gameWinner} player={props.turn} />
+          <ResultsContainer gameWinner={gameWinner} player={props.turnToken} />
         </>
       )}
     </>

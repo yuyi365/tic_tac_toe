@@ -227,7 +227,8 @@
         "title": "BoardResponse",
         "required": [
           "slots",
-          "next_turn"
+          "next_turn",
+          "next_turn_token"
         ],
         "type": "object",
         "properties": {
@@ -240,6 +241,10 @@
           },
           "next_turn": {
             "$ref": "#/components/schemas/Player"
+          },
+          "next_turn_token": {
+            "title": "Next Turn Token",
+            "type": "string"
           }
         }
       },

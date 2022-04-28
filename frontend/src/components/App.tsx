@@ -26,6 +26,7 @@ const App = () => {
   const [playerTwoToken, setPlayerTwoToken] = useState("");
   const [board, setBoard] = useState<Array<string>>([]);
   const [turn, setTurn] = useState<Player>(Player._1);
+  const [turnToken, setTurnToken] = useState("");
   const winner = calculateWinner(board);
 
   const handleError = (error: boolean) => {
@@ -55,6 +56,7 @@ const App = () => {
           .then((boardResponse) => {
             setBoard(boardResponse.slots);
             setTurn(boardResponse.next_turn);
+            setTurnToken(boardResponse.next_turn_token);
             handleError(false);
             setBoardPage(!boardPage);
           })
@@ -78,6 +80,7 @@ const App = () => {
       .then((boardResponse) => {
         setBoard(boardResponse.slots);
         setTurn(boardResponse.next_turn);
+        setTurnToken(boardResponse.next_turn_token);
         setPinPage(!pinPage);
         setBoardPage(!boardPage);
       })
@@ -120,6 +123,8 @@ const App = () => {
           setBoard={setBoard}
           turn={turn}
           setTurn={setTurn}
+          turnToken={turnToken}
+          setTurnToken={setTurnToken}
         />
       ) : (
         <ErrorContainer />

@@ -1,8 +1,6 @@
-import { Player } from "../client";
-
 type ResultProps = {
   gameWinner: string | undefined;
-  player: Player;
+  player: string;
 };
 
 const ResultsContainer = (props: ResultProps) => {

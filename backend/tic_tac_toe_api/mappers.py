@@ -8,7 +8,9 @@ def map_board_response(
     board: Board, tokens: Dict[Optional[Player], str], next_turn: Player
 ) -> BoardResponse:
     return BoardResponse(
-        slots=[tokens[slot] for slot in board.slots], next_turn=next_turn
+        slots=[tokens[slot] for slot in board.slots],
+        next_turn=next_turn,
+        next_turn_token=tokens[next_turn],
     )
 
 
