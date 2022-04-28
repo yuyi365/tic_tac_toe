@@ -7,21 +7,19 @@ type Props = {
 };
 
 const Token = (props: Props) => {
-  const [clickedToken, setClickedToken] = useState(false);
   const handleTokenSelection = (e: any) => {
     props.setPlayerToken(e.target.value);
-    setClickedToken(!clickedToken);
   };
 
   return (
     <>
-      <button
+      <option
+        id="token-option"
         value={props.token}
-        className="token-button"
         onClick={(e) => handleTokenSelection(e)}
       >
         {props.token}
-      </button>
+      </option>
     </>
   );
 };

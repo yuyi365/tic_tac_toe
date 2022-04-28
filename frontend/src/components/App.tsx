@@ -51,7 +51,7 @@ const App = () => {
     })
       .then(() => {
         alert(
-          `Your gameId is ${gameId} use this pin to resume your game later!`
+          `Your Game ID is ${gameId} use this pin to resume your game later!`
         );
         GetBoardService.getBoard(gameId)
           .then((boardResponse) => {

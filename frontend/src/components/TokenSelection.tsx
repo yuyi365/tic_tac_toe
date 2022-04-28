@@ -23,7 +23,9 @@ const TokenSelection = (props: Props) => {
       <h4 className="token-h4" key={props.player}>
         Player {props.player}, select your token:
       </h4>
-      {mapTokens}
+      <select name="tokens" id="id_tokens" multiple>
+        {mapTokens}
+      </select>
     </>
   );
 };

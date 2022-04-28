@@ -121,32 +121,13 @@
   margin-top: 1.5rem;
 }
 
-.token-button {
-  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
-  height: 4rem;
-  width: 4rem;
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 2rem;
-}
-
-.token-button:hover {
-  background-color: aquamarine;
-  cursor: pointer;
-}
-
-.token-button:focus {
-  background-color: aquamarine;
-  cursor: pointer;
-}
-
 .token-complete-button {
   box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
-  height: 3rem;
+  height: 2rem;
   width: 6rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .token-complete-button:hover {
@@ -333,4 +314,38 @@ body {
 }
 .progress-container {
   width: 75%;
+}
+
+#id_tokens {
+  height: 6rem;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+#id_tokens::-moz-focus-inner {
+  border: 0;
+}
+#id_tokens:focus {
+  outline: none;
+}
+
+#token-option {
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 2px rgba(205, 79, 216, 0.75);
+  width: 4rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+#token-option:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+#id_tokens option:checked {
+  background-color: aquamarine;
 }
