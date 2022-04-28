@@ -226,7 +226,8 @@
       "BoardResponse": {
         "title": "BoardResponse",
         "required": [
-          "slots"
+          "slots",
+          "next_turn"
         ],
         "type": "object",
         "properties": {
@@ -236,6 +237,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "next_turn": {
+            "$ref": "#/components/schemas/Player"
           }
         }
       },

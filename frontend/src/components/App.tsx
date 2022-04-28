@@ -11,6 +11,7 @@ import {
   MakeNewGameService,
   GetBoardService,
   MakeSettingsService,
+  Player,
 } from "../client";
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
   const [playerOneToken, setPlayerOneToken] = useState("");
   const [playerTwoToken, setPlayerTwoToken] = useState("");
   const [board, setBoard] = useState<Array<string>>([]);
+  const [turn, setTurn] = useState<Player>(Player._1);
   const winner = calculateWinner(board);
 
   const handleError = (error: boolean) => {
@@ -52,6 +54,7 @@ const App = () => {
         GetBoardService.getBoard(gameId)
           .then((boardResponse) => {
             setBoard(boardResponse.slots);
+            setTurn(boardResponse.next_turn);
             handleError(false);
             setBoardPage(!boardPage);
           })
@@ -74,6 +77,7 @@ const App = () => {
     GetBoardService.getBoard(gameId)
       .then((boardResponse) => {
         setBoard(boardResponse.slots);
+        setTurn(boardResponse.next_turn);
         setPinPage(!pinPage);
         setBoardPage(!boardPage);
       })
@@ -114,6 +118,8 @@ const App = () => {
           winner={winner}
           gameId={gameId}
           setBoard={setBoard}
+          turn={turn}
+          setTurn={setTurn}
         />
       ) : (
         <ErrorContainer />

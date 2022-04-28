@@ -7,6 +7,7 @@ from .game import Player
 
 class BoardResponse(BaseModel):
     slots: List[str]
+    next_turn: Player
 
 
 class MoveRequest(BaseModel):
