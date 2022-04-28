@@ -63,7 +63,11 @@ const BoardContainer = (props: BoardProps) => {
             handleMove={handleMove}
             handleError={props.handleError}
           />
-          <ResultsContainer gameWinner={gameWinner} player={props.turnToken} />
+          <ResultsContainer
+            gameWinner={gameWinner}
+            player={props.turnToken}
+            gameId={props.gameId}
+          />
         </>
       )}
     </>

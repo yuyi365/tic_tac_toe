@@ -5,7 +5,7 @@ const ErrorContainer = () => {
   return (
     <div className="errors" data-testid="error-container">
       <h4 className="error-heading">
-        The API is down - please wait or try again later.
+        There was an error - please try again later.
       </h4>
       <button
         className="try-again-button"

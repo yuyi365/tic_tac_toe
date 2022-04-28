@@ -21,7 +21,6 @@ const App = () => {
   const [boardPage, setBoardPage] = useState(false);
   const [pinPage, setPinPage] = useState(false);
   const [gameId, setGameId] = useState(0);
-  const [pin, setPin] = useState("");
   const [playerOneToken, setPlayerOneToken] = useState("");
   const [playerTwoToken, setPlayerTwoToken] = useState("");
   const [board, setBoard] = useState<Array<string>>([]);
@@ -36,7 +35,6 @@ const App = () => {
   async function handleNewGame() {
     await MakeNewGameService.makeNewGame()
       .then((data) => {
-        setPin(data.pin);
         setGameId(data.game_id);
       })
       .catch(() => {
@@ -52,6 +50,9 @@ const App = () => {
       player_two_token: playerTwoToken,
     })
       .then(() => {
+        alert(
+          `Your gameId is ${gameId} use this pin to resume your game later!`
+        );
         GetBoardService.getBoard(gameId)
           .then((boardResponse) => {
             setBoard(boardResponse.slots);
@@ -99,13 +100,7 @@ const App = () => {
           handleResumeGame={handleResumeGame}
         />
       ) : !error && pinPage ? (
-        <ResumePin
-          pin={pin}
-          setPin={setPin}
-          gameId={gameId}
-          setGameId={setGameId}
-          findGame={findGame}
-        />
+        <ResumePin gameId={gameId} setGameId={setGameId} findGame={findGame} />
       ) : !error && tokenPage ? (
         <TokenSelectionContainer
           handleStartGame={handleStartGame}

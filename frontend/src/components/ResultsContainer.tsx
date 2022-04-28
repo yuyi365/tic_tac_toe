@@ -1,6 +1,7 @@
 type ResultProps = {
   gameWinner: string | undefined;
   player: string;
+  gameId: number;
 };
 
 const ResultsContainer = (props: ResultProps) => {
@@ -9,6 +10,8 @@ const ResultsContainer = (props: ResultProps) => {
       {!props.gameWinner
         ? `It's your turn, player: ${props.player}`
         : `Game is over - the winner is ${props.gameWinner}!`}
+      <p id="game-id">Game ID: {`${props.gameId}`}</p>
+      <button id="save-game">Save Game</button>
     </div>
   );
 };
