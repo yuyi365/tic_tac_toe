@@ -13,6 +13,7 @@
 }
 
 .header {
+  margin-top: 1.5rem;
   padding: 1.5rem;
   font-size: 3rem;
   cursor: pointer;
