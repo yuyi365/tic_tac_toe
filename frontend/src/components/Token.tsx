@@ -2,7 +2,6 @@ import { useState } from "react";
 
 type Props = {
   token: string;
-  player: string;
   setPlayerToken: (playerToken: string) => void;
 };
 

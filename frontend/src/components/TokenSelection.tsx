@@ -9,12 +9,7 @@ type Props = {
 const TokenSelection = (props: Props) => {
   const mapTokens = props.tokens.map((token) => {
     return (
-      <Token
-        key={token}
-        token={token}
-        player={props.player}
-        setPlayerToken={props.setPlayerToken}
-      />
+      <Token key={token} token={token} setPlayerToken={props.setPlayerToken} />
     );
   });
 
