@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { CancelablePromise, GetBoardService } from "../../client";
+import { CancelablePromise, GetBoardService, Player } from "../../client";
 import "@testing-library/jest-dom";
 import Board from "../Board";
 import { act } from "react-dom/test-utils";
@@ -33,6 +33,8 @@ describe("When the component loads", () => {
       return new CancelablePromise((resolve, reject) => {
         resolve({
           slots: ["🦄", "🍄", "", "", "", "", "", "", "🦄"],
+          next_turn: Player._1,
+          next_turn_token: "🍄",
         });
       });
     });

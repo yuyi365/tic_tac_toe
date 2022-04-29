@@ -7,10 +7,10 @@ const loadHeader = () => {
 };
 
 describe("Header component", () => {
-  it("Renders a heading with: 🦄 Tic-Tac-Toe 🍄", () => {
+  it("Renders a heading with: 🦄 👑 Tic-Tac-Toe 🍄 🦩", () => {
     loadHeader();
     const headerElement = screen.getByRole("heading", {
-      name: "🦄 Tic-Tac-Toe 🍄",
+      name: "🦄 👑 Tic-Tac-Toe 🍄 🦩",
     });
     expect(headerElement).toBeInTheDocument();
   });

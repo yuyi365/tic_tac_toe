@@ -4,14 +4,8 @@ import BoardContainer from "../BoardContainer";
 
 describe("When the board container is still loading", () => {
   it("it renders the loading component", () => {
-    const playerOneToken = "🦄";
-    const playerTwoToken = "🍄";
     render(
-      <BoardContainer
-        handleError={(error: boolean) => null}
-        playerOneToken={playerOneToken}
-        playerTwoToken={playerTwoToken}
-      />
+      <BoardContainer handleError={(error: boolean) => null} board={""} />
     );
     const progressBar = screen.getByTestId("progress-container");
     expect(progressBar).toBeInTheDocument;
