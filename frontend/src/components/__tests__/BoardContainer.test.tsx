@@ -13,68 +13,6 @@ import { act } from "react-dom/test-utils";
 const callMakeMoveSpy = jest.spyOn(MakeMoveService, "makeMove");
 const callGetBoardSpy = jest.spyOn(GetBoardService, "getBoard");
 
-describe("When the component loads", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  it("gets a board if the request is valid", async () => {
-    callGetBoardSpy.mockImplementation(() => {
-      return new CancelablePromise((resolve, reject) => {
-        resolve({
-          slots: ["🦄", "🍄", "", "", "", "", "", "", "🦄"],
-          next_turn: Player._2,
-          next_turn_token: "🍄",
-        });
-      });
-    });
-    act(() => {
-      render(
-        <BoardContainer
-          handleError={(error: boolean) => null}
-          board={["🦄", "🍄", "", "", "", "", "", "", "🦄"]}
-          winner={null}
-          gameId={10}
-          turn={Player._2}
-          turnToken={"🍄"}
-          setBoard={(board: Array<string>) => null}
-          setTurn={(turn: Player) => null}
-          setTurnToken={(turnToken: string) => null}
-        />
-      );
-    });
-    await waitFor(() => expect(callGetBoardSpy).toHaveBeenCalledTimes(1));
-  });
-
-  it("does not get a board if the request is invalid", async () => {
-    callGetBoardSpy.mockImplementation(() => {
-      return new CancelablePromise((resolve, reject) => {
-        reject("error");
-      });
-    });
-    const mockSetError = jest.fn((error: boolean) => null);
-    act(() => {
-      render(
-        <BoardContainer
-          handleError={(error: boolean) => null}
-          board={""}
-          winner={null}
-          gameId={10}
-          turn={Player._2}
-          turnToken={"🦄"}
-          setBoard={(board: Array<string>) => null}
-          setTurn={(turn: Player) => null}
-          setTurnToken={(turnToken: string) => null}
-        />
-      );
-    });
-    await waitFor(() => {
-      expect(callGetBoardSpy).toHaveBeenCalledTimes(1);
-      expect(mockSetError).toHaveBeenCalledWith(true);
-    });
-  });
-});
-
 describe("When a player makes a move", () => {
   beforeEach(() => {
     callMakeMoveSpy.mockImplementation(
@@ -110,7 +48,7 @@ describe("When a player makes a move", () => {
           board={["🦄", "🍄", "", "", "", "", "", "", "🦄"]}
           winner={null}
           gameId={10}
-          turn={Player._1}
+          turn={Player._2}
           turnToken={"🍄"}
           setBoard={(board: Array<string>) => null}
           setTurn={(turn: Player) => null}
@@ -130,7 +68,7 @@ describe("When a player makes a move", () => {
     act(() => {
       render(
         <BoardContainer
-          handleError={(error: boolean) => null}
+          handleError={mockSetError}
           board={["🦄", "🍄", "", "", "", "", "", "", "🦄"]}
           winner={null}
           gameId={10}
@@ -142,9 +80,8 @@ describe("When a player makes a move", () => {
         />
       );
     });
-    await waitFor(() => callMakeMoveSpy);
     await waitFor(() =>
-      callGetBoardSpy.mockImplementation(() => {
+      callMakeMoveSpy.mockImplementation(() => {
         return new CancelablePromise((resolve, reject) => {
           reject("error");
         });
