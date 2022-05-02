@@ -1,6 +1,6 @@
 type Props = {
   gameId: number;
-  setGameId: (gameId: any | ((gameId: any) => any)) => void;
+  setGameId: (gameId: string) => void;
   findGame: (gameId: number) => void;
 };
 const ResumeGame = (props: Props) => {

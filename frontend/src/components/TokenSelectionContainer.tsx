@@ -1,4 +1,5 @@
 import TokenSelection from "./TokenSelection";
+import { Player } from "../client";
 
 type Props = {
   handleStartGame: () => void;
@@ -9,7 +10,7 @@ type Props = {
 };
 
 const TokenSelectionContainer = (props: Props) => {
-  const players = ["one", "two"];
+  const players = [Player._1, Player._2];
   const tokens = ["🦄", "🍄", "👑", "🦩"];
 
   const mapPlayers = players.map((player) => {
@@ -26,9 +27,11 @@ const TokenSelectionContainer = (props: Props) => {
         key={player}
         player={player}
         setPlayerToken={
-          player === "one" ? props.setPlayerOneToken : props.setPlayerTwoToken
+          player === Player._1
+            ? props.setPlayerOneToken
+            : props.setPlayerTwoToken
         }
-        tokens={player === "one" ? filterTokensOne : filterTokensTwo}
+        tokens={player === Player._1 ? filterTokensOne : filterTokensTwo}
       />
     );
   });

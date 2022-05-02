@@ -1,7 +1,8 @@
+import { Player } from "../client";
 import Token from "./Token";
 
 type Props = {
-  player: string;
+  player: Player;
   setPlayerToken: (playerToken: string) => void;
   tokens: Array<string>;
 };
@@ -15,9 +16,7 @@ const TokenSelection = (props: Props) => {
 
   return (
     <>
-      <h4 className="token-h4" key={props.player}>
-        Player {props.player}, select your token:
-      </h4>
+      <h4 className="token-h4">Player {props.player}, select your token:</h4>
       <select name="tokens" id="id_tokens" multiple>
         {mapTokens}
       </select>
