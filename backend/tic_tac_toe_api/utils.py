@@ -8,7 +8,7 @@ def make_pin():
 
 def calculate_next_turn(board):
     num_of_placed_slots = sum(slot != Player.EMPTY for slot in board.slots)
-    if num_of_placed_slots == 0 or num_of_placed_slots % 2 == 0:
-        return Player.ONE
-    else:
+    if num_of_placed_slots % 2:
         return Player.TWO
+    else:
+        return Player.ONE
