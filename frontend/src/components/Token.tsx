@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type Props = {
   token: string;
   setPlayerToken: (playerToken: string) => void;

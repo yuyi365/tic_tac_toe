@@ -4,7 +4,7 @@ import Header from "./Header";
 import ErrorContainer from "./ErrorContainer";
 import LandingPage from "./LandingPage";
 import TokenSelectionContainer from "./TokenSelectionContainer";
-import ResumePin from "./ResumePin";
+import ResumeGame from "./ResumeGame";
 import "./App.css";
 import calculateWinner from "../gamelogic";
 import {
@@ -100,7 +100,7 @@ const App = () => {
           handleResumeGame={handleResumeGame}
         />
       ) : !error && pinPage ? (
-        <ResumePin gameId={gameId} setGameId={setGameId} findGame={findGame} />
+        <ResumeGame gameId={gameId} setGameId={setGameId} findGame={findGame} />
       ) : !error && tokenPage ? (
         <TokenSelectionContainer
           handleStartGame={handleStartGame}

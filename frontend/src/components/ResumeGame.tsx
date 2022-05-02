@@ -3,7 +3,7 @@ type Props = {
   setGameId: (gameId: any | ((gameId: any) => any)) => void;
   findGame: (gameId: number) => void;
 };
-const ResumePin = (props: Props) => {
+const ResumeGame = (props: Props) => {
   const handleResumeGameSubmission = (e: any) => {
     e.preventDefault();
     props.findGame(props.gameId);
@@ -11,7 +11,7 @@ const ResumePin = (props: Props) => {
 
   return (
     <div className="form-div">
-      <form className="form">
+      <form className="form" data-testid="resume-game-form">
         <label id="input-id">Please input your game id:</label>
         <input
           type="text"
@@ -24,6 +24,7 @@ const ResumePin = (props: Props) => {
         <button
           onClick={(e) => handleResumeGameSubmission(e)}
           className="pin-complete-button"
+          data-testid="pin-complete-button"
         >
           Submit
         </button>
@@ -32,4 +33,4 @@ const ResumePin = (props: Props) => {
   );
 };
 
-export default ResumePin;
+export default ResumeGame;
