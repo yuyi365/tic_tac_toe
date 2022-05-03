@@ -54,7 +54,6 @@ const BoardContainer = (props: BoardProps) => {
     })
       .then(() => {
         handleSwitchToken();
-        props.handleAppState(AppState._Error);
         findGameBoard(props.gameId);
       })
       .catch(() => {

@@ -5,8 +5,8 @@ import ErrorContainer from "./ErrorContainer";
 import LandingPage from "./LandingPage";
 import TokenSelectionContainer from "./TokenSelectionContainer";
 import ResumeGame from "./ResumeGame";
-import "./App.css";
 import { AppState } from "../utils";
+import "./App.css";
 
 const App = () => {
   const [appState, setAppState] = useState<AppState>(AppState._Landing);
