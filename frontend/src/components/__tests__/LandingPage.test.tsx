@@ -5,7 +5,10 @@ import LandingPage from "../LandingPage";
 describe("When the page loads", () => {
   it("it renders the landing page component with correct buttons", () => {
     render(
-      <LandingPage handleNewGame={() => null} handleResumeGame={() => null} />
+      <LandingPage
+        handleAppState={() => null}
+        handleUpdateGameIdSelectToken={() => null}
+      />
     );
 
     const newGameButton = screen.getByTestId("landing-button-one");

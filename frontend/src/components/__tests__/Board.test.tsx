@@ -10,7 +10,6 @@ const loadEmptyBoard = () => {
       board={["", "", "", "", "", "", "", "", ""]}
       gameWinner={""}
       handleMove={jest.fn((index: number) => null)}
-      handleError={(error: boolean) => null}
     />
   );
 };
@@ -43,7 +42,6 @@ describe("When the component loads", () => {
       render(
         <Board
           board={["🦄", "🍄", "", "", "", "", "", "", "🦄"]}
-          handleError={(error: boolean) => null}
           handleMove={jest.fn((index: number) => null)}
         />
       );
@@ -60,7 +58,6 @@ describe("When the component loads", () => {
           winningCombo={[3, 4, 5]}
           gameWinner={playerTwoToken}
           handleMove={jest.fn((index: number) => null)}
-          handleError={(error: boolean) => null}
         />
       );
       const squares = screen.getAllByRole("cell");
@@ -82,7 +79,6 @@ describe("When the component loads", () => {
         <Board
           board={["", "", "", "", "", "🍄", "🦄", "", "🦄"]}
           handleMove={jest.fn((index: number) => null)}
-          handleError={(error: boolean) => null}
         />
       );
       const squares = screen.getAllByRole("cell");

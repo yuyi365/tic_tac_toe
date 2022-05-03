@@ -1,12 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TokenSelection from "../TokenSelection";
+import { Player } from "../../client";
 
 describe("Token selection component", () => {
   it("initially renders on the screen with all four tokens but changes to three tokens when one is selected", () => {
     render(
       <TokenSelection
-        player={"one"}
+        player={Player._1}
         setPlayerToken={() => null}
         tokens={["🦄", "🍄", "👑", "🦩"]}
       />

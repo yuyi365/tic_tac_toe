@@ -12,6 +12,7 @@ const Token = (props: Props) => {
     <>
       <option
         id="token-option"
+        data-testid={props.token}
         value={props.token}
         onClick={(e) => handleTokenSelection(e)}
       >

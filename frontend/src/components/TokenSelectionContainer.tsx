@@ -50,7 +50,11 @@ const TokenSelectionContainer = (props: Props) => {
     <>
       <div className="token-div">{mapPlayers}</div>
       <div>
-        <button className="token-complete-button" onClick={handleSettingsSetup}>
+        <button
+          className="token-complete-button"
+          data-testid="token-complete-button"
+          onClick={handleSettingsSetup}
+        >
           Start
         </button>
       </div>
