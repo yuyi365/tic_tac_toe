@@ -12,7 +12,7 @@ const ResumeGame = (props: Props) => {
   };
 
   return (
-    <div className="form-div">
+    <div className="form-div" data-testid="resume-game-div">
       <form className="form" data-testid="resume-game-form">
         <label id="input-id">Please input your game id:</label>
         <input

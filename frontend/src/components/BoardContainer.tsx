@@ -2,7 +2,7 @@ import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
 import LoadingContainer from "./LoadingContainer";
 import { MakeMoveService, GetBoardService, Player } from "../client";
-import { AppState } from "../utils";
+import { AppState } from "../appStates";
 import { useState, useEffect } from "react";
 import calculateWinner from "../gamelogic";
 
@@ -29,7 +29,7 @@ const BoardContainer = (props: BoardProps) => {
         handleBoardSetup(boardResponse);
       })
       .catch(() => {
-        props.handleAppState(AppState._Error);
+        props.handleAppState(AppState.Error);
       });
   }
 
@@ -39,25 +39,16 @@ const BoardContainer = (props: BoardProps) => {
     setTurnToken(boardResponse.next_turn_token);
   }
 
-  const handleSwitchToken = () => {
-    if (turn === Player._1) {
-      setTurn(Player._2);
-    } else {
-      setTurn(Player._1);
-    }
-  };
-
   async function handleMove(index: number) {
     MakeMoveService.makeMove(props.gameId, {
       slot_index: index,
       player: turn,
     })
       .then(() => {
-        handleSwitchToken();
         findGameBoard(props.gameId);
       })
       .catch(() => {
-        props.handleAppState(AppState._Error);
+        props.handleAppState(AppState.Error);
       });
   }
 

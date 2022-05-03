@@ -1,5 +1,5 @@
 import { MakeNewGameService } from "../client";
-import { AppState } from "../utils";
+import { AppState } from "../appStates";
 
 type Props = {
   handleAppState: (appState: AppState) => void;
@@ -13,17 +13,17 @@ const LandingPage = (props: Props) => {
         props.handleUpdateGameIdSelectToken(data.game_id);
       })
       .catch(() => {
-        props.handleAppState(AppState._Error);
+        props.handleAppState(AppState.Error);
       });
   }
 
   // resume game (set page to Resume)
   const handleResumeGame = () => {
-    props.handleAppState(AppState._Resume);
+    props.handleAppState(AppState.Resume);
   };
 
   return (
-    <div className="landing-div">
+    <div className="landing-div" data-testid="landing-div">
       <button
         className="landing-button"
         data-testid="landing-button-one"

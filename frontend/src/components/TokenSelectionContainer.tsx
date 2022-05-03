@@ -1,7 +1,7 @@
 import TokenSelection from "./TokenSelection";
 import { useState } from "react";
 import { MakeSettingsService, Player } from "../client";
-import { AppState } from "../utils";
+import { AppState } from "../appStates";
 
 type Props = {
   handleAppState: (appState: AppState) => void;
@@ -25,9 +25,9 @@ const TokenSelectionContainer = (props: Props) => {
         );
       })
       .catch(() => {
-        props.handleAppState(AppState._Error);
+        props.handleAppState(AppState.Error);
       });
-    props.handleAppState(AppState._Board);
+    props.handleAppState(AppState.Board);
   }
 
   const mapPlayers = players.map((player) => {
@@ -48,7 +48,9 @@ const TokenSelectionContainer = (props: Props) => {
   });
   return (
     <>
-      <div className="token-div">{mapPlayers}</div>
+      <div className="token-div" data-testid="token-div">
+        {mapPlayers}
+      </div>
       <div>
         <button
           className="token-complete-button"

@@ -19,7 +19,7 @@ const ResultsContainer = (props: ResultProps) => {
       </p>
 
       <button id="save-game" onClick={() => window.location.reload()}>
-        Save Game
+        Home
       </button>
     </div>
   );

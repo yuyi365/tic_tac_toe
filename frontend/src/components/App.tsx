@@ -5,53 +5,55 @@ import ErrorContainer from "./ErrorContainer";
 import LandingPage from "./LandingPage";
 import TokenSelectionContainer from "./TokenSelectionContainer";
 import ResumeGame from "./ResumeGame";
-import { AppState } from "../utils";
+import { AppState } from "../appStates";
 import "./App.css";
 
-const App = () => {
-  const [appState, setAppState] = useState<AppState>(AppState._Landing);
+type Props = {
+  appState: AppState;
+  setAppState: (appState: AppState) => void;
+};
+const App = (props: Props) => {
   const [gameId, setGameId] = useState(0);
 
   const handleAppState = (newAppState: AppState) => {
-    setAppState(newAppState);
+    props.setAppState(newAppState);
   };
 
   const handleUpdateGameIdGetBoard = (inputGameId: number) => {
     setGameId(inputGameId);
-    setAppState(AppState._Board);
+    props.setAppState(AppState.Board);
   };
 
   const handleUpdateGameIdSelectToken = (newGameId: number) => {
     setGameId(newGameId);
-    setAppState(AppState._SelectToken);
+    props.setAppState(AppState.SelectToken);
   };
 
   const appStateRender = () => {
-    let appStateRender = appState;
-    switch (appStateRender) {
-      case 0:
+    switch (props.appState) {
+      case AppState.Landing:
         return (
           <LandingPage
             handleAppState={handleAppState}
             handleUpdateGameIdSelectToken={handleUpdateGameIdSelectToken}
           />
         );
-      case 1:
+      case AppState.SelectToken:
         return (
           <TokenSelectionContainer
             handleAppState={handleAppState}
             gameId={gameId}
           />
         );
-      case 2:
+      case AppState.Resume:
         return (
           <ResumeGame handleUpdateGameIdGetBoard={handleUpdateGameIdGetBoard} />
         );
-      case 3:
+      case AppState.Board:
         return (
           <BoardContainer handleAppState={handleAppState} gameId={gameId} />
         );
-      case 4:
+      case AppState.Error:
         return <ErrorContainer />;
     }
   };

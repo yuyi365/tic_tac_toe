@@ -122,7 +122,7 @@ async def new_game() -> NewGameResponse:
 
 @app.post(
     "/games/{game_id}/settings",
-    response_model=BoardResponse,
+    response_model=SettingsResponse,
     responses={
         400: {"model": InvalidGameIdErrorResponse},
     },

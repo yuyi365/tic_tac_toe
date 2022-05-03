@@ -192,7 +192,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BoardResponse"
+                  "$ref": "#/components/schemas/SettingsResponse"
                 }
               }
             }
@@ -368,6 +368,19 @@
           "player_two_token": {
             "title": "Player Two Token",
             "type": "string"
+          }
+        }
+      },
+      "SettingsResponse": {
+        "title": "SettingsResponse",
+        "required": [
+          "response"
+        ],
+        "type": "object",
+        "properties": {
+          "response": {
+            "title": "Response",
+            "type": "integer"
           }
         }
       },

@@ -1,4 +1,10 @@
+import { useState } from "react";
 import ReactDOM from "react-dom";
+import { AppState } from "./appStates";
 import App from "./components/App";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const [appState, setAppState] = useState<AppState>(AppState.Landing);
+ReactDOM.render(
+  <App appState={appState} setAppState={setAppState} />,
+  document.getElementById("root")
+);

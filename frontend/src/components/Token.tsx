@@ -1,6 +1,7 @@
 type Props = {
   token: string;
   setPlayerToken: (playerToken: string) => void;
+  id: string;
 };
 
 const Token = (props: Props) => {
@@ -12,7 +13,7 @@ const Token = (props: Props) => {
     <>
       <option
         id="token-option"
-        data-testid={props.token}
+        data-testid={`${props.id}`}
         value={props.token}
         onClick={(e) => handleTokenSelection(e)}
       >
