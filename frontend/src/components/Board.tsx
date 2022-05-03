@@ -5,7 +5,6 @@ type BoardProps = {
   gameWinner?: string;
   winningCombo?: number[];
   handleMove: (index: number) => void;
-  handleError: (error: boolean) => void;
 };
 
 const Board = (props: BoardProps) => {

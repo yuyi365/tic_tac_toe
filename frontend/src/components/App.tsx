@@ -6,124 +6,60 @@ import LandingPage from "./LandingPage";
 import TokenSelectionContainer from "./TokenSelectionContainer";
 import ResumeGame from "./ResumeGame";
 import "./App.css";
-import calculateWinner from "../gamelogic";
-import {
-  MakeNewGameService,
-  GetBoardService,
-  MakeSettingsService,
-  Player,
-} from "../client";
+import { AppState } from "../utils";
 
 const App = () => {
-  const [error, setError] = useState<boolean>(false);
-  const [landingPage, setLandingPage] = useState(true);
-  const [tokenPage, setTokenPage] = useState(false);
-  const [boardPage, setBoardPage] = useState(false);
-  const [pinPage, setPinPage] = useState(false);
+  const [appState, setAppState] = useState<AppState>(AppState._Landing);
   const [gameId, setGameId] = useState(0);
-  const [playerOneToken, setPlayerOneToken] = useState("");
-  const [playerTwoToken, setPlayerTwoToken] = useState("");
-  const [board, setBoard] = useState<Array<string>>([]);
-  const [turn, setTurn] = useState<Player>(Player._1);
-  const [turnToken, setTurnToken] = useState("");
-  const winner = calculateWinner(board);
 
-  const handleError = (error: boolean) => {
-    setError(error);
+  const handleAppState = (newAppState: AppState) => {
+    setAppState(newAppState);
   };
 
-  async function handleNewGame() {
-    await MakeNewGameService.makeNewGame()
-      .then((data) => {
-        setGameId(data.game_id);
-      })
-      .catch(() => {
-        handleError(true);
-      });
-    setTokenPage(!tokenPage);
-    setLandingPage(!landingPage);
-  }
+  const handleUpdateGameIdGetBoard = (inputGameId: number) => {
+    setGameId(inputGameId);
+    setAppState(AppState._Board);
+  };
 
-  async function handleStartGame() {
-    await MakeSettingsService.makeSettings(gameId, {
-      player_one_token: playerOneToken,
-      player_two_token: playerTwoToken,
-    })
-      .then(() => {
-        alert(
-          `Your Game ID is ${gameId} use this pin to resume your game later!`
+  const handleUpdateGameIdSelectToken = (newGameId: number) => {
+    setGameId(newGameId);
+    setAppState(AppState._SelectToken);
+  };
+
+  const appStateRender = () => {
+    let appStateRender = appState;
+    switch (appStateRender) {
+      case 0:
+        return (
+          <LandingPage
+            handleAppState={handleAppState}
+            handleUpdateGameIdSelectToken={handleUpdateGameIdSelectToken}
+          />
         );
-        GetBoardService.getBoard(gameId)
-          .then((boardResponse) => {
-            setBoard(boardResponse.slots);
-            setTurn(boardResponse.next_turn);
-            setTurnToken(boardResponse.next_turn_token);
-            handleError(false);
-            setBoardPage(!boardPage);
-          })
-          .catch(() => {
-            handleError(true);
-          });
-      })
-      .catch(() => {
-        handleError(true);
-      });
-    setTokenPage(!tokenPage);
-  }
-
-  const handleResumeGame = () => {
-    setPinPage(!pinPage);
-    setLandingPage(!landingPage);
+      case 1:
+        return (
+          <TokenSelectionContainer
+            handleAppState={handleAppState}
+            gameId={gameId}
+          />
+        );
+      case 2:
+        return (
+          <ResumeGame handleUpdateGameIdGetBoard={handleUpdateGameIdGetBoard} />
+        );
+      case 3:
+        return (
+          <BoardContainer handleAppState={handleAppState} gameId={gameId} />
+        );
+      case 4:
+        return <ErrorContainer />;
+    }
   };
-
-  async function findGame() {
-    GetBoardService.getBoard(gameId)
-      .then((boardResponse) => {
-        setBoard(boardResponse.slots);
-        setTurn(boardResponse.next_turn);
-        setTurnToken(boardResponse.next_turn_token);
-        setPinPage(!pinPage);
-        setBoardPage(!boardPage);
-      })
-      .catch(() => {
-        handleError(true);
-      });
-  }
 
   return (
     <div className="App">
       <Header />
-
-      {!error && landingPage ? (
-        <LandingPage
-          handleNewGame={handleNewGame}
-          handleResumeGame={handleResumeGame}
-        />
-      ) : !error && pinPage ? (
-        <ResumeGame gameId={gameId} setGameId={setGameId} findGame={findGame} />
-      ) : !error && tokenPage ? (
-        <TokenSelectionContainer
-          handleStartGame={handleStartGame}
-          setPlayerOneToken={setPlayerOneToken}
-          setPlayerTwoToken={setPlayerTwoToken}
-          playerOneToken={playerOneToken}
-          playerTwoToken={playerTwoToken}
-        />
-      ) : !error && boardPage ? (
-        <BoardContainer
-          handleError={handleError}
-          board={board}
-          winner={winner}
-          gameId={gameId}
-          setBoard={setBoard}
-          turn={turn}
-          setTurn={setTurn}
-          turnToken={turnToken}
-          setTurnToken={setTurnToken}
-        />
-      ) : (
-        <ErrorContainer />
-      )}
+      {appStateRender()}
     </div>
   );
 };

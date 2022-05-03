@@ -1,12 +1,14 @@
+import { useState } from "react";
+
 type Props = {
-  gameId: number;
-  setGameId: (gameId: string) => void;
-  findGame: (gameId: number) => void;
+  handleUpdateGameIdGetBoard: (gameId: any) => void;
 };
 const ResumeGame = (props: Props) => {
+  const [gameIdInput, setGameIdInput] = useState("");
+
   const handleResumeGameSubmission = (e: any) => {
     e.preventDefault();
-    props.findGame(props.gameId);
+    props.handleUpdateGameIdGetBoard(gameIdInput);
   };
 
   return (
@@ -19,7 +21,7 @@ const ResumeGame = (props: Props) => {
           name="game-id"
           required
           maxLength={4}
-          onChange={(e) => props.setGameId(e.target.value)}
+          onChange={(e) => setGameIdInput(e.target.value)}
         />
         <button
           onClick={(e) => handleResumeGameSubmission(e)}

@@ -1,35 +1,46 @@
 import TokenSelection from "./TokenSelection";
-import { Player } from "../client";
+import { useState } from "react";
+import { MakeSettingsService, Player } from "../client";
+import { AppState } from "../utils";
 
 type Props = {
-  handleStartGame: () => void;
-  setPlayerOneToken: (playerOneToken: string) => void;
-  setPlayerTwoToken: (playerTwoToken: string) => void;
-  playerOneToken: string;
-  playerTwoToken: string;
+  handleAppState: (appState: AppState) => void;
+  gameId: number;
 };
 
 const TokenSelectionContainer = (props: Props) => {
+  const [playerOneToken, setPlayerOneToken] = useState("");
+  const [playerTwoToken, setPlayerTwoToken] = useState("");
   const players = [Player._1, Player._2];
   const tokens = ["🦄", "🍄", "👑", "🦩"];
 
-  const mapPlayers = players.map((player) => {
-    const filterTokensOne = tokens.filter(
-      (token) => token !== props.playerTwoToken
-    );
+  async function handleSettingsSetup() {
+    await MakeSettingsService.makeSettings(props.gameId, {
+      player_one_token: playerOneToken,
+      player_two_token: playerTwoToken,
+    })
+      .then(() => {
+        alert(
+          `Your Game ID is ${props.gameId} use this pin to resume your game later!`
+        );
+      })
+      .catch(() => {
+        props.handleAppState(AppState._Error);
+      });
+    props.handleAppState(AppState._Board);
+  }
 
-    const filterTokensTwo = tokens.filter(
-      (token) => token !== props.playerOneToken
-    );
+  const mapPlayers = players.map((player) => {
+    const filterTokensOne = tokens.filter((token) => token !== playerTwoToken);
+
+    const filterTokensTwo = tokens.filter((token) => token !== playerOneToken);
 
     return (
       <TokenSelection
         key={player}
         player={player}
         setPlayerToken={
-          player === Player._1
-            ? props.setPlayerOneToken
-            : props.setPlayerTwoToken
+          player === Player._1 ? setPlayerOneToken : setPlayerTwoToken
         }
         tokens={player === Player._1 ? filterTokensOne : filterTokensTwo}
       />
@@ -39,10 +50,7 @@ const TokenSelectionContainer = (props: Props) => {
     <>
       <div className="token-div">{mapPlayers}</div>
       <div>
-        <button
-          className="token-complete-button"
-          onClick={props.handleStartGame}
-        >
+        <button className="token-complete-button" onClick={handleSettingsSetup}>
           Start
         </button>
       </div>
