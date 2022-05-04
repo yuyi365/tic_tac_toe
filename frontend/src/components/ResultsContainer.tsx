@@ -15,7 +15,7 @@ const ResultsContainer = (props: ResultProps) => {
         </p>
       )}
       <p id="game-id" data-testid="game-id">
-        Game ID: {`${props.gameId}`}
+        Game ID: {`${props.gameId} - save this ID to resume game`}
       </p>
 
       <button id="save-game" onClick={() => window.location.reload()}>

@@ -21,9 +21,6 @@ const TokenSelectionContainer = (props: Props) => {
     })
       .then(() => {
         props.handleAppState(AppState.Board);
-        alert(
-          `Your Game ID is ${props.gameId} use this pin to resume your game later!`
-        );
       })
       .catch(() => {
         props.handleAppState(AppState.Error);
