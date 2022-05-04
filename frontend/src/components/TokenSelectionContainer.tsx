@@ -20,6 +20,7 @@ const TokenSelectionContainer = (props: Props) => {
       player_two_token: playerTwoToken,
     })
       .then(() => {
+        props.handleAppState(AppState.Board);
         alert(
           `Your Game ID is ${props.gameId} use this pin to resume your game later!`
         );
@@ -27,7 +28,6 @@ const TokenSelectionContainer = (props: Props) => {
       .catch(() => {
         props.handleAppState(AppState.Error);
       });
-    props.handleAppState(AppState.Board);
   }
 
   const mapPlayers = players.map((player) => {

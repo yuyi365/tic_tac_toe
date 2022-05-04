@@ -6,10 +6,9 @@ import {
   CancelablePromise,
   MakeSettingsService,
   SettingsRequest,
-  Player,
 } from "../../client";
 
-const callMakeSetting = jest.spyOn(MakeSettingsService, "makeSettings");
+const callMakeSettingSpy = jest.spyOn(MakeSettingsService, "makeSettings");
 
 describe("Token selection container component", () => {
   it("initially renders on the screen with all four token options for each player", () => {
@@ -19,6 +18,7 @@ describe("Token selection container component", () => {
         gameId={10}
       />
     );
+
     const tokens = screen.getAllByRole("option");
     expect(tokens).toHaveLength(8);
   });
@@ -30,6 +30,7 @@ describe("Token selection container component", () => {
         gameId={10}
       />
     );
+
     const playerOneMushroom = screen.getByTestId("1-🍄");
     fireEvent.click(playerOneMushroom);
     const tokensAfterClick = screen.getAllByRole("option");
@@ -43,33 +44,69 @@ describe("Token selection container component", () => {
 });
 
 describe("Token selection container component", () => {
-  it("changes app state when the user clicks the submit button", async () => {
-    const mockUpdateAppState = jest.fn((appState: AppState) => undefined);
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
+  it("changes app state to error when the user clicks the submit button", async () => {
+    const mockUpdateAppState = jest.fn((appState: AppState) => null);
+    callMakeSettingSpy.mockImplementation(
+      (gameId: number, requestBody: SettingsRequest) => {
+        return new CancelablePromise((resolve, reject) => {
+          reject("error");
+        });
+      }
+    );
     render(
       <TokenSelectionContainer
         handleAppState={mockUpdateAppState}
-        gameId={10}
+        gameId={20}
       />
     );
+
     const playerOneMushroom = screen.getByTestId("1-🍄");
-    const playerTwoCrown = screen.getByTestId("2-👑");
-    const submitButton = screen.getByTestId("token-complete-button");
     fireEvent.click(playerOneMushroom);
+
+    const playerTwoCrown = screen.getByTestId("2-👑");
     fireEvent.click(playerTwoCrown);
+
+    const tokensAfterClick = screen.getAllByRole("option");
+    expect(tokensAfterClick).toHaveLength(6);
+
+    const submitButton = screen.getByTestId("token-complete-button");
     fireEvent.click(submitButton);
 
-    await waitFor(() =>
-      callMakeSetting.mockImplementation(
-        (gameId: number, requestBody: SettingsRequest) => {
-          return new CancelablePromise((resolve, reject) => {
-            resolve({
-              response: 201,
-            });
-          });
-        }
-      )
+    await waitFor(() => expect(mockUpdateAppState).toHaveBeenCalledTimes(1));
+  });
+
+  it("changes app state to the board when the user clicks the submit button", async () => {
+    const mockUpdateAppState = jest.fn((appState: AppState) => null);
+    callMakeSettingSpy.mockImplementation(
+      (gameId: number, requestBody: SettingsRequest) => {
+        return new CancelablePromise((resolve, reject) => {
+          resolve({ response: 201 });
+        });
+      }
     );
-    expect(mockUpdateAppState).toHaveBeenCalledTimes(1);
+    render(
+      <TokenSelectionContainer
+        handleAppState={mockUpdateAppState}
+        gameId={20}
+      />
+    );
+
+    const playerOneMushroom = screen.getByTestId("1-🍄");
+    fireEvent.click(playerOneMushroom);
+
+    const playerTwoCrown = screen.getByTestId("2-👑");
+    fireEvent.click(playerTwoCrown);
+
+    const tokensAfterClick = screen.getAllByRole("option");
+    expect(tokensAfterClick).toHaveLength(6);
+
+    const submitButton = screen.getByTestId("token-complete-button");
+    fireEvent.click(submitButton);
+
+    await waitFor(() => expect(mockUpdateAppState).toHaveBeenCalledTimes(1));
   });
 });

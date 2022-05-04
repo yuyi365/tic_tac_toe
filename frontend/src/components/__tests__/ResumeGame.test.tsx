@@ -16,7 +16,7 @@ describe("When the component loads", () => {
   });
 
   describe("When the user clicks submit on the form", () => {
-    it("it calls the findGame function", () => {
+    it("it calls the getBoard function", () => {
       const mockUpdateGameIdGetBoard = jest.fn((e: any) => undefined);
       render(
         <ResumeGame handleUpdateGameIdGetBoard={mockUpdateGameIdGetBoard} />
