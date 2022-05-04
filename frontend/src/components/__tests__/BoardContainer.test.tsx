@@ -14,7 +14,7 @@ import { AppState } from "../../appStates";
 const callMakeMoveSpy = jest.spyOn(MakeMoveService, "makeMove");
 const callGetBoardSpy = jest.spyOn(GetBoardService, "getBoard");
 
-describe("When a player makes a move", () => {
+describe("When a player makes a valid move", () => {
   beforeEach(() => {
     callMakeMoveSpy.mockImplementation(
       (gameId: number, requestBody: MoveRequest) => {
@@ -57,26 +57,44 @@ describe("When a player makes a move", () => {
   });
 });
 
-describe("When a player makes a move", () => {
+describe("When a player makes an invalid move", () => {
+  beforeEach(() => {
+    callGetBoardSpy.mockImplementation(() => {
+      return new CancelablePromise((resolve, reject) => {
+        resolve({
+          slots: ["🦄", "🍄", "", "", "", "", "", "", "🦄"],
+          next_turn: Player._2,
+          next_turn_token: "🍄",
+        });
+      });
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("getBoard service is not called and the app state changes to an error state if the move is invalid", async () => {
-    const mockSetErrorState = jest.fn((error) => null);
+    const mockSetErrorState = jest.fn((appState: AppState) => null);
     act(() => {
       render(<BoardContainer gameId={10} handleAppState={mockSetErrorState} />);
     });
-    await waitFor(() =>
-      callMakeMoveSpy.mockImplementation(
-        (gameId: number, requestBody: MoveRequest) => {
-          return new CancelablePromise((resolve, reject) => {
-            reject("error");
-          });
-        }
-      )
-    );
 
-    const square = screen.getAllByRole("cell")[0];
-    fireEvent.click(square);
+    callMakeMoveSpy.mockImplementation(
+      (gameId: number, requestBody: MoveRequest) => {
+        return new CancelablePromise((resolve, reject) => {
+          reject("error");
+        });
+      }
+    );
+    act(() => {
+      render(<BoardContainer gameId={10} handleAppState={mockSetErrorState} />);
+    });
 
     await waitFor(() => callMakeMoveSpy);
+    const square = screen.getAllByRole("cell")[4];
+    fireEvent.click(square);
+    await waitFor(() => expect(callMakeMoveSpy).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(mockSetErrorState).toHaveBeenCalledTimes(1));
   });
 });
