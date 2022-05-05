@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReactDOM from "react-dom";
 import { AppState } from "./appStates";
 import App from "./components/App";
