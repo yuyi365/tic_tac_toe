@@ -14,7 +14,7 @@ type Props = {
 };
 const App = (props: Props) => {
   const [gameId, setGameId] = useState(0);
-
+    const [appState, setAppState] = useState<AppState>(props.appState);
   const handleAppState = (newAppState: AppState) => {
     props.setAppState(newAppState);
   };
