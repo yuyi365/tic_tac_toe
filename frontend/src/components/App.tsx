@@ -10,7 +10,6 @@ import "./App.css";
 
 type Props = {
   appState: AppState;
-  setAppState: (appState: AppState) => void;
 };
 const App = (props: Props) => {
   const [gameId, setGameId] = useState(0);
