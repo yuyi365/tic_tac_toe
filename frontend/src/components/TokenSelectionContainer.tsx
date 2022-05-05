@@ -27,6 +27,14 @@ const TokenSelectionContainer = (props: Props) => {
       });
   }
 
+  const setSubmitButton = () => {
+    if (playerOneToken !== "" && playerTwoToken != "") {
+      return "token-complete-button";
+    } else {
+      return "token-incomplete-button";
+    }
+  };
+
   const mapPlayers = players.map((player) => {
     const filterTokensOne = tokens.filter((token) => token !== playerTwoToken);
 
@@ -50,7 +58,7 @@ const TokenSelectionContainer = (props: Props) => {
       </div>
       <div>
         <button
-          className="token-complete-button"
+          className={setSubmitButton()}
           data-testid="token-complete-button"
           onClick={handleSettingsSetup}
         >

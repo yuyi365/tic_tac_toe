@@ -135,6 +135,21 @@
   cursor: pointer;
 }
 
+.token-incomplete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 2rem;
+  width: 6rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  cursor: not-allowed;
+}
+
+.token-incomplete-button:hover {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 .form-div {
   margin: 1.5rem;
   text-align: center;
