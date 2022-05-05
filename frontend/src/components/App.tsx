@@ -13,23 +13,24 @@ type Props = {
 };
 const App = (props: Props) => {
   const [gameId, setGameId] = useState(0);
-    const [appState, setAppState] = useState<AppState>(props.appState);
+  const [appState, setAppState] = useState<AppState>(props.appState);
+
   const handleAppState = (newAppState: AppState) => {
-    props.setAppState(newAppState);
+    setAppState(newAppState);
   };
 
   const handleUpdateGameIdGetBoard = (inputGameId: number) => {
     setGameId(inputGameId);
-    props.setAppState(AppState.Board);
+    setAppState(AppState.Board);
   };
 
   const handleUpdateGameIdSelectToken = (newGameId: number) => {
     setGameId(newGameId);
-    props.setAppState(AppState.SelectToken);
+    setAppState(AppState.SelectToken);
   };
 
   const appStateRender = () => {
-    switch (props.appState) {
+    switch (appState) {
       case AppState.Landing:
         return (
           <LandingPage
