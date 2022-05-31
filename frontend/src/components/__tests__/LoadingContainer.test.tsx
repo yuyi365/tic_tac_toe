@@ -1,16 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import BoardContainer from "../BoardContainer";
+import { AppState } from "../../appStates";
 
 describe("When the board container is still loading", () => {
   it("it renders the loading component", () => {
-    const playerOneToken = "🦄";
-    const playerTwoToken = "🍄";
     render(
       <BoardContainer
-        handleError={(error: boolean) => null}
-        playerOneToken={playerOneToken}
-        playerTwoToken={playerTwoToken}
+        handleAppState={(appState: AppState) => null}
+        gameId={0}
       />
     );
     const progressBar = screen.getByTestId("progress-container");

@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 
 from . import repository
 from .game import Board, Player, make_empty_board
-from .utils import make_pin
+from .utils import make_pin, calculate_next_turn
 
 
 def create_new_game(conn: sqlalchemy.engine.Connection) -> Union[int, str]:
@@ -70,4 +70,5 @@ def get_board(conn: sqlalchemy.engine.Connection, game_id: int) -> Board:
         board = make_empty_board()
     else:
         board = Board(slots=slots)
-    return {"board": board, "tokens": tokens}
+    next_turn = calculate_next_turn(board)
+    return {"board": board, "tokens": tokens, "next_turn": next_turn}

@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Signika", sans-serif;
 }
 
 .App {
@@ -13,13 +13,32 @@
 }
 
 .header {
+  margin-top: 1.5rem;
   padding: 1.5rem;
   font-size: 3rem;
+  cursor: pointer;
 }
 
 .results {
   padding: 1.5rem;
   font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-id {
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+#save-game {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 1rem;
+  width: 5rem;
+  text-align: center;
+  font-size: 0.6rem;
 }
 
 .errors {
@@ -66,6 +85,137 @@
 .try-again-button:hover,
 .try-again-button:focus {
   background-color: #f082ac;
+}
+
+.landing-div {
+  padding: 1.5rem;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 4rem;
+  width: 8rem;
+  text-align: center;
+  font-size: 1rem;
+  margin: 2rem;
+}
+
+.landing-button:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+.token-div {
+  margin: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.token-h4 {
+  margin-top: 1.5rem;
+}
+
+.token-complete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 2rem;
+  width: 6rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.token-complete-button:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+.token-incomplete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 2rem;
+  width: 6rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  cursor: not-allowed;
+}
+
+.token-incomplete-button:hover {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.form-div {
+  margin: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.form {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#game-id-input {
+  border: none;
+  border-bottom: 3px solid rgba(205, 79, 216, 0.75);
+  margin: 2rem;
+  padding: 2rem;
+  text-align: center;
+  color: #ea4c89;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+}
+
+#game-id-input:focus {
+  color: #ea4c89;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+}
+
+#pin-input {
+  border: none;
+  border-bottom: 3px solid rgba(205, 79, 216, 0.75);
+  margin: 1.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: #ea4c89;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+}
+
+#pin-input:focus {
+  color: #ea4c89;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+}
+
+.pin-complete-button {
+  box-shadow: 0px 0px 0px 3px rgba(205, 79, 216, 0.75);
+  height: 2rem;
+  width: 4rem;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.pin-complete-button:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+#input-id {
+  font-size: 1.5rem;
 }
 
 body {
@@ -179,4 +329,38 @@ body {
 }
 .progress-container {
   width: 75%;
+}
+
+#id_tokens {
+  height: 6rem;
+  width: 100%;
+  border: none;
+  overflow: hidden;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+#id_tokens::-moz-focus-inner {
+  border: 0;
+}
+#id_tokens:focus {
+  outline: none;
+}
+
+#token-option {
+  cursor: pointer;
+  box-shadow: 0px 0px 0px 2px rgba(205, 79, 216, 0.75);
+  width: 4rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+#token-option:hover {
+  background-color: aquamarine;
+  cursor: pointer;
+}
+
+#id_tokens option:checked {
+  background-color: aquamarine;
 }

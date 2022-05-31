@@ -192,7 +192,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BoardResponse"
+                  "$ref": "#/components/schemas/SettingsResponse"
                 }
               }
             }
@@ -226,7 +226,9 @@
       "BoardResponse": {
         "title": "BoardResponse",
         "required": [
-          "slots"
+          "slots",
+          "next_turn",
+          "next_turn_token"
         ],
         "type": "object",
         "properties": {
@@ -236,6 +238,13 @@
             "items": {
               "type": "string"
             }
+          },
+          "next_turn": {
+            "$ref": "#/components/schemas/Player"
+          },
+          "next_turn_token": {
+            "title": "Next Turn Token",
+            "type": "string"
           }
         }
       },
@@ -359,6 +368,19 @@
           "player_two_token": {
             "title": "Player Two Token",
             "type": "string"
+          }
+        }
+      },
+      "SettingsResponse": {
+        "title": "SettingsResponse",
+        "required": [
+          "response"
+        ],
+        "type": "object",
+        "properties": {
+          "response": {
+            "title": "Response",
+            "type": "integer"
           }
         }
       },

@@ -71,7 +71,9 @@ async def board(game_id: int) -> BoardResponse:
     try:
         with engine.connect() as conn:
             result = get_board(conn, game_id)
-        return map_board_response(result["board"], result["tokens"])
+        return map_board_response(
+            result["board"], result["tokens"], result["next_turn"]
+        )
     except IntegrityError:
         raise HTTPException(status_code=403, detail="Invalid game id")
 
@@ -120,7 +122,7 @@ async def new_game() -> NewGameResponse:
 
 @app.post(
     "/games/{game_id}/settings",
-    response_model=BoardResponse,
+    response_model=SettingsResponse,
     responses={
         400: {"model": InvalidGameIdErrorResponse},
     },

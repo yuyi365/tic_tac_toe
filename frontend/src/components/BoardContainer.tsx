@@ -1,56 +1,54 @@
 import Board from "./Board";
 import ResultsContainer from "./ResultsContainer";
 import LoadingContainer from "./LoadingContainer";
+import { MakeMoveService, GetBoardService, Player } from "../client";
+import { AppState } from "../appStates";
 import { useState, useEffect } from "react";
 import calculateWinner from "../gamelogic";
-import { MakeMoveService, GetBoardService, Player } from "../client";
 
 type BoardProps = {
-  handleError: (error: boolean) => void;
+  gameId: number;
+  handleAppState: (appState: AppState) => void;
 };
 
 const BoardContainer = (props: BoardProps) => {
-  const [turn, setTurn] = useState<Player>(Player._1);
   const [board, setBoard] = useState<Array<string>>([]);
+  const [turn, setTurn] = useState<Player>(Player._1);
+  const [turnToken, setTurnToken] = useState("");
   const winner = calculateWinner(board);
   const gameWinner = winner?.winner;
   const winningCombo = winner?.winningSquares;
 
   useEffect(() => {
-    getBoard();
+    findGameBoard(props.gameId);
   }, []);
 
-  async function getBoard() {
-    GetBoardService.getBoard(1)
+  async function findGameBoard(gameId: number) {
+    GetBoardService.getBoard(gameId)
       .then((boardResponse) => {
-        setBoard(boardResponse.slots);
-        props.handleError(false);
+        handleBoardSetup(boardResponse);
       })
       .catch(() => {
-        props.handleError(true);
+        props.handleAppState(AppState.Error);
       });
   }
 
-  const handleSwitchToken = () => {
-    if (turn === Player._1) {
-      setTurn(Player._2);
-    } else {
-      setTurn(Player._1);
-    }
-  };
+  async function handleBoardSetup(boardResponse: any) {
+    setBoard(boardResponse.slots);
+    setTurn(boardResponse.next_turn);
+    setTurnToken(boardResponse.next_turn_token);
+  }
 
   async function handleMove(index: number) {
-    MakeMoveService.makeMove(1, {
+    MakeMoveService.makeMove(props.gameId, {
       slot_index: index,
       player: turn,
     })
       .then(() => {
-        getBoard();
-        handleSwitchToken();
-        props.handleError(false);
+        findGameBoard(props.gameId);
       })
       .catch(() => {
-        props.handleError(true);
+        props.handleAppState(AppState.Error);
       });
   }
 
@@ -65,9 +63,12 @@ const BoardContainer = (props: BoardProps) => {
             gameWinner={gameWinner}
             winningCombo={winningCombo}
             handleMove={handleMove}
-            handleError={props.handleError}
           />
-          <ResultsContainer gameWinner={gameWinner} player={turn} />
+          <ResultsContainer
+            gameWinner={gameWinner}
+            player={turnToken}
+            gameId={props.gameId}
+          />
         </>
       )}
     </>

@@ -5,7 +5,6 @@ from fastapi.testclient import TestClient
 
 from tic_tac_toe_api.api import app
 from tic_tac_toe_api.game import Player, make_empty_board
-from tic_tac_toe_api.models import BoardResponse
 from tic_tac_toe_api.repository import (
     insert_board,
     insert_game,
@@ -59,12 +58,12 @@ def test_get_board_valid_endpoint(client, db_conn):
 
 
 def test_get_board_empty_board_content(client, db_conn):
-    expected_content = BoardResponse(slots=[""] * 9)
+    expected_content = dict(slots=[""] * 9, next_turn=1, next_turn_token="🦄")
 
     game_id = set_up_game_settings_and_board(db_conn)
     response = client.get(f"/games/{game_id}/board")
 
-    assert response.json() == expected_content.dict()
+    assert response.json() == expected_content
 
 
 def test_post_move_valid_endpoint(client, db_conn):
@@ -134,7 +133,7 @@ def test_post_move_response_slot_already_exists(client, db_conn):
     assert response.json() == expected_content
 
 
-def test_post_move_response_type_error_unprocessable_entity(client, db_conn):
+def test_post_move_response_type_error_unprocessable_entity(client):
 
     expected_status = 422
 
@@ -150,7 +149,7 @@ def test_post_move_response_type_error_unprocessable_entity(client, db_conn):
     assert response.status_code == expected_status
 
 
-def test_post_new_game_endpoint(client, db_conn):
+def test_post_new_game_endpoint(client):
 
     expected_status = 200
 
@@ -174,7 +173,7 @@ def test_post_settings_valid_endpoint(client, db_conn):
     assert response.status_code == expected_status
 
 
-def test_post_settings_invalid_endpoint(client, db_conn):
+def test_post_settings_invalid_endpoint(client):
 
     expected_status = 400
 
